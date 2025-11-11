@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@latest/dist/apexcharts.min.css">
+    <title>chart</title>
+    <style>
+        /* Hide the ApexCharts toolbar */
+        .apexcharts-toolbar,.apexcharts-menu-icon{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="chart"></div>
+</body>
+</html>
+
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts@latest/dist/apexcharts.min.js"></script>
+<script>
+    var userCountData = JSON.parse('{{ user_count|safe }}');
+    var trainerCountData = JSON.parse('{{ trainer_count|safe }}');
+    var options = {
+      series: [
+        {
+          name: 'Normal User',
+          data: userCountData
+        },
+        {
+          name: 'Trainer',
+          data: trainerCountData
+        }
+      ],
+      chart: {
+        height: 500,
+        width: 1000,
+        type: 'bar',
+      },
+      plotOptions: {
+        bar: {
+          borderRadius: 10,
+          dataLabels: {
+            position: 'top', // top, center, bottom
+          },
+        }
+      },
+      dataLabels: {
+        enabled: true,
+        formatter: function (val, timestamp, index) {
+          if(val != 0){
+            return val;
+          }
+        },
+        offsetY: -20,
+        style: {
+          fontSize: '12px',
+          colors: ["#304758"]
+        }
+      },
+      xaxis: {
+        categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        position: 'bottom',
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        },
+        crosshairs: {
+          fill: {
+            type: 'gradient',
+            gradient: {
+              colorFrom: '#D8E3F0',
+              colorTo: '#BED1E6',
+              stops: [0, 100],
+              opacityFrom: 0.4,
+              opacityTo: 0.5,
+            }
+          }
+        },
+        tooltip: {
+          enabled: true,
+        }
+      },
+      yaxis: {
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false,
+        },
+        labels: {
+          show: false,
+          formatter: function (val) {
+            return val + "%";
+          }
+        }
+      },
+      title: {
+        floating: true,
+        offsetY: 480,
+        align: 'center',
+        style: {
+          color: '#444'
+        }
+      }
+    };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+</script>

@@ -1,0 +1,279 @@
+{% extends "admin/layout/user_base.html" %}
+{% load static %}
+{% block body_block %}
+{% load my_filters %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <main class="content-area">
+        <div class="container-fluid p-0">
+            <!-- top search bar -->
+            <div class="top-seach-bar mb-0">
+                <!-- top bar form  -->
+                <form class="search-form mt-2">
+                    <div class="add-product-filter user_table_product_filter">
+                        <div class="row align-items-center">
+                            <div class="col-xl-2 col-lg-2">
+                                <h3 class="top-bar-heading">Weight</h3>
+                            </div>
+                            <div class="col-xl-10 col-lg-10">
+                                <div class="row_2 align-items-top justify-content-end">
+                                    <div class="top-search-wrapper">
+                                        <div class="form-group">
+                                            <input type="number" step=any name="search" id="search" value="{{ request.GET.search }}"
+                                                   class="form-control" placeholder="Search Value">
+                                        </div>
+                                        <div style="width:110%;"><span id="error_msg"></span></div>
+
+                                    </div>
+                                    <div class="date-selector-wrapper">
+                                        <div class="form-group">
+                                          <input type="text" name="stDate" value="{{ request.GET.stDate }}" class="form-control" id="stDate" placeholder="From Date">
+                                        </div>
+                                    </div> 
+                                    
+                                    <div class="date-selector-wrapper">
+                                        <div class="form-group">
+                                          <input type="text" name="endDate" value="{{ request.GET.endDate }}" class="form-control" id="endDate" placeholder="To Date">
+                                        </div>
+                                    </div> 
+                                    <div class=" top-action-wrapper d-flex align-items-top">
+                                        <button class="btn btn-detail" id="sbmit">Filter</button>
+                                        <a href="{% url 'appdashboard:weight' %}" class="reset">Reset</a>
+                                        <button type="button" class="btn btn-detail" id="myBtn">Create</button>
+                                    </div>
+                                </div>
+                            </div>
+    
+                           
+                    
+                </div>
+                        </div>
+                </form>
+                
+
+            </div>
+
+            <!-- top bar form  end-->
+        </div>
+        <!-- top search bar end-->
+
+        <!-- right side content box  -->
+        <div class="main-box pd-0">
+
+            <div class="add-product-sec">
+                <div class="product-area-list">
+                </div>
+                <div class="product-area-list list-head" >
+                    <div class="product-box-heading bx-sd mb-1">
+                        <div class="row">
+                            <div class="col-xl-1 col-lg-1">
+
+                            </div>
+                            <div class="col-xl-2 col-lg-2">
+                                <div class="product-content">
+                                    SL
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-3">
+                                <div class="product-content">
+                                    Weight (In kg)
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-3">
+                              <div class="product-content">
+                                  Created Date
+                              </div>
+                          </div>
+                           
+                            <div class="col-xl-3 col-lg-3 text-left">
+                                <div class="product-content">
+                                    Action
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% for rec in records %}
+                        <!-- prodcut box  -->
+                        <div class="product-box user-level bx-sd mb-1">
+                            <div class="row">
+                                <div class="col-xl-1 col-lg-1">
+
+                                </div>
+                                <div class="col-xl-2 col-lg-2">
+                                    <div class="product-content">
+                                        <h3>{{ start_index|add:forloop.counter0 }}</h3>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-xl-3 col-lg-3">
+                                    <div class="product-content">
+                                        <h3>{{ rec.value }}</h3>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3">
+                                 <div class="product-content">
+                                     <h3>{{ rec.created_at| to_default_timezone  }}</h3>
+                                 </div>
+                             </div>                                
+                             <div class="col-xl-3 col-lg-3 user-activity">
+                                <!-- <button type="button" class="btn btn-detail">Edit</button> -->
+                                <button type="button" class="btn btn-detail" onclick="editPopup('{{ rec.value }}',{{ rec.id }})" >Edit</button>
+                                <button type="button" onclick="statusChange('{{rec.id}}',{% if rec.is_active == 0 %}'enable'{% else %}'disable'{% endif %})" {% if rec.is_active == 0 %} class="btn btn-detail" {% else %} class="btn btn-detail disb_btn" {% endif %} id="statusBtn_{{rec.id}}" >
+                                    {% if rec.is_active == 0 %} 
+                                        Enable
+                                    {% else %}
+                                        Disable
+                                    {% endif %}
+                                </button>
+                            </div>
+
+                              
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="col-xl-12 col-lg-3 text-center mt-3">
+                            <h5>No Records</h5>
+                        </div>
+                    {% endfor %}
+
+                    {% if records %}
+                    <div class="row">
+                        <div class="col-sm-6 mt-3 pagination-count">Showing <span>{{ start_index }}</span> to <span>{{ end_index }}</span> of <span>{{ count }}</span> entries</div>
+
+                        <div class="col-sm-6 mt-3">
+                            <nav aria-label="Page navigation ">
+                                <ul class="pagination justify-content-end">
+                                    {% for i in page_range %}
+                                    <li id="pagination-count{{i}}"
+                                        class="page-item"><a
+                                            class="{% if i  == page %} activedata {% endif %} page-link" href="?page={{ i }}{{ params }}">{{i}}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    {%endif%}
+
+                </div>
+                <div id="myModal" class="modal">
+
+                    <!-- Modal content -->
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <form method="post" class="row popupInput" id="PopForm" autocomplete="off" enctype="multipart/form-data" action="/sec-access/weight-add/">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                {% csrf_token %}
+                                <div class="tabs">
+                                    <div id="tabs-content">
+                                        <div id="tab1" class="tab-content">
+                                            <div class="mb-4 col-sm-12">
+                                                <div class="input-wrapper image-field">
+                                                    <label class="mb-2" for="name">Value</label>
+                                                    <input type="text" value="{% if model.value %}{{model.value}}{% endif %}" oninput="change_err()" name="weightname" class="form-control effect " id="id_name"  onkeypress="return isNumberKey(event)">
+                                                    <p class="text-danger mt-2 mb-0" id="error_text">{{ form.avatar.errors.as_text }}</p>
+                                                </div>
+                                            </div>
+                                        
+                                        </div>
+                                                                                
+                                        <input type="hidden" id="hiddenId" name="hiddenId" value="0">                               
+
+                                        <div>
+                                            <button type="button" onclick="validate()" class="btn btn-lg btn-primary" id="saveBtn">Save
+                                            </button>
+                                            </div>
+
+
+                                    </div> <!-- END tabs-content -->
+                                </div> <!-- END tabs -->
+
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+                <input type="hidden" id="hdnVal" value ="">
+
+                <!-- prodcut box  end-->
+            </div>
+        </div>
+        </div>
+        <!-- right side content box  -->
+        </div>
+    </main>
+{% endblock body_block %}
+
+{% block page_script %}
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="{% static 'admin/assets/js/weight.js' %}"></script>
+<script>
+    flatpickr("#stDate", {
+      allowInput: true,
+      dateFormat: "Y-m-d",
+      maxDate: "today",
+    });
+    flatpickr("#endDate", {
+      allowInput: true,
+      dateFormat: "Y-m-d",
+      maxDate: "today",
+    });  
+</script>
+<style>
+    .popupInput{
+        width:100%;
+    }
+
+
+    #error_msg{
+    color:red;
+    }
+    
+    .alert-container{
+        position: absolute;
+        top: 45%;
+        left: 20%;
+        right: auto;
+        margin: auto;
+        width: 75%;
+        height: 20px;
+        padding: 30px;
+    }
+    .alert-container .alert{
+        justify-content: center;
+        padding: 20px 20px;
+    }
+    .alert-container .alert-success{
+        border-radius: 12px;
+        border: 1px solid #117054;
+    }
+    
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        margin: 0; 
+        }
+</style>
+{% if messages %}
+    {% for message in messages %}
+        <script> 
+            Swal.fire({
+            // type: 'danger',
+            icon: {% if message.tags == 'error' %} 'error' {% else %} '{{message.tags}}' {% endif %},
+            showConfirmButton: false,
+            title:'{{message}}'
+            });
+            setTimeout(function(){
+                window.location.reload(1);
+                }, 1000);
+        </script>
+    {% endfor %}
+{% endif %}
+{% endblock %}
+   

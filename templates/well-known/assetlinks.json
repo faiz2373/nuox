@@ -1,0 +1,12 @@
+  [{
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.trainpad.app",
+      "sha256_cert_fingerprints":
+      ["17:14:50:AB:E4:36:31:65:4D:4A:19:6E:5A:FE:CF:C2:B5:69:6E:1D:AB:1B:C8:4D:83:7A:00:AA:14:E8:FA:CF", "1B:F7:90:9B:D2:91:DB:BD:D7:AE:44:04:EC:AE:0E:3D:39:16:06:C8:73:BA:34:9D:07:64:6D:B3:8F:1E:1B:93"]
+    }
+  }]
+  
+  
+  

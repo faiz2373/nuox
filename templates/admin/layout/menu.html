@@ -1,0 +1,294 @@
+{% load static %}
+<nav id="sidebar" class="sidebar js-sidebar">
+    {#            {% urlchange  request.path as current_url %}#}
+    <div class="sidebar-content js-simplebar">
+        <div class="sidebar-brand" href="" data-aos="fade-right" data-aos-anchor-placement="top-bottom"
+           data-aos-delay="100">
+                  <span class="align-middle">
+                     <img src="{% static 'admin/img/logo.png' %}" class="expand-image">
+                     <img src="{% static 'admin/img/logo-collapse.png' %}" class="collapse-image">
+                  </span>
+                  <span class="close-btn">
+                    <img src="{% static 'admin/img/close-mob-menu.svg' %}" class="image-close">
+                    <img src="{% static 'admin/img/close-mob-menu-purple.svg' %}" class="image-close-purple">
+                  </span>
+        </div>
+        <ul class="sidebar-nav">
+            {% url 'appdashboard:statistics' as statistics_url %}
+            <li class="sidebar-item {% if request.path == statistics_url %} active {% endif %}">
+                <a class="sidebar-link" href="{% url 'appdashboard:statistics'%}" data-aos="fade-right" data-aos-anchor-placement="top-bottom"
+                   data-aos-delay="200">
+                        <span class="icon-side">
+                           <img src="{% static 'admin/assets/img/icons/dashboard.svg' %}" class="icon-2">
+                           <img src="{% static 'admin/assets/img/icons/dashboard-white.svg' %}" class="icon-1">
+                        </span>
+                    <span class="align-middle">
+                        Dashboard</span>
+                </a>
+            </li>
+            {#                  {% url 'appdashboard:dashboard' dashboard='user' as user_url %}#}
+            {#                  <li class="sidebar-item {% if request.path == user_url %} active {% endif %}">#}
+            {% url 'appdashboard:user' as user_url %}
+            <li class="sidebar-item user-detail  {% if request.path == user_url %} active {% endif %}">
+                <a class="sidebar-link" href="{% url 'appdashboard:user'%}" data-aos="fade-right" data-aos-anchor-placement="top-bottom"
+                   data-aos-delay="200">
+                        <span class="icon-side">
+                           <img src="{% static 'admin/assets/img/icons/user.svg' %}" class="icon-2">
+                           <img src="{% static 'admin/assets/img/icons/user-white.svg' %}" class="icon-1">
+                        </span>
+                    <span class="align-middle">
+                        Users</span>
+                </a>
+            </li>
+            {% url 'appdashboard:trainer' as trainer_url %}
+            <li class="sidebar-item trainer-detail  {% if request.path == trainer_url %} active {% endif %}">
+                <a class="sidebar-link" href="{% url 'appdashboard:trainer'%}" data-aos="fade-right" data-aos-anchor-placement="top-bottom"
+                   data-aos-delay="200">
+                        <span class="icon-side">
+                           <img src="{% static 'admin/assets/img/icons/trainer.svg' %}" class="icon-2">
+                           <img src="{% static 'admin/assets/img/icons/trainer-white.svg' %}" class="icon-1">
+                        </span>
+                    <span class="align-middle">
+                        Trainers</span>
+                </a>
+            </li>
+            {% url 'appdashboard:gym' as gym_url %}
+            <li class="sidebar-item  {% if 'gym' in request.path %} active {% endif %}">
+                <a class="sidebar-link" href="{% url 'appdashboard:gym'%}" data-aos="fade-right" data-aos-anchor-placement="top-bottom"
+                   data-aos-delay="200">
+                        <span class="icon-side">
+                           <img src="{% static 'admin/assets/img/icons/gym.svg' %}" class="icon-2" style="width:25px;">
+                           <img src="{% static 'admin/assets/img/icons/gym-white.svg' %}" class="icon-1" style="width:25px;">
+                        </span>
+                    <span class="align-middle">
+                        Gym</span>
+                </a>
+            </li>
+            
+            {% url 'appdashboard:equipments' as equipment_url %}
+            <li class="sidebar-item  {% if 'equipment' in request.path %} active {% endif %}">
+                <a class="sidebar-link" href="{% url 'appdashboard:equipments'%}" data-aos="fade-right" data-aos-anchor-placement="top-bottom"
+                   data-aos-delay="200">
+                        <span class="icon-side">
+                           <img src="{% static 'admin/assets/img/icons/equipments.svg' %}" class="icon-2">
+                           <img src="{% static 'admin/assets/img/icons/equipments-white.svg' %}" class="icon-1">
+                        </span>
+                    <span class="align-middle">
+                        Equipments</span>
+                </a>
+            </li>
+
+            {% url 'appdashboard:exercise' as exercise %}
+            <li class="sidebar-item  {% if 'exercise' in request.path %} active {% endif %}">
+                <a class="sidebar-link" href="{% url 'appdashboard:exercise'%}" data-aos="fade-right" data-aos-anchor-placement="top-bottom"
+                   data-aos-delay="200">
+                        <span class="icon-side">
+                           <img src="{% static 'admin/assets/img/icons/exercise.svg' %}" class="icon-2">
+                           <img src="{% static 'admin/assets/img/icons/exercise-white.svg' %}" class="icon-1">
+                        </span>
+                    <span class="align-middle">
+                        Exercise</span>
+                </a>
+            </li>
+
+            {% url 'appdashboard:expertlog' as expertlog %}
+            <li class="sidebar-item  {% if 'expertlog' in request.path %} active {% endif %}">
+                <a class="sidebar-link" href="{% url 'appdashboard:expertlog'%}" data-aos="fade-right" data-aos-anchor-placement="top-bottom"
+                   data-aos-delay="200">
+                        <span class="icon-side">
+                           <img src="{% static 'admin/assets/img/icons/expertlog.svg' %}" class="icon-2">
+                           <img src="{% static 'admin/assets/img/icons/expertlog-white.svg' %}" class="icon-1">
+                        </span>
+                    <span class="align-middle">
+                        Expert Log</span>
+                </a>
+            </li>
+
+            {% url 'appdashboard:help-request' as help_request %}
+            <li class="sidebar-item  {% if request.path == help_request %} active {% endif %}">
+                <a class="sidebar-link" href="{% url 'appdashboard:help-request'%}" data-aos="fade-right" data-aos-anchor-placement="top-bottom"
+                   data-aos-delay="200">
+                        <span class="icon-side">
+                           <img src="{% static 'admin/assets/img/icons/help_req.svg' %}" class="icon-2">
+                           <img src="{% static 'admin/assets/img/icons/help_req-white.svg' %}" class="icon-1">
+                        </span>
+                    <span class="align-middle">
+                        Help Request</span>
+                </a>
+            </li>
+
+            {% url 'appdashboard:feedback-rating' as feedback_rating %}
+            <li class="sidebar-item  {% if request.path == feedback_rating %} active {% endif %}">
+                <a class="sidebar-link" href="{% url 'appdashboard:feedback-rating'%}" data-aos="fade-right" data-aos-anchor-placement="top-bottom"
+                   data-aos-delay="200">
+                        <span class="icon-side">
+                           <img src="{% static 'admin/assets/img/icons/star.svg' %}" class="icon-2">
+                           <img src="{% static 'admin/assets/img/icons/star_white.svg' %}" class="icon-1">
+                        </span>
+                    <span class="align-middle">
+                        Feedback and Rating</span>
+                </a>
+            </li>
+
+            {% url 'appdashboard:faq' as faq_url %}
+            <li class="sidebar-item  {% if 'faq' in request.path %} active {% endif %}">
+                <a class="sidebar-link" href="{% url 'appdashboard:faq'%}" data-aos="fade-right" data-aos-anchor-placement="top-bottom"
+                   data-aos-delay="200">
+                        <span class="icon-side">
+                           <img src="{% static 'admin/assets/img/icons/faq.svg' %}" class="icon-2">
+                           <img src="{% static 'admin/assets/img/icons/faq-white.svg' %}" class="icon-1">
+                        </span>
+                    <span class="align-middle">
+                        FAQ Management</span>
+                </a>
+            </li>
+            
+            <!-- on july 31 based on client meeting -->
+            <!-- {% url 'appdashboard:help' as help_url %}
+            <li class="sidebar-item  {% if 'help' in request.path and 'help-request' not in request.path %} active {% endif %}">
+                <a class="sidebar-link" href="{% url 'appdashboard:help'%}" data-aos="fade-right" data-aos-anchor-placement="top-bottom"
+                   data-aos-delay="200">
+                        <span class="icon-side">
+                           <img src="{% static 'admin/assets/img/icons/help_management.svg' %}" class="icon-2">
+                           <img src="{% static 'admin/assets/img/icons/help_management-white.svg' %}" class="icon-1">
+                        </span>
+                    <span class="align-middle">
+                        Help Management</span>
+                </a>
+            </li> -->
+
+            {% url 'appdashboard:report' as report_url %}
+            <li class="sidebar-item  {% if request.path == report_url %} active {% endif %}">
+                <a class="sidebar-link" href="{% url 'appdashboard:report'%}" data-aos="fade-right" data-aos-anchor-placement="top-bottom"
+                   data-aos-delay="200">
+                        <span class="icon-side">
+                           <img src="{% static 'admin/assets/img/icons/report.svg' %}" class="icon-2">
+                           <img src="{% static 'admin/assets/img/icons/report-white.svg' %}" class="icon-1">
+                        </span>
+                    <span class="align-middle">
+                        Report Management</span>
+                </a>
+            </li>
+
+            {% url 'appdashboard:badge' as badge_url %}
+            <li class="sidebar-item  {% if 'badge' in request.path %} active {% endif %}">
+                <a class="sidebar-link" href="{% url 'appdashboard:badge'%}" data-aos="fade-right" data-aos-anchor-placement="top-bottom"
+                   data-aos-delay="200">
+                        <span class="icon-side">
+                           <img src="{% static 'admin/assets/img/icons/badge.svg' %}" class="icon-2">
+                           <img src="{% static 'admin/assets/img/icons/badge-white.svg' %}" class="icon-1">
+                        </span>
+                    <span class="align-middle">
+                        Badge</span>
+                </a>
+            </li>
+
+            {% if request.user.is_superuser and request.user.user_type is null %}
+                {% url 'appdashboard:activity-log' as activitylog_url %}
+                <li class="sidebar-item  {% if 'activity-log' in request.path %} active {% endif %}">
+                    <a class="sidebar-link" href="{% url 'appdashboard:activity-log'%}" data-aos="fade-right" data-aos-anchor-placement="top-bottom"
+                    data-aos-delay="200">
+                            <span class="icon-side">
+                            <img src="{% static 'admin/assets/img/icons/activity_log.svg' %}" class="icon-2">
+                            <img src="{% static 'admin/assets/img/icons/activity_log-white.svg' %}" class="icon-1">
+                            </span>
+                        <span class="align-middle">
+                            Activity Log</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            <div class="settings" id="settings">
+               
+                <li class="sidebar-item settings">
+                    <a class="sidebar-link   nav-link" href="#" id="navbarDarkDropdownMenuLink" data-aos="fade-right" data-bs-toggle="dropdown" data-aos-anchor-placement="top-bottom"
+                       data-aos-delay="200">
+                            <span class="icon-side">
+                               <img src="{% static 'admin/assets/img/icons/settings.svg' %}" class="icon-2">
+                               <img src="{% static 'admin/assets/img/icons/settings-white.svg' %}" class="icon-1">
+                            </span>
+                        <span class="align-middle ">
+                            Settings</span>
+                       <span class="drop-arrow">
+                        <img src="{% static 'admin/assets/img/down-arrow.svg' %}" class="drop-black-icon">
+                        <img src="{% static 'admin/assets/img/down-arrow-white.svg' %}" class="drop-white-icon">
+                        </span>
+                        
+                    </a>
+                    <ul class="dropdown-menu-dark" >
+                        <li><a class="dropdown-item user-level" href="{% url 'appdashboard:user-level' %}">User Level</a></li>
+                        <li><a class="dropdown-item category" href="{% url 'appdashboard:category' %}">Category</a></li>
+                        <li><a class="dropdown-item muscle" href="{% url 'appdashboard:muscle' %}">Muscle</a></li>
+                        <li><a class="dropdown-item resttime" href="{% url 'appdashboard:resttime' %}">Rest Time</a></li>
+                        <li><a class="dropdown-item reps" href="{% url 'appdashboard:reps' %}">Reps</a></li>
+                        <li><a class="dropdown-item weight" href="{% url 'appdashboard:weight' %}">Weight</a></li>
+                        <li><a class="dropdown-item terms-condition terms-add" href="{% url 'appdashboard:terms-condition' %}">Terms and Condition</a></li>
+                        <li><a class="dropdown-item frame" href="{% url 'appdashboard:frame' %}">Frame</a></li>
+                        <li><a class="dropdown-item avatar-view" href="{% url 'appdashboard:avatar-view' %}">Avatar</a></li>
+                    </ul>
+                </li>
+              
+            </div>
+
+            {% url 'appdashboard:change-password' as change_password %}
+            <li class="sidebar-item  {% if request.path == change_password %} active {% endif %}">
+                <a class="sidebar-link" href="{% url 'appdashboard:change-password'%}" data-aos="fade-right" data-aos-anchor-placement="top-bottom"
+                   data-aos-delay="200">
+                        <span class="icon-side">
+                           <img src="{% static 'admin/assets/img/icons/password-reset.svg' %}" class="icon-2">
+                           <img src="{% static 'admin/assets/img/icons/password-reset-white.svg' %}" class="icon-1">
+                        </span>
+                    <span class="align-middle">
+                        Change Password</span>
+                </a>
+            </li>
+
+
+            <script>
+            
+                $(document).ready(function() {
+                    var pathname = window.location.pathname
+
+                    if (pathname.split('/').length >= 2) {
+                        url = pathname.split('/')[2]
+                    }
+                    settings_sub_menu = ['category', 'user-level','muscle','resttime','reps','weight','frame',
+                    'terms-condition','terms-add','avatar-view']
+                    if (settings_sub_menu.includes(url)) {
+                        $("."+url).addClass("active");
+                        $(".settings").addClass("active");
+                        $('.dropdown-menu-dark').show();
+                        $('.nav-link').addClass('open-menu')
+                        
+                    }
+                    user_sub_menu = ['user-detail','trainer-detail']
+                    if (user_sub_menu.includes(url))
+                    {
+                        $("."+url).addClass("active");
+                    }
+                })
+            </script>
+
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="{% url 'appdashboard:logout' %}" data-aos="fade-right" data-aos-anchor-placement="top-bottom"
+                   data-aos-delay="1000">
+                        <span class="icon-side">
+                           <img src="{% static 'admin/assets/img/icons/logout.svg' %}" class="icon-2">
+                           <img src="{% static 'admin/assets/img/icons/logout-white.svg' %}" class="icon-1">
+                        </span>
+                    <span class="align-middle">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<style>
+    .sidebar .sidebar-nav .sidebar-item.active {
+        background-color: #fff !important;
+    }
+    .badge{
+        display: flex;
+    }
+</style>

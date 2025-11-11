@@ -1,0 +1,2772 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-21 03:50+0000\n"
+"PO-Revision-Date: 2023-08-21 04:08+0000\n"
+"Last-Translator:   <admin@trainpad.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Translated-Using: django-rosetta 0.9.8\n"
+
+#: portal/models.py:49
+msgid "The Email must be set"
+msgstr "يجب تعيين البريد الإلكتروني"
+
+#: portal/models.py:62
+msgid "Superuser must have is_staff=True."
+msgstr ""
+
+#: portal/models.py:64
+msgid "Superuser must have is_superuser=True."
+msgstr ""
+
+#: user/serializers/accountserializer.py:31
+#: user/serializers/accountserializer.py:350
+#: user/serializers/accountserializer.py:384
+#: user/serializers/accountserializer.py:417
+#: user/serializers/accountserializer.py:697
+msgid "Name must contain characters only"
+msgstr "يجب أن يحتوي الاسم على أحرف فقط"
+
+#: user/serializers/accountserializer.py:32
+#: user/serializers/accountserializer.py:348
+msgid "Email already exist with another User."
+msgstr "البريد الإلكتروني موجود بالفعل مع مستخدم آخر."
+
+#: user/serializers/accountserializer.py:33
+msgid "Mobile already exist with another User."
+msgstr "الجوال موجود بالفعل مع مستخدم آخر."
+
+#: user/serializers/accountserializer.py:45
+#, fuzzy
+#| msgid "Name must contain characters only"
+msgid "Password must contain 8 characters"
+msgstr "يجب أن يحتوي الاسم على أحرف فقط"
+
+#: user/serializers/accountserializer.py:49
+#, fuzzy
+#| msgid ""
+#| "Password must contain 8 charaters including one uppercase character, one "
+#| "lowercase character,one special character and numbers"
+msgid ""
+"Password must contain one uppercase character, one lower case character ,one"
+" special character and numbers"
+msgstr ""
+"يجب أن تحتوي كلمة المرور على 8 أحرف تتضمن حرفًا كبيرًا وحرفًا صغيرًا وحرفًا "
+"خاصًا وأرقامًا"
+
+#: user/serializers/accountserializer.py:66
+#: user/serializers/accountserializer.py:202
+msgid "Invalid mobile number, check number or country code"
+msgstr "رقم الهاتف المحمول غير صحيح ، تحقق من الرقم أو رمز الدولة"
+
+#: user/serializers/accountserializer.py:68
+msgid "Please accept terms and conditions"
+msgstr "الرجاء قبول الشروط والأحكام"
+
+#: user/serializers/accountserializer.py:97
+#: user/serializers/accountserializer.py:103
+#: user/serializers/accountserializer.py:126
+#: user/serializers/accountserializer.py:131
+msgid "Document need to be uploaded"
+msgstr "يجب تحميل المستند"
+
+#: user/serializers/accountserializer.py:109
+#, fuzzy
+#| msgid "User details already exists"
+msgid "Email id already exist."
+msgstr "تفاصيل المستخدم موجودة بالفعل"
+
+#: user/serializers/accountserializer.py:113
+#, fuzzy
+#| msgid "Mobile already exist with another User."
+msgid "Mobile id already exist."
+msgstr "الجوال موجود بالفعل مع مستخدم آخر."
+
+#: user/serializers/accountserializer.py:152
+#: user/serializers/accountserializer.py:340
+#: user/serializers/accountserializer.py:529
+msgid "OTP invalid format"
+msgstr "تنسيق OTP غير صالح"
+
+#: user/serializers/accountserializer.py:156
+#: user/serializers/accountserializer.py:344
+#: user/serializers/accountserializer.py:542
+msgid "Invalid otp entered"
+msgstr "تم إدخال otp غير صالح"
+
+#: user/serializers/accountserializer.py:206
+#: user/serializers/accountserializer.py:463
+#: user/serializers/accountserializer.py:498
+msgid "User does'nt exist"
+msgstr "المستخدم غير موجود"
+
+#: user/serializers/accountserializer.py:249
+#: user/serializers/accountserializer.py:307
+#: user/serializers/accountserializer.py:433
+msgid "Your documents are not verified yet. Please wait until verified."
+msgstr ""
+"لم يتم التحقق من المستندات الخاصة بك حتى الآن. يرجى الانتظار حتى التحقق."
+
+#: user/serializers/accountserializer.py:256
+#: user/serializers/accountserializer.py:258
+#: user/serializers/accountserializer.py:274
+#: user/serializers/accountserializer.py:309 user/view/communityview.py:554
+#: user/view/communityview.py:658 user/view/communityview.py:747
+#, fuzzy
+#| msgid "User does'nt exist"
+msgid "User doesn't exist"
+msgstr "المستخدم غير موجود"
+
+#: user/serializers/accountserializer.py:276
+#: user/serializers/accountserializer.py:323
+#: user/serializers/accountserializer.py:473
+#: user/serializers/accountserializer.py:508
+msgid "Your account has been blocked"
+msgstr "لقد تم حذف حسابك"
+
+#: user/serializers/accountserializer.py:278
+msgid "Invalid password"
+msgstr "رمز مرور خاطئ"
+
+#: user/serializers/accountserializer.py:280
+#: user/serializers/accountserializer.py:325
+#: user/serializers/accountserializer.py:475
+#: user/serializers/accountserializer.py:510
+msgid "Your account is inactive please send enquiry to support"
+msgstr "حسابك غير نشط يرجى إرسال استفسار للدعم"
+
+#: user/serializers/accountserializer.py:406
+#: user/serializers/accountserializer.py:440
+msgid "User not found / Your account blocked please send enquiry to support"
+msgstr "المستخدم غير موجود / حسابك محظور ، يرجى إرسال استفسار للدعم"
+
+#: user/serializers/accountserializer.py:461
+#: user/serializers/accountserializer.py:496
+msgid "Your documents are not verified yet. Please be wait until verified."
+msgstr ""
+"لم يتم التحقق من المستندات الخاصة بك حتى الآن. يرجى الانتظار حتى التحقق."
+
+#: user/serializers/accountserializer.py:465
+msgid "Email Required"
+msgstr "البريد الإلكتروني (مطلوب"
+
+#: user/serializers/accountserializer.py:500
+msgid "Mobile Number Required"
+msgstr "رقم الهاتف المحمول مطلوب"
+
+#: user/serializers/accountserializer.py:521
+#: user/serializers/accountserializer.py:554
+#: user/serializers/accountserializer.py:562
+msgid ""
+"Password must contain 8 charaters including one uppercase character, one "
+"lowercase character,one special character and numbers"
+msgstr ""
+"يجب أن تحتوي كلمة المرور على 8 أحرف تتضمن حرفًا كبيرًا وحرفًا صغيرًا وحرفًا "
+"خاصًا وأرقامًا"
+
+#: user/serializers/accountserializer.py:539
+#: user/serializers/accountserializer.py:575
+msgid ""
+"Your new password matches your existing password. Please choose a different "
+"password."
+msgstr "لقد استخدمت كلمة المرور هذه مؤخرًا. الرجاء اختيار واحد مختلف."
+
+#: user/serializers/accountserializer.py:544
+#: user/serializers/accountserializer.py:569
+msgid "Password fields didn't match."
+msgstr "حقول كلمة المرور غير متطابقة."
+
+#: user/serializers/accountserializer.py:572
+msgid "Old password is not correct."
+msgstr "كلمة المرور القديمة غير صحيحة."
+
+#: user/serializers/communityserializer.py:26
+msgid "File size is too large. Please select a video less than {} MB."
+msgstr "حجم الملف كبير جدًا. الرجاء تحديد مقطع فيديو أقل من {} ميغابايت."
+
+#: user/serializers/communityserializer.py:27
+#, python-brace-format
+msgid "Invalid file extension. Allowed extensions are: {allowed_extensions}."
+msgstr "ملحق الملف غير صالح. الامتدادات المسموح بها هي: {allowed_extensions}."
+
+#: user/serializers/communityserializer.py:1977
+#, fuzzy
+#| msgid "Name must contain characters only"
+msgid "Action must contain characters only"
+msgstr "يجب أن يحتوي الاسم على أحرف فقط"
+
+#: user/serializers/workoutserializer.py:1100 user/view/workoutview.py:351
+#| msgid "Exercise Not Found"
+msgid "Workout not found"
+msgstr "لم يتم العثور على التمرين"
+
+#: user/view/accountview.py:58 user/view/accountview.py:67
+#: user/view/accountview.py:106 user/view/accountview.py:330
+#: user/view/accountview.py:338 user/view/accountview.py:396
+#: user/view/accountview.py:509 user/view/accountview.py:518
+#: user/view/accountview.py:542
+msgid "OTP Expired / Invalid"
+msgstr "انتهت صلاحية كلمة المرور / غير صالحة"
+
+#: user/view/accountview.py:117 user/view/accountview.py:122
+#: user/view/accountview.py:132 user/view/commonview.py:281
+#: user/view/commonview.py:297 user/view/commonview.py:307
+#: user/view/communityview.py:54 user/view/communityview.py:72
+#: user/view/communityview.py:97 user/view/communityview.py:108
+#: user/view/communityview.py:128 user/view/communityview.py:145
+#: user/view/communityview.py:161 user/view/communityview.py:170
+#: user/view/communityview.py:230 user/view/communityview.py:268
+#: user/view/communityview.py:284 user/view/communityview.py:295
+#: user/view/communityview.py:308 user/view/communityview.py:320
+#: user/view/communityview.py:339 user/view/communityview.py:368
+#: user/view/communityview.py:474 user/view/communityview.py:499
+#: user/view/communityview.py:513 user/view/communityview.py:551
+#: user/view/communityview.py:607 user/view/communityview.py:623
+#: user/view/communityview.py:703 user/view/communityview.py:712
+#: user/view/communityview.py:716 user/view/communityview.py:734
+#: user/view/communityview.py:743 user/view/communityview.py:758
+#: user/view/communityview.py:928 user/view/communityview.py:971
+#: user/view/communityview.py:1080 user/view/communityview.py:1094
+#: user/view/communityview.py:1137 user/view/communityview.py:1144
+#: user/view/communityview.py:1241 user/view/communityview.py:1261
+#: user/view/workoutview.py:57 user/view/workoutview.py:92
+#: user/view/workoutview.py:113 user/view/workoutview.py:121
+#: user/view/workoutview.py:139 user/view/workoutview.py:152
+#: user/view/workoutview.py:190 user/view/workoutview.py:202
+#: user/view/workoutview.py:219 user/view/workoutview.py:238
+#: user/view/workoutview.py:263 user/view/workoutview.py:278
+#: user/view/workoutview.py:303 user/view/workoutview.py:307
+#: user/view/workoutview.py:326 user/view/workoutview.py:346
+#: user/view/workoutview.py:363 user/view/workoutview.py:410
+#: user/view/workoutview.py:421 user/view/workoutview.py:632
+#: user/view/workoutview.py:650 user/view/workoutview.py:672
+#: user/view/workoutview.py:678 user/view/workoutview.py:691
+#: user/view/workoutview.py:721 user/view/workoutview.py:772
+#: user/view/workoutview.py:788 user/view/workoutview.py:832
+#: user/view/workoutview.py:854 user/view/workoutview.py:879
+#: user/view/workoutview.py:971 user/view/workoutview.py:988
+#: user/view/workoutview.py:1011 user/view/workoutview.py:1031
+#: user/view/workoutview.py:1041 user/view/workoutview.py:1056
+#: user/view/workoutview.py:1066 user/view/workoutview.py:1113
+#: user/view/workoutview.py:1131 user/view/workoutview.py:1145
+#: user/view/wrktprgrsview.py:136 user/view/wrktprgrsview.py:240
+#: user/view/wrktprgrsview.py:247 user/view/wrktprgrsview.py:256
+#: user/view/wrktprgrsview.py:278 user/view/wrktprgrsview.py:295
+#: user/view/wrktprgrsview.py:307 user/view/wrktprgrsview.py:329
+msgid "success"
+msgstr ""
+
+#: user/view/accountview.py:117 user/view/accountview.py:122
+#: user/view/accountview.py:132
+#, fuzzy
+#| msgid "Workout Created Successfully"
+msgid "Token updated successfully"
+msgstr "تم إنشاء التمرين بنجاح"
+
+#: user/view/accountview.py:124 user/view/accountview.py:134
+#: user/view/accountview.py:636 user/view/commonview.py:47
+#: user/view/commonview.py:49 user/view/commonview.py:61
+#: user/view/commonview.py:283 user/view/commonview.py:345
+#: user/view/commonview.py:355 user/view/communityview.py:75
+#: user/view/communityview.py:77 user/view/communityview.py:90
+#: user/view/communityview.py:101 user/view/communityview.py:111
+#: user/view/communityview.py:133 user/view/communityview.py:148
+#: user/view/communityview.py:172 user/view/communityview.py:174
+#: user/view/communityview.py:176 user/view/communityview.py:233
+#: user/view/communityview.py:235 user/view/communityview.py:271
+#: user/view/communityview.py:274 user/view/communityview.py:287
+#: user/view/communityview.py:290 user/view/communityview.py:298
+#: user/view/communityview.py:301 user/view/communityview.py:310
+#: user/view/communityview.py:324 user/view/communityview.py:341
+#: user/view/communityview.py:371 user/view/communityview.py:423
+#: user/view/communityview.py:554 user/view/communityview.py:557
+#: user/view/communityview.py:610 user/view/communityview.py:626
+#: user/view/communityview.py:629 user/view/communityview.py:658
+#: user/view/communityview.py:660 user/view/communityview.py:705
+#: user/view/communityview.py:719 user/view/communityview.py:736
+#: user/view/communityview.py:745 user/view/communityview.py:747
+#: user/view/communityview.py:749 user/view/communityview.py:760
+#: user/view/communityview.py:762 user/view/communityview.py:764
+#: user/view/communityview.py:787 user/view/communityview.py:826
+#: user/view/communityview.py:841 user/view/communityview.py:853
+#: user/view/communityview.py:855 user/view/communityview.py:857
+#: user/view/communityview.py:871 user/view/communityview.py:873
+#: user/view/communityview.py:875 user/view/communityview.py:898
+#: user/view/communityview.py:910 user/view/communityview.py:931
+#: user/view/communityview.py:953 user/view/communityview.py:973
+#: user/view/communityview.py:975 user/view/communityview.py:977
+#: user/view/communityview.py:990 user/view/communityview.py:993
+#: user/view/communityview.py:1016 user/view/communityview.py:1065
+#: user/view/communityview.py:1083 user/view/communityview.py:1086
+#: user/view/communityview.py:1096 user/view/communityview.py:1098
+#: user/view/communityview.py:1147 user/view/communityview.py:1150
+#: user/view/communityview.py:1153 user/view/communityview.py:1166
+#: user/view/communityview.py:1168 user/view/communityview.py:1174
+#: user/view/communityview.py:1213 user/view/communityview.py:1264
+#: user/view/communityview.py:1292 user/view/communityview.py:1295
+#: user/view/communityview.py:1327 user/view/communityview.py:1330
+#: user/view/communityview.py:1333 user/view/communityview.py:1351
+#: user/view/communityview.py:1356 user/view/workoutview.py:56
+#: user/view/workoutview.py:59 user/view/workoutview.py:95
+#: user/view/workoutview.py:115 user/view/workoutview.py:123
+#: user/view/workoutview.py:125 user/view/workoutview.py:132
+#: user/view/workoutview.py:141 user/view/workoutview.py:154
+#: user/view/workoutview.py:156 user/view/workoutview.py:193
+#: user/view/workoutview.py:205 user/view/workoutview.py:209
+#: user/view/workoutview.py:221 user/view/workoutview.py:242
+#: user/view/workoutview.py:243 user/view/workoutview.py:273
+#: user/view/workoutview.py:280 user/view/workoutview.py:310
+#: user/view/workoutview.py:329 user/view/workoutview.py:332
+#: user/view/workoutview.py:349 user/view/workoutview.py:351
+#: user/view/workoutview.py:366 user/view/workoutview.py:368
+#: user/view/workoutview.py:413 user/view/workoutview.py:423
+#: user/view/workoutview.py:425 user/view/workoutview.py:635
+#: user/view/workoutview.py:647 user/view/workoutview.py:653
+#: user/view/workoutview.py:671 user/view/workoutview.py:693
+#: user/view/workoutview.py:723 user/view/workoutview.py:726
+#: user/view/workoutview.py:774 user/view/workoutview.py:785
+#: user/view/workoutview.py:790 user/view/workoutview.py:857
+#: user/view/workoutview.py:866 user/view/workoutview.py:870
+#: user/view/workoutview.py:875 user/view/workoutview.py:881
+#: user/view/workoutview.py:979 user/view/workoutview.py:983
+#: user/view/workoutview.py:990 user/view/workoutview.py:1013
+#: user/view/workoutview.py:1033 user/view/workoutview.py:1043
+#: user/view/workoutview.py:1045 user/view/workoutview.py:1047
+#: user/view/workoutview.py:1058 user/view/workoutview.py:1068
+#: user/view/workoutview.py:1070 user/view/workoutview.py:1072
+#: user/view/workoutview.py:1074 user/view/workoutview.py:1132
+#: user/view/workoutview.py:1136 user/view/workoutview.py:1147
+#: user/view/workoutview.py:1149 user/view/wrktprgrsview.py:253
+#: user/view/wrktprgrsview.py:256 user/view/wrktprgrsview.py:282
+#: user/view/wrktprgrsview.py:297 user/view/wrktprgrsview.py:309
+msgid "failure"
+msgstr ""
+
+#: user/view/accountview.py:161 user/view/workoutview.py:125
+msgid "Action not found"
+msgstr "لم يتم العثور على الإجراء"
+
+#: user/view/accountview.py:189 user/view/commonview.py:47
+#: user/view/communityview.py:719 user/view/communityview.py:764
+#: user/view/communityview.py:975 user/view/workoutview.py:647
+#, fuzzy
+#| msgid "Invalid otp entered"
+msgid "Invalid choice"
+msgstr "تم إدخال otp غير صالح"
+
+#: user/view/accountview.py:204
+msgid "Document uploaded successfully"
+msgstr "تم تحميل المستند بنجاح"
+
+#: user/view/accountview.py:233
+#, fuzzy
+#| msgid "Only images files allowed"
+msgid "Only image files allowed"
+msgstr "يسمح فقط بملفات الصور"
+
+#: user/view/accountview.py:244
+#, fuzzy
+#| msgid "Invalid password"
+msgid "Invalid avatar"
+msgstr "رمز مرور خاطئ"
+
+#: user/view/accountview.py:270
+#, fuzzy
+#| msgid "User details already exists"
+msgid "User details already exists"
+msgstr "تفاصيل المستخدم موجودة بالفعل"
+
+#: user/view/accountview.py:273
+msgid "Personal profile added successfully"
+msgstr "تمت إضافة الملف الشخصي بنجاح"
+
+#: user/view/accountview.py:312
+msgid "User session is in use, Logout first"
+msgstr "جلسة المستخدم قيد الاستخدام ، تسجيل الخروج أولاً"
+
+#: user/view/accountview.py:479
+#, fuzzy
+#| msgid "Invalid password"
+msgid "Invalid type"
+msgstr "رمز مرور خاطئ"
+
+#: user/view/accountview.py:537
+msgid "Password changed successfully"
+msgstr "تم تغيير الرقم السري بنجاح"
+
+#: user/view/accountview.py:583
+msgid "Profile Updated Successfully"
+msgstr "تم تحديث الملف الشخصي بنجاح"
+
+#: user/view/accountview.py:597
+msgid "Profile pic Added Successfully"
+msgstr "تمت إضافة صورة الملف الشخصي بنجاح"
+
+#: user/view/accountview.py:617
+msgid "Logout Successfully"
+msgstr "تم تسجيل الخروج بنجاح"
+
+#: user/view/accountview.py:630
+msgid "Coordinates Updated"
+msgstr "تم تحديث الإحداثيات"
+
+#: user/view/accountview.py:649 user/view/communityview.py:148
+#: user/view/communityview.py:233 user/view/communityview.py:271
+#: user/view/communityview.py:301 user/view/communityview.py:310
+#: user/view/communityview.py:341 user/view/communityview.py:371
+#: user/view/communityview.py:736 user/view/communityview.py:745
+#: user/view/communityview.py:760 user/view/communityview.py:762
+#: user/view/communityview.py:826 user/view/communityview.py:841
+#: user/view/communityview.py:853 user/view/communityview.py:855
+#: user/view/communityview.py:871 user/view/communityview.py:873
+#: user/view/communityview.py:931 user/view/communityview.py:973
+#: user/view/communityview.py:990 user/view/communityview.py:1096
+#: user/view/communityview.py:1292 user/view/communityview.py:1327
+#: user/view/communityview.py:1356 user/view/workoutview.py:56
+#: user/view/workoutview.py:653 user/view/workoutview.py:671
+#: user/view/workoutview.py:774 user/view/workoutview.py:1033
+#: user/view/workoutview.py:1043 user/view/workoutview.py:1058
+#: user/view/workoutview.py:1068 user/view/workoutview.py:1074
+#: user/view/workoutview.py:1132 user/view/workoutview.py:1147
+msgid "No records"
+msgstr "لا تسجيلات"
+
+#: user/view/commonview.py:49 user/view/commonview.py:61
+#: user/view/commonview.py:283 user/view/commonview.py:345
+#: user/view/communityview.py:787 user/view/communityview.py:1153
+#: user/view/communityview.py:1351 user/view/workoutview.py:59
+#: user/view/workoutview.py:95 user/view/workoutview.py:349
+#: user/view/workoutview.py:366 user/view/workoutview.py:413
+#: user/view/workoutview.py:857 user/view/workoutview.py:1045
+#: user/view/workoutview.py:1047 user/view/workoutview.py:1070
+#: user/view/workoutview.py:1072
+#, fuzzy
+#| msgid "Invalid password"
+msgid "Invalid record"
+msgstr "رمز مرور خاطئ"
+
+#: user/view/commonview.py:140 user/view/commonview.py:150
+#: user/view/commonview.py:152 user/view/commonview.py:218
+#: user/view/commonview.py:228 user/view/commonview.py:239
+#: user/view/commonview.py:255 user/view/communityview.py:1166
+#: user/view/communityview.py:1174
+msgid "No Records"
+msgstr "لا تسجيلات"
+
+#: user/view/commonview.py:182
+msgid "Rated Successfully"
+msgstr "تم التقييم بنجاح"
+
+#: user/view/commonview.py:204
+msgid "Reported Issue"
+msgstr "المشكلة المبلغ عنها"
+
+#: user/view/commonview.py:281
+msgid "Read status updated"
+msgstr "تم تحديث حالة القراءة"
+
+#: user/view/commonview.py:306
+#, fuzzy
+#| msgid ""
+#| "File size is too large. Please select a video less than {} MB."
+msgid "File size is too large.Please select a video less than {} MB"
+msgstr "حجم الملف كبير جدًا. الرجاء تحديد مقطع فيديو أقل من {} ميغابايت."
+
+#: user/view/commonview.py:355 user/view/communityview.py:1150
+#: user/view/workoutview.py:423 user/view/workoutview.py:425
+#: user/view/workoutview.py:881
+msgid "No record"
+msgstr "لا سجلات"
+
+#: user/view/communityview.py:75 user/view/communityview.py:77
+#: user/view/communityview.py:133 user/view/communityview.py:172
+#: user/view/communityview.py:174 user/view/communityview.py:176
+#: user/view/communityview.py:705
+msgid "No result"
+msgstr "لا نتيجة"
+
+#: user/view/communityview.py:90
+#, fuzzy
+#| msgid "OTP invalid format"
+msgid "Invalid image format"
+msgstr "تنسيق OTP غير صالح"
+
+#: user/view/communityview.py:97 user/view/communityview.py:108
+#: user/view/communityview.py:128
+msgid "Post Created Successfully"
+msgstr "تم إنشاء المشاركة بنجاح"
+
+#: user/view/communityview.py:101
+#, fuzzy
+#| msgid "OTP invalid format"
+msgid "Invalid video format"
+msgstr "تنسيق OTP غير صالح"
+
+#: user/view/communityview.py:145
+msgid "Post updated successfully"
+msgstr "تم تحديث المنشور بنجاح"
+
+#: user/view/communityview.py:230
+msgid "Liked Successfully"
+msgstr "أحببت بنجاح"
+
+#: user/view/communityview.py:268
+msgid "Comment Added Successfuly"
+msgstr "تمت إضافة التعليق بنجاح"
+
+#: user/view/communityview.py:284
+msgid "Post Deleted Successfully"
+msgstr "تم حذف المشاركة بنجاح"
+
+#: user/view/communityview.py:287
+msgid "No post created yet"
+msgstr "لم يتم إنشاء وظيفة بعد"
+
+#: user/view/communityview.py:290 user/view/communityview.py:298
+#: user/view/workoutview.py:635
+#, fuzzy
+#| msgid "Invalid password"
+msgid "Invalid records"
+msgstr "رمز مرور خاطئ"
+
+#: user/view/communityview.py:295
+msgid "Comment Deleted Successfully"
+msgstr "تم حذف التعليق بنجاح"
+
+#: user/view/communityview.py:423
+msgid "You cannot follow / unfollow yourself"
+msgstr "لا يمكنك متابعة / إلغاء متابعة نفسك"
+
+#: user/view/communityview.py:474
+msgid "Your follow request is cancelled."
+msgstr "تم إلغاء طلب المتابعة الخاص بك."
+
+#: user/view/communityview.py:499 user/view/communityview.py:551
+msgid ""
+"Congratulations! You are now following {}. You will receive updates on their"
+" activity."
+msgstr "تهانينا! أنت الآن تتابع {}. سوف تتلقى تحديثات عن نشاطهم."
+
+#: user/view/communityview.py:513
+msgid ""
+"You have successfully unfollowed {}. You will no longer receive updates on "
+"their activity."
+msgstr "لقد نجحت في إلغاء متابعة {}. لن تتلقى تحديثات عن نشاطهم بعد الآن."
+
+#: user/view/communityview.py:557 user/view/communityview.py:660
+#: user/view/communityview.py:749 user/view/communityview.py:857
+#: user/view/communityview.py:875 user/view/communityview.py:993
+#: user/view/communityview.py:1168 user/view/communityview.py:1213
+msgid "A valid integer is required."
+msgstr "مطلوب عدد صحيح صالح."
+
+#: user/view/communityview.py:607
+msgid "Accepted the request"
+msgstr "قبلت الطلب"
+
+#: user/view/communityview.py:610 user/view/communityview.py:626
+#: user/view/communityview.py:629 user/view/communityview.py:1098
+#: user/view/workoutview.py:1149
+#, fuzzy
+#| msgid "Invalid password"
+msgid "Invalid data"
+msgstr "رمز مرور خاطئ"
+
+#: user/view/communityview.py:623
+msgid "Request rejected"
+msgstr "طلب رفض"
+
+#: user/view/communityview.py:712
+msgid ""
+"Congratulations, your account is now private! Your content is now only "
+"visible to your followers."
+msgstr "تهانينا ، حسابك خاص الآن! المحتوى الخاص بك الآن مرئي فقط لمتابعيك."
+
+#: user/view/communityview.py:716
+msgid ""
+"Congratulations, your account is now public! Your content will be visible to"
+" everyone."
+msgstr ""
+"تهانينا ، أصبح حسابك عامًا الآن! سيكون المحتوى الخاص بك مرئيًا للجميع."
+
+#: user/view/communityview.py:898
+msgid ""
+"This is a private account and you are not following it. Please send a follow"
+" request to access their data"
+msgstr ""
+"هذا حساب خاص وأنت لا تتابعه. يرجى إرسال طلب متابعة للوصول إلى بياناتهم"
+
+#: user/view/communityview.py:910
+msgid "No Followers"
+msgstr "لا متابعين"
+
+#: user/view/communityview.py:923 user/view/communityview.py:966
+#: user/view/communityview.py:1235 user/view/communityview.py:1255
+#: user/view/communityview.py:1333
+#, fuzzy
+#| msgid "Invalid otp entered"
+msgid "Invalid page number"
+msgstr "تم إدخال otp غير صالح"
+
+#: user/view/communityview.py:953
+msgid "No Followings"
+msgstr "لا أتباع"
+
+#: user/view/communityview.py:1016
+msgid "No nearby users found."
+msgstr ""
+
+#: user/view/communityview.py:1065
+msgid "Gym has not been selected"
+msgstr "لم يتم اختيار الصالة الرياضية"
+
+#: user/view/communityview.py:1080
+msgid "Help request sent successfully"
+msgstr "تم إرسال طلب المساعدة بنجاح"
+
+#: user/view/communityview.py:1083
+msgid "Currently no spotters available to assist you."
+msgstr ""
+
+#: user/view/communityview.py:1137
+#, fuzzy
+#| msgid "Request rejected"
+msgid "Request Accepted"
+msgstr "طلب رفض"
+
+#: user/view/communityview.py:1144
+#, fuzzy
+#| msgid "Request rejected"
+msgid "Request Rejected"
+msgstr "طلب رفض"
+
+#: user/view/communityview.py:1147
+#, fuzzy
+#| msgid "Invalid otp entered"
+msgid "Invalid Choice"
+msgstr "تم إدخال otp غير صالح"
+
+#: user/view/communityview.py:1210
+msgid "Connection request sent successfully"
+msgstr "تم إرسال طلب الاتصال بنجاح"
+
+#: user/view/communityview.py:1289
+msgid "Gym has been updated successfully"
+msgstr "تم تحديث الصالة الرياضية بنجاح"
+
+#: user/view/communityview.py:1330
+msgid "Invalid limit or page number"
+msgstr "حد غير صالح أو رقم الصفحة"
+
+#: user/view/workoutview.py:92
+msgid "Workout Created Successfully"
+msgstr "تم إنشاء التمرين بنجاح"
+
+#: user/view/workoutview.py:115
+#, fuzzy
+#| msgid "Exercise Not Found"
+msgid "Muscle Not Found"
+msgstr "لم يتم العثور على التمرين"
+
+#: user/view/workoutview.py:123 user/view/workoutview.py:141
+msgid "Search result not found"
+msgstr "لم يتم العثور على نتيجة البحث"
+
+#: user/view/workoutview.py:132
+#, fuzzy
+#| msgid "Action not found"
+msgid "Muscle not found"
+msgstr "لم يتم العثور على الإجراء"
+
+#: user/view/workoutview.py:154 user/view/workoutview.py:242
+#: user/view/workoutview.py:280
+msgid "Exercise Not Found"
+msgstr "لم يتم العثور على التمرين"
+
+#: user/view/workoutview.py:156 user/view/workoutview.py:243
+#: user/view/workoutview.py:273
+#, fuzzy
+#| msgid "Invalid otp entered"
+msgid "Invalid input for exercise_id"
+msgstr "تم إدخال otp غير صالح"
+
+#: user/view/workoutview.py:190
+msgid "Added to favourites"
+msgstr "تمت الإضافة إلى المفضلة"
+
+#: user/view/workoutview.py:202
+msgid "Removed from Favorites"
+msgstr "تمت إزالته من المفضلة"
+
+#: user/view/workoutview.py:205
+msgid "Favorite workout not found."
+msgstr "لم يتم العثور على نتيجة البحث"
+
+#: user/view/workoutview.py:209
+#, fuzzy
+#| msgid "Invalid otp entered"
+msgid "Invalid action parameter"
+msgstr "تم إدخال otp غير صالح"
+
+#: user/view/workoutview.py:221
+msgid "No Favourites"
+msgstr "لا مفضلات"
+
+#: user/view/workoutview.py:238
+msgid "Exercise removed from Favourites"
+msgstr "تمت إزالة التمرين من المفضلة"
+
+#: user/view/workoutview.py:310
+msgid "No custom workouts"
+msgstr "لا تدريبات مخصصة"
+
+#: user/view/workoutview.py:326
+msgid "Workout deleted successfully"
+msgstr "تم حذف التمرين بنجاح"
+
+#: user/view/workoutview.py:329
+#| msgid "Exercise Not Found"
+msgid "Workout Not Found"
+msgstr "لم يتم العثور على التمرين"
+
+#: user/view/workoutview.py:332
+msgid "Invalid input for workout_id"
+msgstr "إدخال غير صالح لـ معرّف_تجريب"
+
+#: user/view/workoutview.py:368
+#, fuzzy
+#| msgid "Invalid otp entered"
+msgid "Invalid input"
+msgstr "تم إدخال otp غير صالح"
+
+#: user/view/workoutview.py:410
+msgid "Workout Updated Successfully"
+msgstr "تم إنشاء التمرين بنجاح"
+
+#: user/view/workoutview.py:442
+msgid "'{}' "
+msgstr ""
+
+#: user/view/workoutview.py:444
+msgid "'{}' workout is in progress"
+msgstr "تجريب \"{}\" قيد التقدم"
+
+#: user/view/workoutview.py:483 user/view/workoutview.py:519
+msgid "Workout started successfully"
+msgstr "بدأ التمرين بنجاح"
+
+#: user/view/workoutview.py:632
+msgid "Workout Completed Successfully"
+msgstr "اكتمل التمرين بنجاح"
+
+#: user/view/workoutview.py:650
+msgid "Reminder updated"
+msgstr "تم تحديث التذكير"
+
+#: user/view/workoutview.py:785
+msgid "Workout with specified id does not exist."
+msgstr "التمرين بالمعرف المحدد غير موجود."
+
+#: user/view/workoutview.py:807
+msgid "Workout with same exercise already exist"
+msgstr "التمرين مع نفس التمرين موجود بالفعل"
+
+#: user/view/workoutview.py:832 user/view/workoutview.py:854
+msgid "Workout updated successfully"
+msgstr "تم تحديث التمرين بنجاح"
+
+#: user/view/workoutview.py:1131
+msgid "Workout log shared successfuly"
+msgstr "شارك سجل التمرين بنجاح"
+
+#: user/view/wrktprgrsview.py:278
+msgid "Your photo updated"
+msgstr "تم تحديث صورتك"
+
+#: venv/lib/python3.10/site-packages/ckeditor_uploader/forms.py:6
+msgid "Search files"
+msgstr "ابحث في الملفات"
+
+#: venv/lib/python3.10/site-packages/ckeditor_uploader/templates/ckeditor/browse.html:5
+msgid "Select an image to embed"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/ckeditor_uploader/templates/ckeditor/browse.html:27
+msgid "Browse for the image you want, then click 'Embed Image' to continue..."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/ckeditor_uploader/templates/ckeditor/browse.html:29
+msgid ""
+"No images found. Upload images using the 'Image Button' dialog's 'Upload' "
+"tab."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/ckeditor_uploader/templates/ckeditor/browse.html:50
+msgid "Images in: "
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/ckeditor_uploader/templates/ckeditor/browse.html:62
+#: venv/lib/python3.10/site-packages/ckeditor_uploader/templates/ckeditor/browse.html:80
+msgid "Embed Image"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/ckeditor_uploader/templates/ckeditor/browse.html:146
+msgid "Play Slideshow"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/ckeditor_uploader/templates/ckeditor/browse.html:147
+msgid "Pause Slideshow"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/ckeditor_uploader/templates/ckeditor/browse.html:148
+msgid "&lsaquo; Previous Photo"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/ckeditor_uploader/templates/ckeditor/browse.html:149
+msgid "Next Photo &rsaquo;"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/ckeditor_uploader/templates/ckeditor/browse.html:150
+msgid "Next &rsaquo;"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/ckeditor_uploader/templates/ckeditor/browse.html:151
+msgid "&lsaquo; Prev"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/_termui_impl.py:496
+#, python-brace-format
+msgid "{editor}: Editing failed"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/_termui_impl.py:500
+#, python-brace-format
+msgid "{editor}: Editing failed: {e}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:1097
+msgid "Aborted!"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:1282
+#: venv/lib/python3.10/site-packages/click/decorators.py:495
+msgid "Show this message and exit."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:1313
+#: venv/lib/python3.10/site-packages/click/core.py:1339
+#, python-brace-format
+msgid "(Deprecated) {text}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:1357
+msgid "Options"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:1383
+#, python-brace-format
+msgid "Got unexpected extra argument ({args})"
+msgid_plural "Got unexpected extra arguments ({args})"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:1399
+msgid "DeprecationWarning: The command {name!r} is deprecated."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:1605
+msgid "Commands"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:1637
+msgid "Missing command."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:1715
+msgid "No such command {name!r}."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:2271
+msgid "Value must be an iterable."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:2291
+#, python-brace-format
+msgid "Takes {nargs} values but 1 was given."
+msgid_plural "Takes {nargs} values but {len} were given."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:2734
+#, python-brace-format
+msgid "env var: {var}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:2764
+msgid "(dynamic)"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:2777
+#, python-brace-format
+msgid "default: {default}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/core.py:2790
+#, fuzzy
+#| msgid "Email Required"
+msgid "required"
+msgstr "البريد الإلكتروني (مطلوب"
+
+#: venv/lib/python3.10/site-packages/click/decorators.py:400
+#, python-format
+msgid "%(prog)s, version %(version)s"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/decorators.py:464
+msgid "Show the version and exit."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/exceptions.py:43
+#: venv/lib/python3.10/site-packages/click/exceptions.py:79
+#, python-brace-format
+msgid "Error: {message}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/exceptions.py:71
+#, python-brace-format
+msgid "Try '{command} {option}' for help."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/exceptions.py:120
+#, python-brace-format
+msgid "Invalid value: {message}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/exceptions.py:122
+#, python-brace-format
+msgid "Invalid value for {param_hint}: {message}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/exceptions.py:178
+msgid "Missing argument"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/exceptions.py:180
+msgid "Missing option"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/exceptions.py:182
+msgid "Missing parameter"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/exceptions.py:184
+#, python-brace-format
+msgid "Missing {param_type}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/exceptions.py:191
+#, python-brace-format
+msgid "Missing parameter: {param_name}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/exceptions.py:211
+#, python-brace-format
+msgid "No such option: {name}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/exceptions.py:223
+#, python-brace-format
+msgid "Did you mean {possibility}?"
+msgid_plural "(Possible options: {possibilities})"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: venv/lib/python3.10/site-packages/click/exceptions.py:261
+msgid "unknown error"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/exceptions.py:268
+msgid "Could not open file {filename!r}: {message}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/parser.py:231
+msgid "Argument {name!r} takes {nargs} values."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/parser.py:413
+msgid "Option {name!r} does not take a value."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/parser.py:474
+msgid "Option {name!r} requires an argument."
+msgid_plural "Option {name!r} requires {nargs} arguments."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: venv/lib/python3.10/site-packages/click/shell_completion.py:316
+msgid "Shell completion is not supported for Bash versions older than 4.4."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/shell_completion.py:322
+msgid "Couldn't detect Bash version, shell completion is not supported."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/termui.py:160
+msgid "Repeat for confirmation"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/termui.py:176
+msgid "Error: The value you entered was invalid."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/termui.py:178
+#, python-brace-format
+msgid "Error: {e.message}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/termui.py:189
+msgid "Error: The two entered values do not match."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/termui.py:245
+msgid "Error: invalid input"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/termui.py:776
+msgid "Press any key to continue..."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:265
+#, python-brace-format
+msgid ""
+"Choose from:\n"
+"\t{choices}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:297
+msgid "{value!r} is not {choice}."
+msgid_plural "{value!r} is not one of {choices}."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:387
+msgid "{value!r} does not match the format {format}."
+msgid_plural "{value!r} does not match the formats {formats}."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:409
+msgid "{value!r} is not a valid {number_type}."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:465
+#, python-brace-format
+msgid "{value} is not in the range {range}."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:606
+msgid "{value!r} is not a valid boolean."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:630
+msgid "{value!r} is not a valid UUID."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:811
+msgid "file"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:813
+msgid "directory"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:815
+msgid "path"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:861
+msgid "{name} {filename!r} does not exist."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:870
+msgid "{name} {filename!r} is a file."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:878
+#, python-brace-format
+msgid "{name} '{filename}' is a directory."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:887
+msgid "{name} {filename!r} is not readable."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:896
+msgid "{name} {filename!r} is not writable."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:905
+msgid "{name} {filename!r} is not executable."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/click/types.py:972
+#, python-brace-format
+msgid "{len_type} values are required, but {len_value} was given."
+msgid_plural "{len_type} values are required, but {len_value} were given."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: venv/lib/python3.10/site-packages/django/contrib/messages/apps.py:7
+msgid "Messages"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/contrib/sitemaps/apps.py:8
+msgid "Site Maps"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/contrib/staticfiles/apps.py:9
+msgid "Static Files"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/contrib/syndication/apps.py:7
+msgid "Syndication"
+msgstr ""
+
+#. Translators: String used to replace omitted page numbers in elided page
+#. range generated by paginators, e.g. [1, 2, '…', 5, 6, 7, '…', 9, 10].
+#: venv/lib/python3.10/site-packages/django/core/paginator.py:30
+msgid "…"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/core/paginator.py:51
+msgid "That page number is not an integer"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/core/paginator.py:53
+msgid "That page number is less than 1"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/core/paginator.py:58
+msgid "That page contains no results"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/core/validators.py:22
+msgid "Enter a valid value."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/core/validators.py:93
+#: venv/lib/python3.10/site-packages/django/forms/fields.py:675
+msgid "Enter a valid URL."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/core/validators.py:150
+msgid "Enter a valid integer."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/core/validators.py:161
+msgid "Enter a valid email address."
+msgstr ""
+
+#. Translators: "letters" means latin letters: a-z and A-Z.
+#: venv/lib/python3.10/site-packages/django/core/validators.py:262
+msgid ""
+"Enter a valid “slug” consisting of letters, numbers, underscores or hyphens."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/core/validators.py:269
+msgid ""
+"Enter a valid “slug” consisting of Unicode letters, numbers, underscores, or"
+" hyphens."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/core/validators.py:278
+#: venv/lib/python3.10/site-packages/django/core/validators.py:288
+#: venv/lib/python3.10/site-packages/django/core/validators.py:311
+msgid "Enter a valid IPv4 address."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/core/validators.py:296
+#: venv/lib/python3.10/site-packages/django/core/validators.py:312
+msgid "Enter a valid IPv6 address."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/core/validators.py:306
+#: venv/lib/python3.10/site-packages/django/core/validators.py:310
+msgid "Enter a valid IPv4 or IPv6 address."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/core/validators.py:340
+msgid "Enter only digits separated by commas."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/core/validators.py:346
+#, python-format
+msgid "Ensure this value is %(limit_value)s (it is %(show_value)s)."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/core/validators.py:379
+#, python-format
+msgid "Ensure this value is less than or equal to %(limit_value)s."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/core/validators.py:388
+#, python-format
+msgid "Ensure this value is greater than or equal to %(limit_value)s."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/core/validators.py:398
+#, python-format
+msgid ""
+"Ensure this value has at least %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at least %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: venv/lib/python3.10/site-packages/django/core/validators.py:413
+#, python-format
+msgid ""
+"Ensure this value has at most %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at most %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: venv/lib/python3.10/site-packages/django/core/validators.py:432
+#: venv/lib/python3.10/site-packages/django/forms/fields.py:292
+#: venv/lib/python3.10/site-packages/django/forms/fields.py:327
+msgid "Enter a number."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/core/validators.py:434
+#, python-format
+msgid "Ensure that there are no more than %(max)s digit in total."
+msgid_plural "Ensure that there are no more than %(max)s digits in total."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: venv/lib/python3.10/site-packages/django/core/validators.py:439
+#, python-format
+msgid "Ensure that there are no more than %(max)s decimal place."
+msgid_plural "Ensure that there are no more than %(max)s decimal places."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: venv/lib/python3.10/site-packages/django/core/validators.py:444
+#, python-format
+msgid ""
+"Ensure that there are no more than %(max)s digit before the decimal point."
+msgid_plural ""
+"Ensure that there are no more than %(max)s digits before the decimal point."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: venv/lib/python3.10/site-packages/django/core/validators.py:506
+#, python-format
+msgid ""
+"File extension “%(extension)s” is not allowed. Allowed extensions are: "
+"%(allowed_extensions)s."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/core/validators.py:559
+msgid "Null characters are not allowed."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/base.py:1210
+#: venv/lib/python3.10/site-packages/django/forms/models.py:768
+msgid "and"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/base.py:1212
+#, python-format
+msgid "%(model_name)s with this %(field_labels)s already exists."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:100
+#, python-format
+msgid "Value %(value)r is not a valid choice."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:101
+msgid "This field cannot be null."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:102
+msgid "This field cannot be blank."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:103
+#, python-format
+msgid "%(model_name)s with this %(field_label)s already exists."
+msgstr ""
+
+#. Translators: The 'lookup_type' is one of 'date', 'year' or 'month'.
+#. Eg: "Title must be unique for pub_date year"
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:107
+#, python-format
+msgid ""
+"%(field_label)s must be unique for %(date_field_label)s %(lookup_type)s."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:126
+#, python-format
+msgid "Field of type: %(field_type)s"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:958
+#, python-format
+msgid "“%(value)s” value must be either True or False."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:959
+#, python-format
+msgid "“%(value)s” value must be either True, False, or None."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:961
+msgid "Boolean (Either True or False)"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1002
+#, python-format
+msgid "String (up to %(max_length)s)"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1096
+msgid "Comma-separated integers"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1145
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid date format. It must be in YYYY-MM-DD "
+"format."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1147
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1290
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD) but it is an invalid "
+"date."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1150
+msgid "Date (without time)"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1288
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in YYYY-MM-DD "
+"HH:MM[:ss[.uuuuuu]][TZ] format."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1292
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD "
+"HH:MM[:ss[.uuuuuu]][TZ]) but it is an invalid date/time."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1296
+msgid "Date (with time)"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1444
+#, python-format
+msgid "“%(value)s” value must be a decimal number."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1446
+msgid "Decimal number"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1585
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in [DD] "
+"[[HH:]MM:]ss[.uuuuuu] format."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1588
+msgid "Duration"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1638
+msgid "Email address"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1661
+msgid "File path"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1727
+#, python-format
+msgid "“%(value)s” value must be a float."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1729
+msgid "Floating point number"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1767
+#, python-format
+msgid "“%(value)s” value must be an integer."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1769
+msgid "Integer"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1852
+msgid "Big (8 byte) integer"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1867
+msgid "Small integer"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1875
+msgid "IPv4 address"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1906
+msgid "IP address"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1986
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1987
+#, python-format
+msgid "“%(value)s” value must be either None, True or False."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1989
+msgid "Boolean (Either True, False or None)"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2043
+msgid "Positive big integer"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2056
+msgid "Positive integer"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2069
+msgid "Positive small integer"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2083
+#, python-format
+msgid "Slug (up to %(max_length)s)"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2115
+msgid "Text"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2181
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] "
+"format."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2183
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is an "
+"invalid time."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2186
+msgid "Time"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2312
+msgid "URL"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2334
+msgid "Raw binary data"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2399
+#, python-format
+msgid "“%(value)s” is not a valid UUID."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2401
+msgid "Universally unique identifier"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/files.py:226
+msgid "File"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/files.py:375
+msgid "Image"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/json.py:18
+msgid "A JSON object"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/json.py:20
+msgid "Value must be valid JSON."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/related.py:790
+#, python-format
+msgid "%(model)s instance with %(field)s %(value)r does not exist."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/related.py:792
+msgid "Foreign Key (type determined by related field)"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/related.py:1045
+msgid "One-to-one relationship"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/related.py:1099
+#, python-format
+msgid "%(from)s-%(to)s relationship"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/related.py:1100
+#, python-format
+msgid "%(from)s-%(to)s relationships"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/db/models/fields/related.py:1142
+msgid "Many-to-many relationship"
+msgstr ""
+
+#. Translators: If found as last label character, these punctuation
+#. characters will prevent the default label_suffix to be appended to the
+#. label
+#: venv/lib/python3.10/site-packages/django/forms/boundfield.py:150
+msgid ":?.!"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/fields.py:54
+#, fuzzy
+#| msgid "Exercise id is required"
+msgid "This field is required."
+msgstr "معرف التمرين مطلوب"
+
+#: venv/lib/python3.10/site-packages/django/forms/fields.py:247
+msgid "Enter a whole number."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/fields.py:402
+#: venv/lib/python3.10/site-packages/django/forms/fields.py:1143
+msgid "Enter a valid date."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/fields.py:426
+#: venv/lib/python3.10/site-packages/django/forms/fields.py:1144
+msgid "Enter a valid time."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/fields.py:454
+msgid "Enter a valid date/time."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/fields.py:488
+msgid "Enter a valid duration."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/fields.py:489
+#, python-brace-format
+msgid "The number of days must be between {min_days} and {max_days}."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/fields.py:549
+msgid "No file was submitted. Check the encoding type on the form."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/fields.py:550
+msgid "No file was submitted."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/fields.py:551
+msgid "The submitted file is empty."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/fields.py:553
+#, python-format
+msgid ""
+"Ensure this filename has at most %(max)d character (it has %(length)d)."
+msgid_plural ""
+"Ensure this filename has at most %(max)d characters (it has %(length)d)."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: venv/lib/python3.10/site-packages/django/forms/fields.py:556
+msgid "Please either submit a file or check the clear checkbox, not both."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/fields.py:617
+msgid ""
+"Upload a valid image. The file you uploaded was either not an image or a "
+"corrupted image."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/fields.py:779
+#: venv/lib/python3.10/site-packages/django/forms/fields.py:869
+#: venv/lib/python3.10/site-packages/django/forms/models.py:1309
+#, python-format
+msgid "Select a valid choice. %(value)s is not one of the available choices."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/fields.py:870
+#: venv/lib/python3.10/site-packages/django/forms/fields.py:985
+#: venv/lib/python3.10/site-packages/django/forms/models.py:1308
+msgid "Enter a list of values."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/fields.py:986
+msgid "Enter a complete value."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/fields.py:1202
+msgid "Enter a valid UUID."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/fields.py:1232
+msgid "Enter a valid JSON."
+msgstr ""
+
+#. Translators: This is the default suffix added to form field labels
+#: venv/lib/python3.10/site-packages/django/forms/forms.py:76
+msgid ":"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/forms.py:203
+#, python-format
+msgid "(Hidden field %(name)s) %(error)s"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/formsets.py:61
+#, python-format
+msgid ""
+"ManagementForm data is missing or has been tampered with. Missing fields: "
+"%(field_names)s. You may need to file a bug report if the issue persists."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/formsets.py:370
+#, python-format
+msgid "Please submit at most %d form."
+msgid_plural "Please submit at most %d forms."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: venv/lib/python3.10/site-packages/django/forms/formsets.py:377
+#, python-format
+msgid "Please submit at least %d form."
+msgid_plural "Please submit at least %d forms."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: venv/lib/python3.10/site-packages/django/forms/formsets.py:405
+#: venv/lib/python3.10/site-packages/django/forms/formsets.py:412
+msgid "Order"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/formsets.py:417
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/application_confirm_delete.html:13
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/application_detail.html:38
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/authorized-token-delete.html:7
+msgid "Delete"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/models.py:763
+#, python-format
+msgid "Please correct the duplicate data for %(field)s."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/models.py:767
+#, python-format
+msgid "Please correct the duplicate data for %(field)s, which must be unique."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/models.py:773
+#, python-format
+msgid ""
+"Please correct the duplicate data for %(field_name)s which must be unique "
+"for the %(lookup)s in %(date_field)s."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/models.py:782
+msgid "Please correct the duplicate values below."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/models.py:1109
+msgid "The inline value did not match the parent instance."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/models.py:1193
+msgid ""
+"Select a valid choice. That choice is not one of the available choices."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/models.py:1311
+#, python-format
+msgid "“%(pk)s” is not a valid value."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/utils.py:172
+#, python-format
+msgid ""
+"%(datetime)s couldn’t be interpreted in time zone %(current_timezone)s; it "
+"may be ambiguous or it may not exist."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/widgets.py:403
+msgid "Clear"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/widgets.py:404
+msgid "Currently"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/widgets.py:405
+msgid "Change"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/widgets.py:714
+msgid "Unknown"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/widgets.py:715
+msgid "Yes"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/forms/widgets.py:716
+msgid "No"
+msgstr ""
+
+#. Translators: Please do not add spaces around commas.
+#: venv/lib/python3.10/site-packages/django/template/defaultfilters.py:817
+msgid "yes,no,maybe"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/template/defaultfilters.py:846
+#: venv/lib/python3.10/site-packages/django/template/defaultfilters.py:863
+#, python-format
+msgid "%(size)d byte"
+msgid_plural "%(size)d bytes"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: venv/lib/python3.10/site-packages/django/template/defaultfilters.py:865
+#, python-format
+msgid "%s KB"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/template/defaultfilters.py:867
+#, python-format
+msgid "%s MB"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/template/defaultfilters.py:869
+#, python-format
+msgid "%s GB"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/template/defaultfilters.py:871
+#, python-format
+msgid "%s TB"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/template/defaultfilters.py:873
+#, python-format
+msgid "%s PB"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dateformat.py:66
+msgid "p.m."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dateformat.py:67
+msgid "a.m."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dateformat.py:72
+msgid "PM"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dateformat.py:73
+msgid "AM"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dateformat.py:146
+msgid "midnight"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dateformat.py:148
+msgid "noon"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:6
+msgid "Monday"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:6
+msgid "Tuesday"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:6
+msgid "Wednesday"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:6
+msgid "Thursday"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:6
+msgid "Friday"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:7
+msgid "Saturday"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:7
+msgid "Sunday"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:10
+msgid "Mon"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:10
+msgid "Tue"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:10
+msgid "Wed"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:10
+msgid "Thu"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:10
+msgid "Fri"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:11
+msgid "Sat"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:11
+msgid "Sun"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:14
+msgid "January"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:14
+msgid "February"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:14
+msgid "March"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:14
+msgid "April"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:14
+msgid "May"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:14
+msgid "June"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:15
+msgid "July"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:15
+msgid "August"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:15
+msgid "September"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:15
+msgid "October"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:15
+msgid "November"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:16
+msgid "December"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:19
+msgid "jan"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:19
+msgid "feb"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:19
+msgid "mar"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:19
+msgid "apr"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:19
+msgid "may"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:19
+msgid "jun"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:20
+msgid "jul"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:20
+msgid "aug"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:20
+msgid "sep"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:20
+msgid "oct"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:20
+msgid "nov"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:20
+msgid "dec"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:23
+msgctxt "abbrev. month"
+msgid "Jan."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:24
+msgctxt "abbrev. month"
+msgid "Feb."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:25
+msgctxt "abbrev. month"
+msgid "March"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:26
+msgctxt "abbrev. month"
+msgid "April"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:27
+msgctxt "abbrev. month"
+msgid "May"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:28
+msgctxt "abbrev. month"
+msgid "June"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:29
+msgctxt "abbrev. month"
+msgid "July"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:30
+msgctxt "abbrev. month"
+msgid "Aug."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:31
+msgctxt "abbrev. month"
+msgid "Sept."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:32
+msgctxt "abbrev. month"
+msgid "Oct."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:33
+msgctxt "abbrev. month"
+msgid "Nov."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:34
+msgctxt "abbrev. month"
+msgid "Dec."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:37
+msgctxt "alt. month"
+msgid "January"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:38
+msgctxt "alt. month"
+msgid "February"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:39
+msgctxt "alt. month"
+msgid "March"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:40
+msgctxt "alt. month"
+msgid "April"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:41
+msgctxt "alt. month"
+msgid "May"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:42
+msgctxt "alt. month"
+msgid "June"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:43
+msgctxt "alt. month"
+msgid "July"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:44
+msgctxt "alt. month"
+msgid "August"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:45
+msgctxt "alt. month"
+msgid "September"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:46
+msgctxt "alt. month"
+msgid "October"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:47
+msgctxt "alt. month"
+msgid "November"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/dates.py:48
+msgctxt "alt. month"
+msgid "December"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/ipv6.py:8
+msgid "This is not a valid IPv6 address."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/text.py:71
+#, python-format
+msgctxt "String to return when truncating text"
+msgid "%(truncated_text)s…"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/text.py:240
+msgid "or"
+msgstr ""
+
+#. Translators: This string is used as a separator between list elements
+#: venv/lib/python3.10/site-packages/django/utils/text.py:259
+#: venv/lib/python3.10/site-packages/django/utils/timesince.py:94
+msgid ", "
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/utils/timesince.py:9
+#, python-format
+msgid "%d year"
+msgid_plural "%d years"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: venv/lib/python3.10/site-packages/django/utils/timesince.py:10
+#, python-format
+msgid "%d month"
+msgid_plural "%d months"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: venv/lib/python3.10/site-packages/django/utils/timesince.py:11
+#, python-format
+msgid "%d week"
+msgid_plural "%d weeks"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: venv/lib/python3.10/site-packages/django/utils/timesince.py:12
+#, python-format
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: venv/lib/python3.10/site-packages/django/utils/timesince.py:13
+#, python-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: venv/lib/python3.10/site-packages/django/utils/timesince.py:14
+#, python-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: venv/lib/python3.10/site-packages/django/views/csrf.py:110
+msgid "Forbidden"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/csrf.py:111
+msgid "CSRF verification failed. Request aborted."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/csrf.py:115
+msgid ""
+"You are seeing this message because this HTTPS site requires a “Referer "
+"header” to be sent by your Web browser, but none was sent. This header is "
+"required for security reasons, to ensure that your browser is not being "
+"hijacked by third parties."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/csrf.py:120
+msgid ""
+"If you have configured your browser to disable “Referer” headers, please re-"
+"enable them, at least for this site, or for HTTPS connections, or for “same-"
+"origin” requests."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/csrf.py:124
+msgid ""
+"If you are using the <meta name=\"referrer\" content=\"no-referrer\"> tag or"
+" including the “Referrer-Policy: no-referrer” header, please remove them. "
+"The CSRF protection requires the “Referer” header to do strict referer "
+"checking. If you’re concerned about privacy, use alternatives like <a "
+"rel=\"noreferrer\" …> for links to third-party sites."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/csrf.py:132
+msgid ""
+"You are seeing this message because this site requires a CSRF cookie when "
+"submitting forms. This cookie is required for security reasons, to ensure "
+"that your browser is not being hijacked by third parties."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/csrf.py:137
+msgid ""
+"If you have configured your browser to disable cookies, please re-enable "
+"them, at least for this site, or for “same-origin” requests."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/csrf.py:142
+msgid "More information is available with DEBUG=True."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/generic/dates.py:41
+msgid "No year specified"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/generic/dates.py:61
+#: venv/lib/python3.10/site-packages/django/views/generic/dates.py:111
+#: venv/lib/python3.10/site-packages/django/views/generic/dates.py:208
+msgid "Date out of range"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/generic/dates.py:90
+msgid "No month specified"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/generic/dates.py:142
+msgid "No day specified"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/generic/dates.py:188
+msgid "No week specified"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/generic/dates.py:338
+#: venv/lib/python3.10/site-packages/django/views/generic/dates.py:367
+#, python-format
+msgid "No %(verbose_name_plural)s available"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/generic/dates.py:594
+#, python-format
+msgid ""
+"Future %(verbose_name_plural)s not available because "
+"%(class_name)s.allow_future is False."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/generic/dates.py:628
+#, python-format
+msgid "Invalid date string “%(datestr)s” given format “%(format)s”"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/generic/detail.py:54
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/generic/list.py:67
+msgid "Page is not “last”, nor can it be converted to an int."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/generic/list.py:72
+#, python-format
+msgid "Invalid page (%(page_number)s): %(message)s"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/generic/list.py:154
+#, python-format
+msgid "Empty list and “%(class_name)s.allow_empty” is False."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/static.py:40
+msgid "Directory indexes are not allowed here."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/static.py:42
+#, python-format
+msgid "“%(path)s” does not exist"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/static.py:80
+#, python-format
+msgid "Index of %(directory)s"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/templates/default_urlconf.html:7
+#: venv/lib/python3.10/site-packages/django/views/templates/default_urlconf.html:221
+msgid "The install worked successfully! Congratulations!"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/templates/default_urlconf.html:207
+#, python-format
+msgid ""
+"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
+"target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/templates/default_urlconf.html:222
+#, python-format
+msgid ""
+"You are seeing this page because <a "
+"href=\"https://docs.djangoproject.com/en/%(version)s/ref/settings/#debug\" "
+"target=\"_blank\" rel=\"noopener\">DEBUG=True</a> is in your settings file "
+"and you have not configured any URLs."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/templates/default_urlconf.html:230
+msgid "Django Documentation"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/templates/default_urlconf.html:231
+msgid "Topics, references, &amp; how-to’s"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/templates/default_urlconf.html:239
+msgid "Tutorial: A Polling App"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/templates/default_urlconf.html:240
+msgid "Get started with Django"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/templates/default_urlconf.html:248
+msgid "Django Community"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/django/views/templates/default_urlconf.html:249
+msgid "Connect, get help, or contribute"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/kombu/transport/qpid.py:1311
+#, python-format
+msgid "Attempting to connect to qpid with SASL mechanism %s"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/kombu/transport/qpid.py:1316
+#, python-format
+msgid "Connected to qpid with SASL mechanism %s"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/kombu/transport/qpid.py:1334
+#, python-format
+msgid "Unable to connect to qpid with SASL mechanism %s"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/modeltranslation/widgets.py:26
+msgid "None"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/models.py:66
+msgid "Confidential"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/models.py:67
+msgid "Public"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/models.py:76
+msgid "Authorization code"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/models.py:77
+msgid "Implicit"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/models.py:78
+msgid "Resource owner password-based"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/models.py:79
+msgid "Client credentials"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/models.py:80
+msgid "OpenID connect hybrid"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/models.py:87
+msgid "No OIDC support"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/models.py:88
+msgid "RSA with SHA-2 256"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/models.py:89
+msgid "HMAC with SHA-2 256"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/models.py:104
+msgid "Allowed URIs list, space separated"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/models.py:113
+msgid "Hashed on Save. Copy it now if this is a new secret."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/models.py:175
+#, python-brace-format
+msgid "Unauthorized redirect scheme: {scheme}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/models.py:179
+#, python-brace-format
+msgid "redirect_uris cannot be empty with grant_type {grant_type}"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/models.py:185
+msgid "You must set OIDC_RSA_PRIVATE_KEY to use RSA algorithm"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/models.py:194
+msgid "You cannot use HS256 with public grants or clients"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/oauth2_validators.py:211
+msgid "The access token is invalid."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/oauth2_validators.py:218
+msgid "The access token has expired."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/oauth2_validators.py:225
+msgid "The access token is valid but does not have enough scope."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/application_confirm_delete.html:6
+msgid "Are you sure to delete the application"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/application_confirm_delete.html:12
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/authorize.html:29
+msgid "Cancel"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/application_detail.html:10
+msgid "Client id"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/application_detail.html:15
+msgid "Client secret"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/application_detail.html:20
+msgid "Client type"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/application_detail.html:25
+msgid "Authorization Grant Type"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/application_detail.html:30
+msgid "Redirect Uris"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/application_detail.html:36
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/application_form.html:35
+msgid "Go Back"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/application_detail.html:37
+msgid "Edit"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/application_form.html:9
+msgid "Edit application"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/application_form.html:37
+msgid "Save"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/application_list.html:6
+msgid "Your applications"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/application_list.html:14
+msgid "New Application"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/application_list.html:17
+msgid "No applications defined"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/application_list.html:17
+msgid "Click here"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/application_list.html:17
+msgid "if you want to register a new one"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/application_registration_form.html:5
+msgid "Register a new application"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/authorize.html:8
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/authorize.html:30
+msgid "Authorize"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/authorize.html:17
+msgid "Application requires the following permissions"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/authorized-token-delete.html:6
+msgid "Are you sure you want to delete this token?"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/authorized-tokens.html:6
+msgid "Tokens"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/authorized-tokens.html:11
+msgid "revoke"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/oauth2_provider/templates/oauth2_provider/authorized-tokens.html:19
+msgid "There are no authorized tokens yet."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/admin.py:75
+#, python-format
+msgid "Some messages could not be processed: %r"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/admin.py:103
+#, python-format
+msgid "Some messages were sent: %s"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/admin.py:105
+#, python-format
+msgid "All messages were sent: %s"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/admin.py:111
+msgid "Send test message"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/admin.py:116
+msgid "Send test message in bulk"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/admin.py:121
+msgid "Enable selected devices"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/admin.py:126
+msgid "Disable selected devices"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/fields.py:49
+msgid "Enter a valid hexadecimal number"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/models.py:22
+msgid "Name"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/models.py:24
+msgid "Is active"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/models.py:25
+msgid "Inactive devices will not be sent notifications"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/models.py:31
+msgid "Creation date"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/models.py:34
+msgid "Application ID"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/models.py:36
+msgid ""
+"Opaque application identity, should be filled in for multiple "
+"key/certificate access"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/models.py:91
+#: venv/lib/python3.10/site-packages/push_notifications/models.py:148
+#: venv/lib/python3.10/site-packages/push_notifications/models.py:199
+msgid "Device ID"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/models.py:92
+msgid "ANDROID_ID / TelephonyManager.getDeviceId() (always as hex)"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/models.py:94
+#: venv/lib/python3.10/site-packages/push_notifications/models.py:152
+#: venv/lib/python3.10/site-packages/push_notifications/models.py:234
+msgid "Registration ID"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/models.py:96
+msgid "Cloud Message Type"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/models.py:98
+msgid "You should choose FCM or GCM"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/models.py:103
+msgid "GCM device"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/models.py:149
+msgid "UUID / UIDevice.identifierForVendor()"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/models.py:158
+msgid "APNS device"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/models.py:200
+msgid "GUID()"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/models.py:202
+msgid "Notification URI"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/models.py:207
+msgid "WNS device"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/models.py:236
+msgid "User public encryption key"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/models.py:239
+msgid "User auth secret"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/models.py:242
+msgid "Browser"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/models.py:244
+msgid "Currently only support to Chrome, Firefox, Edge and Opera browsers"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/push_notifications/models.py:249
+msgid "WebPush device"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/timezone_field/rest_framework.py:12
+msgid "A valid timezone is required."
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/versatileimagefield/fields.py:34
+msgid "Versatile Image Field"
+msgstr ""
+
+#: venv/lib/python3.10/site-packages/versatileimagefield/templates/versatileimagefield/forms/widgets/versatile_image.html:17
+#: venv/lib/python3.10/site-packages/versatileimagefield/templates/versatileimagefield/forms/widgets/versatile_image_bootstrap.html:17
+msgid "Primary Point of Interest"
+msgstr ""
+
+#: trainpad/settings.py:194
+msgid "English"
+msgstr "إنجليزي"
+
+#: trainpad/settings.py:195
+msgid "Arabic"
+msgstr "عربي"
+
+#~ msgid "error"
+#~ msgstr "خطأ"
+
+#~ msgid "Empty Favourites"
+#~ msgstr "المفضلة الفارغة"
+
+#, fuzzy
+#~ msgid "Removed from Favorite Exercise"
+#~ msgstr "تمت إزالة التمرين من المفضلة"
+
+#~ msgid "You need to start workout properly"
+#~ msgstr "تحتاج إلى بدء التمرين بشكل صحيح"

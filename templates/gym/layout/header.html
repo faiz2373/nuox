@@ -1,0 +1,321 @@
+{% load static %}
+{% load my_filters %}
+  <!-- top navigation start  -->
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <nav class="navbar navbar-expand navbar-light navbar-bg">
+    <a class="sidebar-toggle js-sidebar-toggle">
+       <i class="hamburger align-self-center"></i>
+       </a>
+       <a class="mobile-menu-btn js-sidebar-toggle">
+         <i class="hamburger align-self-center"></i>
+      </a>
+      <a href="" class="mobile-logo">
+         <span>
+            <!-- <img src="/static/admin/img/logo.png" class="expand-image"> -->
+         </span>
+      </a>
+    <div class="navbar-collapse collapse">
+       <ul class="navbar-nav navbar-align">
+          <!-- <li class="nav-item dropdown">
+             <a class="nav-icon dropdown-toggle" href="#" id="messagesDropdown" data-bs-toggle="dropdown">
+                <div class="position-relative">
+                   <i class="align-middle" data-feather="file-text"></i>
+                   <span class="indicator">4</span>
+                </div>
+             </a>
+             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="messagesDropdown">
+                <div class="dropdown-menu-header">
+                   <div class="position-relative">
+                      4 New Messages
+                   </div>
+                </div>
+                <div class="list-group">
+                   <a href="#" class="list-group-item">
+                      <div class="row g-0 align-items-center">
+                         <div class="col-2">
+                            <img src="{% static 'admin/assets/img/avatars/avatar-5.jpg' %}" class="avatar img-fluid rounded-circle" alt="Vanessa Tucker">
+                         </div>
+                         <div class="col-10 ps-2">
+                            <div class="text-dark">Vanessa Tucker</div>
+                            <div class="text-muted small mt-1">Nam pretium turpis et arcu. Duis arcu tortor.</div>
+                            <div class="text-muted small mt-1">15m ago</div>
+                         </div>
+                      </div>
+                   </a>
+                   <a href="#" class="list-group-item">
+                      <div class="row g-0 align-items-center">
+                         <div class="col-2">
+                            <img src="{% static 'admin/assets/img/avatars/avatar-2.jpg' %}" class="avatar img-fluid rounded-circle" alt="William Harris">
+                         </div>
+                         <div class="col-10 ps-2">
+                            <div class="text-dark">William Harris</div>
+                            <div class="text-muted small mt-1">Curabitur ligula sapien euismod vitae.</div>
+                            <div class="text-muted small mt-1">2h ago</div>
+                         </div>
+                      </div>
+                   </a>
+                   <a href="#" class="list-group-item">
+                      <div class="row g-0 align-items-center">
+                         <div class="col-2">
+                            <img src="{% static 'admin/assets/img/avatars/avatar-4.jpg' %}" class="avatar img-fluid rounded-circle" alt="Christina Mason">
+                         </div>
+                         <div class="col-10 ps-2">
+                            <div class="text-dark">Christina Mason</div>
+                            <div class="text-muted small mt-1">Pellentesque auctor neque nec urna.</div>
+                            <div class="text-muted small mt-1">4h ago</div>
+                         </div>
+                      </div>
+                   </a>
+                   <a href="#" class="list-group-item">
+                      <div class="row g-0 align-items-center">
+                         <div class="col-2">
+                            <img src="{% static 'admin/assets/img/avatars/avatar-3.jpg' %}" class="avatar img-fluid rounded-circle" alt="Sharon Lessman">
+                         </div>
+                         <div class="col-10 ps-2">
+                            <div class="text-dark">Sharon Lessman</div>
+                            <div class="text-muted small mt-1">Aenean tellus metus, bibendum sed, posuere ac, mattis non.</div>
+                            <div class="text-muted small mt-1">5h ago</div>
+                         </div>
+                      </div>
+                   </a>
+                </div>
+                <div class="dropdown-menu-footer">
+                   <a href="#" class="text-muted">Show all messages</a>
+                </div>
+             </div>
+          </li> -->
+          <li class="nav-item dropdown" onclick="makeread()" >
+             <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
+                <div class="position-relative">
+                   <span id="notification_count">0</span>
+                   <i class="align-middle" id="notification" data-feather="bell"></i>
+                  
+                </div>
+             </a>
+             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="alertsDropdown">
+                {% comment %} <div class="dropdown-menu-header">
+                   4 New Notifications
+                </div>  {% endcomment %}
+                <div id="notification_id">
+                 
+                </div>
+                {% comment %} <div class="list-group">
+                   <a href="#" class="list-group-item">
+                      <div class="row g-0 align-items-center">
+                         <div class="col-2">
+                            <i class="text-danger" data-feather="alert-circle"></i>
+                         </div>
+                         <div class="col-10">
+                            <div class="text-dark">Update completed</div>
+                            <div class="text-muted small mt-1">Restart server 12 to complete the update.</div>
+                            <div class="text-muted small mt-1">30m ago</div>
+                         </div>
+                      </div>
+                   </a>
+                   <a href="#" class="list-group-item">
+                      <div class="row g-0 align-items-center">
+                         <div class="col-2">
+                            <i class="text-warning" data-feather="bell"></i>
+                         </div>
+                         <div class="col-10">
+                            <div class="text-dark">Lorem ipsum</div>
+                            <div class="text-muted small mt-1">Aliquam ex eros, imperdiet vulputate hendrerit et.</div>
+                            <div class="text-muted small mt-1">2h ago</div>
+                         </div>
+                      </div>
+                   </a>
+                   <a href="#" class="list-group-item">
+                      <div class="row g-0 align-items-center">
+                         <div class="col-2">
+                            <i class="text-primary" data-feather="home"></i>
+                         </div>
+                         <div class="col-10">
+                            <div class="text-dark">Login from 192.186.1.8</div>
+                            <div class="text-muted small mt-1">5h ago</div>
+                         </div>
+                      </div>
+                   </a>
+                   <a href="#" class="list-group-item">
+                      <div class="row g-0 align-items-center">
+                         <div class="col-2">
+                            <i class="text-success" data-feather="user-plus"></i>
+                         </div>
+                         <div class="col-10">
+                            <div class="text-dark">New connection</div>
+                            <div class="text-muted small mt-1">Christina accepted your request.</div>
+                            <div class="text-muted small mt-1">14h ago</div>
+                         </div>
+                      </div>
+                   </a>
+                </div> {% endcomment %}
+                {% comment %} <div class="dropdown-menu-footer">
+                   <a href="#" class="text-muted">Show all notifications</a>
+                </div> {% endcomment %}
+             </div>
+          </li> 
+           {% comment %} <li class="nav-item dropdown">
+             <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
+                <div class="position-relative">
+                   <i class="align-middle" data-feather="help-circle"></i>
+                  
+                </div>
+             </a>
+             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="alertsDropdown">
+                <div class="dropdown-menu-header">
+                   4 New Notifications
+                </div>
+                <div class="list-group">
+                   <a href="#" class="list-group-item">
+                      <div class="row g-0 align-items-center">
+                         <div class="col-2">
+                            <i class="text-danger" data-feather="alert-circle"></i>
+                         </div>
+                         <div class="col-10">
+                            <div class="text-dark">Update completed</div>
+                            <div class="text-muted small mt-1">Restart server 12 to complete the update.</div>
+                            <div class="text-muted small mt-1">30m ago</div>
+                         </div>
+                      </div>
+                   </a>
+                   <a href="#" class="list-group-item">
+                      <div class="row g-0 align-items-center">
+                         <div class="col-2">
+                            <i class="text-warning" data-feather="bell"></i>
+                         </div>
+                         <div class="col-10">
+                            <div class="text-dark">Lorem ipsum</div>
+                            <div class="text-muted small mt-1">Aliquam ex eros, imperdiet vulputate hendrerit et.</div>
+                            <div class="text-muted small mt-1">2h ago</div>
+                         </div>
+                      </div>
+                   </a>
+                   <a href="#" class="list-group-item">
+                      <div class="row g-0 align-items-center">
+                         <div class="col-2">
+                            <i class="text-primary" data-feather="home"></i>
+                         </div>
+                         <div class="col-10">
+                            <div class="text-dark">Login from 192.186.1.8</div>
+                            <div class="text-muted small mt-1">5h ago</div>
+                         </div>
+                      </div>
+                   </a>
+                   <a href="#" class="list-group-item">
+                      <div class="row g-0 align-items-center">
+                         <div class="col-2">
+                            <i class="text-success" data-feather="user-plus"></i>
+                         </div>
+                         <div class="col-10">
+                            <div class="text-dark">New connection</div>
+                            <div class="text-muted small mt-1">Christina accepted your request.</div>
+                            <div class="text-muted small mt-1">14h ago</div>
+                         </div>
+                      </div>
+                   </a>
+                </div>
+                <div class="dropdown-menu-footer">
+                   <a href="#" class="text-muted">Show all notifications</a>
+                </div>
+             </div>
+          </li>  {% endcomment %}
+          {% if user.is_authenticated %}
+          <li class="nav-item dropdown" style="top:-4px;">
+             <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+             <i class="align-middle" data-feather="settings"></i>
+             </a>
+             <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown" style="padding-top: 0;padding-bottom: 0;">
+               {% get_gym_logo user.id  as image_url %}     
+               <img src="{{image_url}}" id="gymlogo" class="avatar img-fluid rounded me-1" alt="{{ user.name }}" style="margin-top: 0;"/>
+             {% comment %} {% if user.profile_pic %}    
+                  
+               <img src="/media/{{data.profile_pic}}" id="gymlogo" class="avatar img-fluid rounded me-1" alt="{{ user.name }}" style="margin-top: 0;"/>
+            {% else %}
+               <img src="{% static 'admin/assets/img/avatars/default-avatar.jpg' %}" class="avatar img-fluid rounded me-1" alt="{{ user.name }}" />
+            {% endif %} {% endcomment %}
+             <!-- <span class="text-dark">{{ user.email }}</span> -->
+             </a>
+             <div class="dropdown-menu dropdown-menu-end">
+               <ul class="profile-details">
+                  <li><div class="profile-pic"><img src="{{image_url}}" id="gymlogo" alt="{{ user.name }}" class="avatar img-fluid rounded me-1" style="margin-top: 0;"/></div> </li>
+                  <li><p>{{ user.email }}</p></li>
+                  <li class="profile-btn hr-top"><a class="dropdown-item" href="/gym/view-profile/"><i class="align-middle me-1" data-feather="user"></i> Profile</a> </li>
+                  <li class="profile-btn hr-top"><a class="dropdown-item" href="{% url 'appdashboard:logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i> Log out</a></li>                          
+                </ul>
+             </div>
+          </li>
+          {% endif %}
+       </ul>
+    </div>
+    <script>
+      function makeread(){
+         $.ajax({
+            url : '/gym/readnotification/',
+            type : 'GET',
+            datatype : 'json',
+            success: function(response) {
+               // location.reload();
+            }
+         })
+      }
+
+
+      $( document ).ready(function() {
+            $.ajax({
+            url : '/gym/notification/',
+            type : 'GET',
+            datatype : 'json',
+            success: function(response) {
+               var jsonArray = JSON.parse(response);
+               console.log(jsonArray["count"])
+               console.log(jsonArray["records"])
+
+               $('#notification_count').text(jsonArray["count"])
+               $('#gymlogo').attr('src',jsonArray["gymlogo"])
+
+               var html = ''
+               for (const record of jsonArray["records"]) {
+                  html += '<div class="Wrapper"><div class="notificationImgWrap"><img class="notificationImg" src="'+record['img']+'"> </div><div class="notification-item notificationDiv">'+record['msg']+' On '+record['time']+' </div></div>';
+                  
+               }
+               html += '<div class="notification-item notificationDiv"><a href="/gym/notification-all/">See all notifications</a></div>'
+               console.log(html)
+               $('#notification_id').html(html)
+                  // Iterate over each item in the response
+                  
+            },
+            })
+         })
+    </script>
+    <style>
+      .notificationDiv{
+         padding: 0.75rem;
+         font-weight: 600;
+         border-bottom: 1px solid #dee2e6;
+      }     
+      .dropdown-menu-end {
+         background-color: lightblue;
+      }
+      .notificationImg{
+         width:100%;
+         height:100%;
+         object-fit: cover;
+      }
+      .notificationImgWrap{
+         width:50px;
+         min-width: 50px;
+         height:50px;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         overflow: hidden;
+      }
+      .Wrapper{
+         display: flex;
+         align-items: center;
+         padding-left: 10px;
+      }
+    </style>
+ </nav>
+ <!-- top navigation end  -->
+ 

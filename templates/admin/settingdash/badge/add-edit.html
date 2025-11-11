@@ -1,0 +1,854 @@
+{% extends "admin/layout/user_base.html" %}
+{% load static %}
+{% block body_block %}
+
+    <main class="content-area">
+        <div class="container-fluid p-0">
+            <div class="log-in-side-2">
+                <div class="form-box">
+                    <div class="card">
+                        <div class="form-box-inner">
+                            <div>
+                                <div class="log-head">
+                                    <h1 class=" mb-3">Badge</h1>
+                                </div>
+                                <!-- log in form area -->
+                                <div class="">
+                                    
+                                    <form method="post" class="row popupInput" id="badgeForm" autocomplete="off" enctype="multipart/form-data" action="/sec-access/badge/">
+                                        {% csrf_token %}
+                                        <div class="tabs">
+                                            <ul id="tabs-nav">
+                                                <li id="englishli"><a href="#tab1" id="english">ENGLISH</a></li>
+                                                <li id="arabicli"><a href="#tab2" id="arabic">ARABIC</a></li>
+
+                                            </ul> <!-- END tabs-nav -->
+                                            <div id="tabs-content">
+                                                <div class="mb-4 col-sm-12">
+                                                    <div id="tab1" class="tab-content">
+                                                        <div class="input-wrapper image-field">
+                                                            <label class="mb-2" for="name">Badge Name (in English)</label>
+                                                            {{ form.name }}
+                                                            <p class="text-danger mt-2 mb-0" id="name_er_en"></p>
+                                                            <input type="hidden" id="hdnName" value ="">
+                                                        </div>
+                    
+                                                        <div class="input-wrapper image-field">
+                                                            <label class="mb-2" for="name">Badge Description (in English)</label>
+                                                            {{ form.description }}
+                                                            <p class="text-danger mt-2 mb-0" id="descr_er_en"></p>
+                                                        </div>
+                    
+                                                        <div class="input-wrapper image-field">
+                                                            <label class="mb-2" for="name">Unlock Condition (in English)</label>
+                                                            {{ form.unlock_condition }}
+                                                            <p class="text-danger mt-2 mb-0" id="unlock_er_en"></p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div id="tab2" class="tab-content">
+                                                        <div class="input-wrapper image-field">
+                                                            <label class="mb-2" for="name">Badge Name (in Arabic)</label>
+                                                            {{ form.name_ar }}
+                                                            <p class="text-danger mt-2 mb-0" id="name_er_ar"></p>
+                                                            <input type="hidden" id="hdnName_ar" value ="">
+                                                        </div>
+                    
+                                                        <div class="input-wrapper image-field">
+                                                            <label class="mb-2" for="name">Badge Description (in Arabic)</label>
+                                                            {{ form.description_ar }}
+                                                            <p class="text-danger mt-2 mb-0" id="descr_er_ar"></p>
+                                                        </div>
+                    
+                                                        <div class="input-wrapper image-field">
+                                                            <label class="mb-2" for="name">Unlock Condition (in Arabic)</label>
+                                                            {{ form.unlock_condition_ar }}
+                                                            <p class="text-danger mt-2 mb-0" id="unlock_er_ar"></p>
+                                                        </div>
+                                                    </div>
+                
+                                                    <!-- <div class="input-wrapper image-field wrapperCls"> -->
+                                                    <div class="input-wrapper image-field wrapperCls">
+                                                        <label class="mb-2" for="name">Badge category</label>
+                                                        {{ form.category }}
+                                                        <p class="text-danger mt-2 mb-0" id="category_er"></p>
+                                                    </div>
+
+                                                    <div class="input-wrapper image-field" style="display: none;">
+                                                        <label class="mb-2" for="name">Time Limit</label>
+                                                        {{ form.time_limit }}
+                                                        <p class="text-danger mt-2 mb-0" id="timelimit_er"></p>
+                                                    </div> 
+                
+                                                    <div class="input-wrapper image-field">
+                                                        <label class="mb-2" for="name" id="target">Target</label>
+                                                        {{ form.target }}
+                                                        <p class="text-danger mt-2 mb-0" id="target_er"></p>
+                                                    </div>
+                                                    
+                                                    <div style="display: none;" id="weightBased">
+                                                        <label class="mb-2" for="name">Choose muscle</label>
+                                                        {% if muscledropdwn %}
+                                                        <div class="input-wrapper input-box choose-muscle" >
+                                                            <select class="select-user form-control" name="muscle" id="muscle" multiple>
+                                                                {% for muscle in muscle_list %}
+                                                                    <option value="{{muscle.id}}">{{muscle.name}}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                            <p class="text-danger mt-2 mb-0" id="muscle_er"></p>
+                                                            <p class="invalid-field mt-2 mb-0 include_details_field text-danger" style="display:none;" id="include_details_field">This field is required</p>
+                                                        </div>
+                                                        {% else %}
+                                                        <div class="input-wrapper input-box choose-muscle" >
+                                                            <select class="select-user form-control" name="muscle" id="muscle" multiple>
+
+                                                            </select>
+                                                            <p class="text-danger mt-2 mb-0" id="muscle_er"></p>
+                                                            <p class="invalid-field mt-2 mb-0 include_details_field text-danger" style="display:none;" id="include_details_field">This field is required</p>
+                                                        </div>
+                                                        {% endif %}
+
+                                                        <!-- <div class="input-wrapper image-field">
+                                                            <label class="mb-2" for="name">Choose Excercise</label>
+                                                            {{ form.exercise }}
+                                                            <p class="text-danger mt-2 mb-0" id="target_er"></p>
+                                                        </div>  -->
+                
+                                                        <label class="mb-2" for="name">Choose Excercise</label>
+                                                        <div class="input-wrapper input-box choose-muscle" >
+                                                            <select class="select-user form-control" name="selExercise" id="selExercise" multiple>
+                                                                
+                                                            </select>
+                                                            <p class="text-danger mt-2 mb-0" id="exercise_er"></p>
+                                                            <p class="invalid-field mt-2 mb-0 include_details_field text-danger" style="display:none;" id="include_details_field">This field is required</p>
+                                                        </div>
+                                                        
+                                                                                                    
+                                                    </div>
+                                                    
+                                                    
+                
+                                                    <div class="input-wrapper image-field">
+                                                        <label class="mb-2" for="name">Badge</label>
+                                                        {{ form.image }}
+                                                        <p class="text-danger mt-2 mb-0" id="badge_er"></p>
+     
+                                                        {% if image_url %}
+                                                        <a data-fancybox data-small-btn="true" class="popup-image" href="/media/{{image_url}}"><img
+                                                            src="/media/{{image_url}}" width="64px" height="64px"></a>
+                                                        {% endif %}
+                                                        </div>
+                                            
+                                                </div>
+                                                
+                    
+                                                <span id ="editImg"></span> 
+                                                
+                                                <input type="hidden" id="hiddenId" name="hiddenId" value="{{ badge_id }}">                               
+                    
+                                                <div class="submmitBtn">
+                                                    <button type="button" id = "saveBtn"  onclick="validate()" class="btn btn-lg btn-primary">Save
+                                                    </button>
+                                                </div>
+                    
+                    
+                                            </div> <!-- END tabs-content -->
+                                        </div> <!-- END tabs -->
+                    
+                                    </form>
+
+                                    {% if messages %}
+                                        {% for message in messages %}
+                                            <div class="alert-container">
+                                                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}"
+                                                     role="alert">{{ message|lower|capfirst }}</div>
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <!-- log in form area end -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock body_block %}
+{% block page_script %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="{% static 'admin/assets/js/jquery.sumoselect.js' %}"></script>
+<script src="{% static 'admin/assets/js/badge.js' %}"></script>
+   <script>
+    name_er_en_flag = 1
+    name_er_ar_flag = 1
+    $(document).ready(function() {
+        $('#muscle').SumoSelect({ placeholder: 'Muscles', selectAll: true, search: true, searchText: 'Enter here.' });
+        $('#selExercise').SumoSelect({ placeholder: 'Exercise', selectAll: false, search: true, searchText: 'Enter here.' });
+    })
+
+    function getEditData(Id){
+            data = {}
+            data['badge_id'] =Id
+            $.ajax({
+                type:'PUT',
+                url: '/sec-access/badge-edit/',
+                data:data,
+                success: function(response){
+                    for (const record of response.records) {
+                        const $select_cat = document.querySelector('#id_category');
+                        const $select_limit = document.querySelector('#id_time_limit');
+                        const $select_muscle = document.querySelector('#muscle');
+                        const $select_exercise = document.querySelector('#selExercise');
+                        $select_muscle.innerHTML = '';
+                        $select_exercise.innerHTML = '';
+                        const selArr = response.records[0].muscle_edit_list;
+                        const selExrcArr = response.records[0].exercise_edit_list;
+
+                        for (const muscle of response.records[0].muscle_list) {
+                            const option = document.createElement('option');
+                            option.value = muscle.id;
+                            option.textContent = muscle.name;
+                            const index = $.inArray(muscle.id, selArr);
+                            if (index !== -1) {
+                                option.setAttribute('selected', 'selected'); // Add selected attribute
+                            } 
+                            $select_muscle.appendChild(option);
+                        }
+                        $('#muscle').SumoSelect().sumo.reload();
+
+                        for (const exercise of response.records[0].sel_exercise_list) {
+                            const option = document.createElement('option');
+                            option.value = exercise.id;
+                            option.textContent = exercise.exercise_name
+                            option.setAttribute('selected', 'selected'); // Add selected attribute
+                            $select_exercise.appendChild(option);
+                        }
+                        
+                        // Initialize SumoSelect after updating the options
+                        $('#selExercise').SumoSelect().sumo.reload();
+
+                        // $select_cat.value = record.category_id
+                        // $select_limit.value = record.time_limit
+
+                        for (let option of $select_cat.options) {
+                            console.log(parseInt(option.value),'--op')
+                            console.log(parseInt(record.category_id),'--rec')
+                            if (parseInt(option.value) === parseInt(record.category_id)) {
+                                var sumoSelect = $('#id_category')[0].sumo;
+                                sumoSelect.selectItem(record.category_id);
+                                break; 
+                            }
+
+                        }
+
+                        // for (let option of $select_limit.options) {
+                        //     if (option.value === record.time_limit) {
+                        //         option.selected = true;
+                        //         break; // Stop the loop once the desired option is found and selected
+                        //     }
+                        // }
+
+
+                        $('#id_name').val(record.name)
+                        $('#id_name_ar').val(record.name_ar)
+                        $('#id_description').val(record.description)
+                        $('#id_description_ar').val(record.description_ar)
+                        $('#id_unlock_condition').val(record.unlock_condition)
+                        $('#id_unlock_condition_ar').val(record.unlock_condition_ar)
+                        $('#id_target').val(record.target)
+
+                        if(record.category_id == 1){
+                            $('#weightBased').show()
+                            $('#target').text('Target (Weight in Kg)')
+                            if(record.muscle_id != 0){
+                                const $select_mucle = document.querySelector('#id_muscle');
+                                $select_mucle.value = record.muscle_id
+                            }
+                            if(record.muscle_id != 0){
+                                setExercise()
+                            }
+                        }
+                        else{
+                            $('#weightBased').hide()
+                            $('#target').text('Target (Number of Exercise)')
+                        }
+
+                        $('#id_unlock_condition').val(record.unlock_condition)
+                        // $('#editImg').html('<a data-fancybox data-small-btn="true" class="popup-image person-image" href="'+record.image+'" style="width: 150px; height: 100px;"> <img id ="badgImg" src="'+record.image+'" width="100px"> </a>')
+
+                        // html += '<option value="'+record.exercise_id+'">'+ record.exercise_name +'</option>'
+                    }
+                    $('#hdnName').val($('#id_name').val())
+                    $('#hdnName_ar').val($('#id_name_ar').val())
+                    // $('#selExercise').html(html)                    
+                }
+            })
+
+        }
+
+        $(document).ready(function() {
+            id = parseInt($('#hiddenId').val())
+            if(id != 0){
+                getEditData(id)
+            
+            }
+            // $("#id_mobile").val('+971')
+            $('.popup-youtube').fancybox({
+                width  : 500,
+                height : 500,
+                autoSize : false
+            });
+        });
+
+        // check for user exist
+        function checkExisit(type){
+            id = parseInt($('#hiddenId').val())
+            if(id == 0){
+                if(type == 'english'){
+                    val = $('#id_name').val()
+                }
+                else if(type == 'arabic'){
+                    val = $('#id_name_ar').val()
+                }
+                if(val != ''){
+                    data = {}
+                    data['name'] = val
+                    data['type'] = type
+                    $.ajax({
+                        type:'PUT',
+                        url: '/sec-access/badge-check-nameexist/',
+                        data: data,
+                        success: function(response){
+                            if(response.exist > 0){
+
+                                if(type == 'english'){
+                                    $('#name_er_en').text('Badge with same name already exists')
+                                    $('#saveBtn').attr('disabled', true);
+
+                                }
+                                else if(type == 'arabic'){
+                                    $('#name_er_ar').text('Badge with same name already exists')
+                                    $('#saveBtn').attr('disabled', true);
+
+                                }
+                            }
+                            else{
+                                if (name_er_ar_flag == 0 ){
+                                    $('#name_er_ar').text('')
+                                }
+                                if (name_er_en_flag == 0 ){
+                                    $('#name_er_en').text('')
+                                }
+                                $('#saveBtn').attr('disabled', false);
+
+                            }
+
+                        }
+                    })
+                }
+
+            }
+            // else{
+            //     if(type == 'english'){
+            //         val = $('#id_name').val()
+            //         hdn = $('#hdnName').val()
+
+            //     }
+            //     else if(type == 'arabic'){
+            //         val = $('#id_name_ar').val()
+            //         hdn = $('#hdnName_ar').val()
+
+            //     }
+                
+
+            //     if (val != '' && val != hdn) {
+            //         data = {}
+            //         data['name'] = val
+            //         data['type'] = type
+            //         $.ajax({
+            //             type:'PUT',
+            //             url: '/sec-access/badge-check-nameexist/',
+            //             data: data,
+            //             success: function(response){
+            //                 if(response.exist > 0){
+
+            //                     if(type == 'english'){
+            //                         $('#name_er_en').text('Badge with same name already exists')
+            //                         $('#saveBtn').attr('disabled', true);
+
+            //                     }
+            //                     else if(type == 'arabic'){
+            //                         $('#name_er_ar').text('Badge with same name already exists')
+            //                         $('#saveBtn').attr('disabled', true);
+
+            //                     }
+            //                 }
+            //                 else{
+            //                     $('#name_er_en').text('')
+            //                     $('#name_er_ar').text('')
+            //                     $('#saveBtn').attr('disabled', false);
+
+            //                 }
+
+            //             }
+            //         })
+            //     }
+            //     else{
+            //         $('#name_er_en').text('')
+            //         $('#name_er_ar').text('')
+            //         $('#saveBtn').attr('disabled', false);
+
+            //     }
+                
+            // }
+            
+
+        }
+
+        // setup image preview
+        $("#id_image").change(function(){
+            readURL(this);
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                
+                reader.onload = function (e) {
+                    $('#badgImg').attr('src', e.target.result);
+                }
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        
+        
+    
+        function changeError(id){
+            $('#'+id).text('')
+        }
+
+        function selectbadgetype()
+        {
+            choosen = $('#id_category').val()
+            if(choosen == 1){
+                $('#category_er').text('')
+                $('#weightBased').show()
+                $('#target').text('Target (Weight in Kg)')
+            }
+            else if(choosen == 2){
+                $('#category_er').text('')
+                $('#weightBased').hide()
+                $('#target').text('Target (Number of Exercise)')
+            }
+            else if(choosen == 3){
+                $('#category_er').text('')
+                $('#weightBased').hide()
+                $('#target').text('Target (Maximum number of Help Request)')
+            }
+        }
+        
+        // function setExercise()
+        // {
+        //     $('#muscle_er').text('')
+        //     muscle_id = $('#id_muscle').val()
+        //     data = {}
+        //     data['muscle_id'] = muscle_id
+        //     $.ajax({
+        //         type:'PUT',
+        //         url: '/sec-access/badgeexercise-filter/',
+        //         data:data,
+        //         success: function(response){
+        //             var html = ''
+        //             html += '<option value="Null">All</option>'
+        //             for (const record of response.records) {
+        //                 html += '<option value="'+record.exercise_id+'">'+ record.exercise_name +'</option>'
+        //             }
+        //             $('#selExercise').html(html)
+                    
+        //         }
+        //     })
+        // }
+
+        
+
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57)){
+                $('#target_er').text('Only numerical values are allowed.')
+                return false;
+            }
+            else{
+                $('#target_er').text('')
+                return true;
+            }
+        }
+
+
+        function validate(){
+            err_flag = 0
+            selCat = $('#id_category').val()
+            
+            if($('#id_name').val() == ''){
+                $('#name_er_en').text('This field is required')
+
+                $(".tab-content").hide();
+                $("#tab1").show();
+                $('#englishli').addClass('active')
+                $('#arabicli').removeClass('active')
+                $('#id_name').focus()
+                err_flag++;
+            }
+            else{
+                $('#name_er_en').text('')
+
+                if($('#id_name_ar').val() == ''){
+                    $('#name_er_ar').text('This field is required')
+    
+                    $(".tab-content").hide();
+                    $("#tab2").show();
+                    $('#englishli').removeClass('active')
+                    $('#arabicli').addClass('active')
+                    $('#id_name_ar').focus()
+                    err_flag++;
+                }
+                else{
+                    $('#name_er_ar').text('')
+                }
+            }
+
+            if($('#id_description').val() == ''){
+                $('#descr_er_en').text('This field is required')
+
+                $(".tab-content").hide();
+                $("#tab1").show();
+                $('#englishli').addClass('active')
+                $('#arabicli').removeClass('active')
+                $('#id_description').focus()
+                err_flag++;
+            }
+            else{
+                $('#descr_er_en').text('')
+
+                if($('#id_description_ar').val() == ''){
+                    $('#descr_er_ar').text('This field is required')
+    
+                    $(".tab-content").hide();
+                    $("#tab2").show();
+                    $('#englishli').removeClass('active')
+                    $('#arabicli').addClass('active')
+                    $('#id_description_ar').focus()
+                    err_flag++;
+                }
+                else{
+                    $('#descr_er_ar').text('')
+                }
+            }
+
+            if($('#id_unlock_condition').val() == ''){
+                $('#unlock_er_en').text('This field is required')
+
+                $(".tab-content").hide();
+                $("#tab1").show();
+                $('#englishli').addClass('active')
+                $('#arabicli').removeClass('active')
+                $('#id_unlock_condition').focus()
+                err_flag++;
+            }
+            else{
+                $('#unlock_er_en').text('')
+
+                if($('#id_unlock_condition_ar').val() == ''){
+                    $('#unlock_er_ar').text('This field is required')
+    
+                    $(".tab-content").hide();
+                    $("#tab2").show();
+                    $('#englishli').removeClass('active')
+                    $('#arabicli').addClass('active')
+                    $('#id_unlock_condition_ar').focus()
+                    err_flag++;
+                }
+                else{
+                    $('#unlock_er_ar').text('')
+                    
+                }
+                
+            }
+
+            if(selCat == ''){
+                $('#category_er').text('This field is required')
+                $('#id_category').focus()
+                $('html, body').animate({
+                    scrollTop: $("#category_er").offset().top
+                }, 2000);
+                err_flag++
+            }
+
+            if($('#id_time_limit').val() == ''){
+                $('#timelimit_er').text('This field is required')
+                $('#id_time_limit').focus()
+                err_flag++;
+            }
+            else{
+                $('#timelimit_er').text('')
+                
+            }
+
+            if($('#id_target').val() == ''){
+                $('#target_er').text('This field is required')
+                $('#id_target').focus()
+                err_flag++;
+            }
+            else{
+                $('#target_er').text('')
+                
+            }    
+                
+            // if(selCat == 1){
+                
+            //     if($('#hiddenId').val() == 0){
+            //         if($('#id_muscle').val() == ''){
+            //             $('#muscle_er').text('This field is required')
+            //             $('#id_muscle').focus()
+            //             err_flag++;
+            //         }
+            //         else{
+            //             $('#muscle_er').text('')
+            //         } 
+            //     }
+                
+            //     if($('#selExercise').val() == ''){
+            //         $('#exercise_er').text('This field is required')
+            //         $('#selExercise').focus()
+            //         err_flag++;
+            //     }
+            //     else{
+            //         $('#exercise_er').text('')
+            //     } 
+
+            // }
+            id = parseInt($('#hiddenId').val())
+            if(id == 0){
+                if(parseInt($('#hiddenId').val()) == 0){
+                    if($('#id_image').val() == ''){
+                        $('#badge_er').text('This field is required')
+                        $('#id_image').focus()
+                        err_flag++;
+                    }
+                    else{
+                        extn = ['jpg', 'jpeg', 'png', 'gif']
+                        file = $('#id_image').val()
+                        var ext = file.split('.').pop();
+                        ext = ext.toLowerCase()
+                        if ($.inArray(ext, extn) == -1){
+                            $('#badge_er').text('Unsupported file extension. Only .jpg, .jpeg, .png and .gif are allowed.')
+                            err_flag++;
+                        }
+                        
+                    }
+                }
+                else if(parseInt($('#hiddenId').val()) != 0){
+                    if($('#id_image').val() != ''){
+                        extn = ['jpg', 'jpeg', 'png', 'gif']
+                        file = $('#id_image').val()
+                        var ext = file.split('.').pop();
+                        ext = ext.toLowerCase()
+                        if ($.inArray(ext, extn) == -1){
+                            $('#badge_er').text('Unsupported file extension. Only .jpg, .jpeg, .png and .gif are allowed.')
+                            err_flag++;
+                        }
+                        
+                    }
+                    else if ($('#editImg img').attr('src') === undefined || $('#editImg img').attr('src') === '') {
+                        $('#badge_er').text('This field is required');
+                        $('#badge_er').focus()
+                        err_flag++;
+                    }
+                }
+            }
+                            
+        
+
+            
+            if(err_flag != 0){
+                return false
+            }
+            else{
+                $('#badgeForm').submit()
+            }
+            
+            
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const nameInput = document.getElementById('id_name');
+            nameInput.addEventListener('input', function() {
+                const nameLength = this.value.length;
+                const maxLength = parseInt(this.getAttribute('maxlength'));
+                if (nameLength >= maxLength) {
+                    $('#name_er_en').text('Badge Name should not exceed 100 characters')
+
+                } else {
+                    name_er_en_flag = 0
+                    $('#name_er_en').text('')
+                    changeError("name_er_en")
+                    
+                }
+            });
+
+            const nameInput_ar = document.getElementById('id_name_ar');
+            nameInput_ar.addEventListener('input', function() {
+                const nameLength = this.value.length;
+                const maxLength = parseInt(this.getAttribute('maxlength'));
+                if (nameLength >= maxLength) {
+                    $('#name_er_ar').text('Badge Name should not exceed 100 characters')
+
+                } else {
+                    name_er_ar_flag = 0
+                    $('#name_er_ar').text('')
+                    changeError("name_er_ar")
+                }
+            });
+
+            const descriptionInput = document.getElementById('id_description');
+            descriptionInput.addEventListener('input', function() {
+                const descriptionLength = this.value.length;
+                const maxLength = parseInt(this.getAttribute('maxlength'));
+                if (descriptionLength >= maxLength) {
+                    $('#descr_er_en').text('Badge description should not exceed 300 characters.')
+
+                } else {
+                    $('#descr_er_en').text('')
+                    changeError("descr_er_en")
+                }
+            });
+
+            const descriptionInput_ar = document.getElementById('id_description_ar');
+            descriptionInput_ar.addEventListener('input', function() {
+                const descriptionLength = this.value.length;
+                const maxLength = parseInt(this.getAttribute('maxlength'));
+                if (descriptionLength >= maxLength) {
+                    $('#descr_er_ar').text('Badge description should not exceed 300 characters')
+
+                } else {
+                    $('#descr_er_ar').text('')
+                    changeError("descr_er_ar")
+                }
+            });
+
+            const unlock_condition = document.getElementById('id_unlock_condition');
+            unlock_condition.addEventListener('input', function() {
+                const descriptionLength = this.value.length;
+                const maxLength = parseInt(this.getAttribute('maxlength'));
+                if (descriptionLength >= maxLength) {
+                    $('#unlock_er_en').text('Badge unlock condition should not exceed 50 characters.')
+
+                } else {
+                    $('#unlock_er_en').text('')
+                    changeError("unlock_er_en")
+                }
+            });
+
+            const unlock_condition_ar = document.getElementById('id_unlock_condition_ar');
+            unlock_condition_ar.addEventListener('input', function() {
+                const descriptionLength = this.value.length;
+                const maxLength = parseInt(this.getAttribute('maxlength'));
+                if (descriptionLength >= maxLength) {
+                    $('#unlock_er_ar').text('Badge unlock condition should not exceed 50 characters')
+
+                } else {
+                    $('#unlock_er_ar').text('')
+                    changeError("unlock_er_ar")
+                }
+            });
+
+        });
+        
+   </script>
+   <style>
+    .wrapperCls{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    /* Hide the select element with the hideClass */
+    .form-control.hideClass {
+        display: none;
+    }
+
+    /* Show the p element with the hideClass if it follows a select element with the hideClass */
+    .form-control.hideClass ~ .form-control.hideClass {
+        display: block;
+    }
+    
+    .textareas
+        {
+        white-space: unset; 
+        overflow: unset; 
+        text-overflow: unset;
+        }
+    textarea.arabic {
+        text-align: right!important;
+        direction: rtl!important;
+
+    }
+    .form-control[readonly] {
+    background-color: #fff;
+    }
+    .django-ckeditor-widget{
+            display: block !important;
+        }
+        .inner-addon { 
+    position: relative; 
+    }
+
+    /* style icon */
+    .inner-addon .glyphicon {
+    position: absolute;
+    padding: 10px;
+    cursor: pointer;
+    }
+
+    /* align icon */
+    .left-addon .glyphicon  { 
+        right:  0px;
+        top:27px;
+    }
+    .right-addon .glyphicon { right: 0px;top:0
+    }
+
+    /* add padding  */
+    /* .left-addon input  { padding-left:  30px; } */
+    /* .right-addon input { padding-right: 30px; } */
+
+    .input-wrapper-mobile .form-control {
+    padding-left: 52px;
+}
+
+.input-wrapper-mobile span{
+    position: absolute;
+    left:20px;
+    top:34px;
+    color: #060606 !important;
+    font-size: 14px;
+    font-weight: 500;
+}
+.outer-wrapper{ 
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+}
+.inner-wrapper{
+    width:48%;
+}
+.card {
+    margin-bottom: 100px;
+}
+
+   </style>
+   {% endblock %}

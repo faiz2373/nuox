@@ -1,0 +1,338 @@
+{% extends "admin/layout/user_base.html" %}
+{% load static %}
+{% block body_block %}
+{% load my_filters %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <main class="content-area">
+        <div class="container-fluid p-0">
+            <!-- top search bar -->
+            <div class="top-seach-bar mb-0">
+                <!-- top bar form  -->
+                <form class="search-form mt-2">
+                    <div class="add-product-filter user_table_product_filter">
+                        <div class="row align-items-center">
+                            <div class="col-xl-2 col-lg-2">
+                                <h3 class="top-bar-heading">Help Request</h3>
+                            </div>
+                            <div class="col-xl-10 col-lg-10">
+                                <div class="row_2 align-items-top justify-content-end ">
+                                    <div class="top-search-wrapper">
+                                        <div class="form-group">
+                                            <input type="text" name="search" id="search" value="{{ request.GET.search }}"
+                                                   class="form-control" placeholder="Search Name or Email ID">
+                                        </div>
+                                        <div><span id="error_msg"></span></div>
+                                    </div>
+                                    <div class="table-filter">
+                                        <div class="filter-box">
+                                                <p>More Filters</p>
+                                                    <img src="{% static 'admin/img/filter_icon.svg' %}"/>   
+                                         </div>
+                                    <div class="filter-wrapper ">
+                                        <div class="filter-title">
+                                            <!-- <h5>Sort By</h5> -->
+                                            <div><span id="error_msg2"></span></div>
+                                            <span class="close-filter">×</span>  
+                                        </div>                                    
+                                            <ul class="filter-list"> 
+                                                <li class="filter-item">  
+                                                    <div class="top-select-wrapper ">
+                                                        <div class="form-group">
+                                                            <select class="form-control filter-select" name="active" id="active">
+                                                                <option value="">Select Status</option>
+                                                                <option value="accept" {% if request.GET.active == 'accept' %}selected{% endif %}>Accepted</option>    
+                                                                <option value="reject" {% if request.GET.active == 'reject' %}selected{% endif %}>Rejected</option>    
+                                                                {% comment %} <option value="pending" {% if request.GET.active == 'pending' %}selected{% endif %}>Pending</option>     {% endcomment %}
+                                                            </select>
+                                                        </div>
+                                                    </div>  
+                                                </li> 
+                                                <li class="filter-item two-item-filter">  
+                                                    <div class="date-selector-wrapper">
+                                                        <div class="form-group">
+                                                          <input type="text" name="stDate" value="{{ request.GET.stDate }}" class="form-control" id="stDate" placeholder="From Date">
+                                                        </div>
+                                                    </div> 
+                                                    <div class="date-selector-wrapper">
+                                                        <div class="form-group">
+                                                          <input type="text" name="endDate" value="{{ request.GET.endDate }}" class="form-control" id="endDate" placeholder="To Date">
+                                                        </div>
+                                                    </div> 
+                                                </li>
+                                        </ul> 
+                                    </div>   
+                                    </div>                                
+
+                                    <div class=" top-action-wrapper d-flex align-items-top">
+                                        <button class="btn btn-detail me-2" id="sbmit">Filter</button>
+                                        <a href="{% url 'appdashboard:help-request' %}" class="reset">Reset</a>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                        </div>
+                </form>
+
+            </div>
+
+            <!-- top bar form  end-->
+        </div>
+        <!-- top search bar end-->
+
+        <!-- right side content box  -->
+        <div class="main-box pd-0">
+
+            <div class="add-product-sec">
+                <div class="product-area-list">
+                </div>
+                <div class="product-area-list list-head">
+                    <div class="product-box-heading gymIndexData bx-sd mb-1">
+                        <div class="row">
+                            <div class="col-xl-1 col-lg-1">
+                                <div class="product-content">
+                                    SL
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-3">
+                                <div class="product-content">
+                                    Sender 
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-3">
+                                <div class="product-content">
+                                    Receiver 
+                                </div>
+                            </div>
+                            <div class="col-xl-2 col-lg-2">
+                                <div class="product-content">
+                                    Gym 
+                                </div>
+                            </div>
+                            <div class="col-xl-2 col-lg-2">
+                              <div class="product-content">
+                                    Created Date
+                              </div>
+                          </div>
+                            <div class="col-xl-1 col-lg-1">
+                                <div class="product-content">
+                                    Status 
+                                </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+                    {% for rec in records %}
+                        <!-- prodcut box  -->
+                        <div class="product-box user-level gymIndexData bx-sd mb-1">
+                            <div class="row">
+                                <div class="col-xl-1 col-lg-1">
+                                    <div class="product-content">
+                                        <h3>{{ start_index|add:forloop.counter0 }}</h3>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3">
+                                    <div class="product-content">
+                                        <h3 style="word-break: break-all;">{{ rec.sender.email }}</h3>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3">
+                                    <div class="product-content">
+                                        <h3 style="word-break: break-all;">{{ rec.receiver.email }}</h3>
+                                    </div>
+                                </div>
+                                <div class="col-xl-2 col-lg-2">
+                                    <div class="product-content">
+                                        {% get_user_email rec.sender.id  as gym_name %} 
+                                        <h3>{{ gym_name }}</h3>
+                                    </div>
+                                </div>
+                                <div class="col-xl-2 col-lg-2">
+                                    <div class="product-content">
+                                        <h3>{{ rec.created_at | to_default_timezone }}</h3>
+                                    </div>
+                                </div>                        
+                                <div class="col-xl-1 col-lg-1">
+                                    <div class="product-content">
+                                    {% if rec.accepted == True and rec.is_active == False %}
+                                        <h3 class="text-success">Accepted</h3>
+                                    {% comment %} {% elif rec.accepted == False and rec.is_active == True %} 
+                                        <h3 style="color: #d38a29;">Pending</h3> {% endcomment %}
+                                    {% elif rec.accepted == False and rec.is_active == False %} 
+                                        <h3 class="text-danger">Rejected</h3>
+                                    {% endif %}
+                                    </div>
+                                </div> 
+                             
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="col-xl-12 col-lg-3 text-center mt-3">
+                            <h5>No Records</h5>
+                        </div>
+                    {% endfor %}
+
+                    {% if records %}
+                    <div class="row">
+                        <div class="col-sm-6 mt-3 pagination-count">Showing <span>{{ start_index }}</span> to <span>{{ end_index }}</span> of <span>{{ count }}</span> entries</div>
+
+                        <div class="col-sm-6 mt-3">
+                            <nav aria-label="Page navigation ">
+                                <ul class="pagination justify-content-end">
+                                    {% for i in page_range %}
+                                    <li id="pagination-count{{i}}"
+                                        class="page-item"><a
+                                            class="{% if i  == page %} activedata {% endif %} page-link" href="?page={{ i }}{{ params }}">{{i}}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                </div>
+                <!-- prodcut box  end-->
+            </div>
+        </div>
+        </div>
+        <!-- right side content box  -->
+        </div>
+    </main>
+{% endblock body_block %}
+
+{% block page_script %}
+<script src="{% static 'admin/assets/js/jquery.sumoselect.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+    flatpickr("#stDate", {
+      allowInput: true,
+      dateFormat: "Y-m-d",
+      maxDate: "today",
+    });
+    flatpickr("#endDate", {
+      allowInput: true,
+      dateFormat: "Y-m-d",
+      maxDate: "today",
+    });
+    
+    function btnok(id,msg)
+            {
+                Swal.fire({
+                    title: 'Are you  sure you want to '+msg+' it ?',  
+                    type: 'warning',
+                    confirmButtonText: 'Yes',
+                    confirmButtonColor: 'LightSeaGreen',
+                    cancelButtonColor: 'Crimson',
+                    cancelButtonText: 'No',
+                    showCancelButton: true,
+                    // reverseButtons: true
+                })
+                .then(function(e){
+                    if (e.value === true) {
+                    data = {}
+                    data['userid'] = id
+                    $.ajax({
+                    type:'PUT',
+                    url: '/sec-access/frame-enabledisable/',
+                    data: data,
+                    success: function(response){
+                        Swal.fire({
+                            type: 'success',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            title:response.msg
+                            });
+                    }
+                })
+                setTimeout(function(){
+                    window.location.reload(1);
+                    }, 1000);
+            }
+        })
+        }
+
+        $("#sbmit").click(function()
+        {
+            search = $('#search').val()
+            stDate = $('#stDate').val()
+            endDate = $('#endDate').val()
+            date_flag = 0
+
+            if(stDate != '' && endDate != ''){
+                date_flag=1
+            }
+            else{
+                if(stDate!='' && endDate ==''){
+                    $('#error_msg2').text('You cannot leave to date empty')
+                    date_flag = 0
+                    return false
+                }
+                else if(stDate =='' && endDate !=''){
+                    $('#error_msg2').text('You cannot leave from date empty')
+                    date_flag = 0
+                    return false
+                }
+                else  if(stDate =='' && endDate ==''){
+                    date_flag = 0
+                }
+            }
+           
+            if (search == '' && $('#active').val() =='' && date_flag == 0)
+            {
+                if ($('.filter-wrapper').hasClass('active')) {
+                    $('#error_msg2').text('Choose any filtering option')
+                    $('#error_msg').text('')
+                } 
+                else {
+                    $('#error_msg').text('Choose any filtering option')
+                    $('#error_msg2').text('')
+                }
+                return false;
+            }
+        })  
+
+    </script>
+        <style>
+            #error_msg{
+                color:red;
+            }
+            #error_msg2{
+                color:red;
+                font-size: 14px;
+            }
+            .alert-container{
+                position: absolute;
+                top: 45%;
+                left: 20%;
+                right: auto;
+                margin: auto;
+                width: 75%;
+                height: 20px;
+                padding: 30px;
+            }
+            .alert-container .alert{
+                justify-content: center;
+                padding: 20px 20px;
+            }
+            .alert-container .alert-success{
+                border-radius: 12px;
+                border: 1px solid #117054;
+            }
+            .product-box{
+                height: 50px;
+            }
+        </style>
+        {% if messages %}
+        {% for message in messages %}
+            <script> 
+            Swal.fire({
+               type: 'success',
+               icon: 'success',
+               showConfirmButton: false,
+               title:'{{message}}'
+               });
+            </script>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+   

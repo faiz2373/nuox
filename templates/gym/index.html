@@ -1,0 +1,383 @@
+{% extends "gym/layout/user_base.html" %}
+{% load static %}
+{% block body_block %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<main class="content-area" style="overflow: hidden;">
+    <div class="container-fluid p-0">
+       <!-- right side content box  -->
+       <div class="main-box pd-0">
+             <div class="row top-bar-heading-box mt-3">
+                <div class="col-sm-6">
+                   <h3 class="top-bar-heading">Dashboard</h3>
+                </div>
+                {% comment %} <div class="col-sm-6" align="right">
+                   <a class="nav-link" href="{% url 'appdashboard:dashboard' %}">
+                      <button class="btn btn-add" data-bs-toggle="modal" data-bs-target="#addproduct"><span data-feather="plus"></span>&nbsp;Add Product</button>
+                   </a>
+                </div>  {% endcomment %}
+             </div>
+             <div class="add-product-sec mt-2">           
+                <div class="product-area-list row">
+                   <!-- prodcut box  -->
+                   <div class=" product-box dashboard-box bx-sd mb-3">
+                      <div class="row">
+                         <a href="/gym/members/?usertype=normal_user" class="product-content">
+                            <h3 class="mb-4" align="center" >Users</h3>
+                            <h1 class="Count" align="center">{% if gym_user_count %}{{ gym_user_count }}{% else %} 0 {% endif %}</h1>
+                         </a>
+                      </div>
+                   </div>
+
+                  <div class="product-box dashboard-box bx-sd mb-3">
+                     <div class="row">
+                        <a href="/gym/trainers/" class="product-content">
+                           <h3 class="mb-4" align="center" >Trainers</h3>
+                           <h1 class="Count"  align="center">{% if gym_trainer_count %}{{ gym_trainer_count }}{% else %} 0 {% endif %}</h1>
+                        </a>
+                     </div>
+                  </div>
+
+                   <!-- prodcut box  -->
+                   <div class="product-box dashboard-box bx-sd mb-3">
+                      <div class="row">
+                         <a href="/gym/equipments/" class="product-content">
+                            <h3 class="mb-4" align="center" >Equipments</h3>
+                            <h1 class="Count" align="center">{% if equipment_count %}{{ equipment_count }}{% else %} 0 {% endif %}</h1>
+                         </a>
+                      </div>
+                   </div>
+                   <!-- prodcut box  -->
+                  <div class="product-box dashboard-box bx-sd mb-3">
+                     <div class="row">
+                        <a href="/gym/enquiries?status=pending" class="product-content">
+                           <h3 class="mb-4" align="center" >Pending Enquiries</h3>
+                           <h1 class="Count" align="center">{% if pending_enquiry %}{{ pending_enquiry }}{% else %} 0 {% endif %}</h1>
+                        </a>
+                     </div>
+                  </div> 
+
+                  <div class="product-box dashboard-box bx-sd mb-3">
+                     <div class="row">
+                        <a href="/gym/enquiries?status=responded" class="product-content">
+                           <h3 class="mb-4" align="center" >Responded Enquiries</h3>
+                           <h1 class="Count" align="center">{% if respond_enquiry %}{{ respond_enquiry }}{% else %} 0 {% endif %}</h1>
+                        </a>
+                     </div>
+                  </div> 
+                <!-- prodcut box  end-->
+             </div>
+          
+          </div>
+       </div>
+       <!-- right side content box  -->
+    </div>
+    <div class="row" style="margin-right: 8px;">
+      <div class="col-lg-6 col-md-6 myChartDiv" >
+         <div class="graph-wrapper">
+            <span class="center">Yearly user/trainer Registration</span>
+            <div id="chart"></div>
+         </div>
+      </div>
+      <div class="col-lg-6 col-md-6 myChartDiv">
+         <!-- <div id="piechart" style="background-color: #FFFFFF;"></div> -->
+         <div class="graph-wrapper">
+            <span class="center">Top 5 Users with workout count</span>
+            {% if user_workout_count|length == 0 %}
+               <div class="center" style="margin-top: 20%;">No data.</div>
+            {% endif %}
+            <div class="doughnut-graph-wrapper">
+               <canvas id="donutchart" class="donutCanvas"></canvas>
+            </div>
+         </div>
+      </div>
+   </div>
+ </main>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <style>
+ 
+   .myChartDiv {
+      margin-bottom: 20px;
+  } 
+   .apexcharts-toolbar,.apexcharts-menu-icon{
+            display: none;
+        }
+   .product-area-list .product-box{
+      width: 17%;
+      margin-right:50px;
+      /* margin-left: -25px; */
+   }
+   .product-area-list {
+      margin-left: -28px;
+      margin-right: -5px;
+  }
+  .product-area-list .product-box {
+   width: calc(20% - 1%);
+   margin-right: 0.5%;
+   margin-left: 0.5%;
+}
+   .mb-4 {
+      margin-bottom: 1rem !important;
+      margin-top: 0.5rem !important;
+   }
+   .apexcharts-canvas{
+      background-color: #ffff;
+   }
+   .apx-legend-position-right{
+      position: absolute;
+      left: auto;
+      top: 100px!important;
+      right: 20px!important;
+   }
+   .center{
+      padding-top: 5px;
+      display: flex;
+      justify-content: center;
+      font-weight: 400;     
+      font-size: 18px; 
+   }
+   .graph-wrapper {
+      height: 400px;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #CBD6E282;
+  }
+  .doughnut-graph-wrapper {
+   margin-top: 30px;
+   display: flex;
+   justify-content: center;
+   height: 250px;
+}
+
+
+ </style>
+
+{% if messages %}
+   {% for message in messages %}
+      {% if message.tags == "success" %}
+         <script> 
+         Swal.fire({
+         type: 'success',
+         icon: 'success',
+         showConfirmButton: false,
+         title:'{{message}}'
+         });
+         setTimeout(function(){
+         window.location.reload(1);
+         }, 1000);
+         </script>
+      {% endif %}
+      {% if message.tags == "info" %}
+         <script> 
+         Swal.fire({
+         type: 'error',
+         icon: 'info',
+         showConfirmButton: false,
+         title:'{{message}}'
+         });
+         setTimeout(function(){
+         window.location.reload(1);
+         }, 1000);
+         </script>
+      {% endif %}
+   {% endfor %}
+{% endif %}
+ 
+{% endblock body_block %}
+
+{% block page_script %}
+   <script src="https://cdn.jsdelivr.net/npm/apexcharts@latest/dist/apexcharts.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+
+      $('.Count').each(function () {
+         var $this = $(this);
+         jQuery({ Counter: 0 }).animate({ Counter: $this.text() }, {
+            duration: 5000,
+            easing: 'swing',
+            step: function () {
+               $this.text(Math.ceil(this.Counter));
+            }
+         });
+      });
+
+      
+    var userCountData = JSON.parse('{{ user_count|safe }}');
+    var trainerCountData = JSON.parse('{{ trainer_count|safe }}');
+    var options = {
+      colors : ['#4A8BD9', '#B479E4'],
+      series: [
+        {
+          name: 'Normal User',
+          data: userCountData
+        },
+        {
+          name: 'Trainer',
+          data: trainerCountData
+        }
+      ],
+      chart: {
+        height: 300,
+        type: 'bar',
+      },
+      plotOptions: {
+        bar: {
+          borderRadius: 3,
+          dataLabels: {
+            position: 'top', // top, center, bottom
+          },
+        }
+      },
+      dataLabels: {
+        enabled: true,
+        formatter: function (val, timestamp, index) {
+          if(val != 0){
+            return val;
+          }
+        },
+        offsetY: -20,
+        style: {
+          fontSize: '12px',
+          colors: ["#304758"]
+        }
+      },
+      xaxis: {
+        categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        position: 'bottom',
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        },
+        crosshairs: {
+          fill: {
+            type: 'gradient',
+            gradient: {
+              colorFrom: '#D8E3F0',
+              colorTo: '#BED1E6',
+              stops: [0, 100],
+              opacityFrom: 0.4,
+              opacityTo: 0.5,
+            }
+          }
+        },
+        tooltip: {
+          enabled: true,
+        }
+      },
+      yaxis: {
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false,
+        },
+        labels: {
+          show: true,
+          formatter: function (val) {
+            return val;
+          }
+        }
+      },
+      
+    };
+
+   var chart = new ApexCharts(document.querySelector("#chart"), options);
+   chart.render();
+
+   
+
+   // pie chart
+   
+   // user_workout_count = JSON.parse('{{ user_workout_count|safe }}');
+   // user_labels = {{ user_labels|safe }};
+
+   // var pie_options = {
+   //       series: user_workout_count,
+   //       chart: {
+   //          width: 500,
+   //          height: 300,
+   //          type: 'pie',
+   //       },
+   //       labels: user_labels,
+   //       responsive: [{
+   //          breakpoint: 600,
+   //          options: {
+   //          chart: {
+   //             width: 500,
+   //             height: 300,
+   //          },
+   //          legend: {
+   //             position: 'bottom'
+   //          }
+   //          }
+   //       }]
+   //    };
+   // var piechart = new ApexCharts(document.querySelector("#piechart"), pie_options);
+   // piechart.render();
+
+   
+   
+   var ctx = document.getElementById('donutchart').getContext('2d');
+   user_workout_count = JSON.parse('{{ user_workout_count|safe }}');
+   user_labels = {{ user_labels|safe }};
+
+   var data = {
+      labels: user_labels,
+      datasets: [{
+         data: user_workout_count,
+         backgroundColor: ['#074d81', '#20cbc2', '#ff6384', '#ffce56','#40b2e6'],
+         hoverBackgroundColor: ['#1a70b1', '#22b1a9', '#fb5074', '#ffce56','#40b2e6'],
+         borderWidth: 0,
+         borderRadius: 10 // Adjust the value to control the roundness of the donut slices
+      }]
+   };
+
+   var options = {
+      // cutoutPercentage: 40,
+      cutout:90,
+      responsive: true,
+      // maintainAspectRatio: false,
+      plugins: {
+         legend: {
+            position: 'right',
+            labels: {
+               padding:20,
+           }
+         },
+         
+         // title: {
+         //    display: true,
+         //    text: 'Top 5 Users with workout count', // Specify your chart title here
+         //    font: {
+         //       size: 16, // Adjust the font size of the title
+         //       weight: 'bold' // Adjust the font weight of the title
+         //    }
+         // }
+      },
+       
+      spacing: 10,
+      aspectRatio: 1.7,
+      tooltips: {
+         enabled: true
+      }
+   };
+
+
+   var donutchart = new Chart(ctx, {
+      type: 'doughnut',
+      data: data,
+      options: options
+   });
+
+
+    </script>
+{% endblock %}
+   

@@ -1,0 +1,243 @@
+{% extends "gym/layout/user_base.html" %}
+{% load static %}
+{% block body_block %}
+{% load my_filters %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <main class="content-area">
+        <div class="container-fluid p-0">
+            <!-- top search bar -->
+            <div class="top-seach-bar mb-0">
+                <!-- top bar form  -->
+                <form class="search-form mt-2" id="userForm">
+                    <div class="add-product-filter user_table_product_filter">
+                        <div class="row align-items-center" >
+                            <div class="col-xl-2 col-lg-2">
+                                <h3 class="top-bar-heading">Notifications</h3>
+                            </div>
+                            <div class="col-xl-10 col-lg-10">
+                 
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </form>
+                <!-- top bar form  end-->
+            </div>
+            <!-- top search bar end-->
+
+            <!-- right side content box  -->
+            <div class="main-box pd-0">
+
+                <div class="add-product-sec">
+                    <div class="product-area-list">
+                        <!-- prodcut box  -->
+
+                    </div>
+                    <div class="product-area-list list-head" >
+                        <div class="product-box-heading bx-sd mb-1">
+                            <div class="row">
+                                <div class="col-xl-1 col-lg-1">
+                                    <div class="product-content">
+                                        SL
+                                    </div>
+                                </div>
+                                <div class="col-xl-1 col-lg-1">
+                                    <div class="product-content">
+                                        Profile Pic
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-6 col-lg-6">
+
+                                    <div class="product-content">
+                                        Message  
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 text-left">
+                                    <div class="product-content">
+                                        Created Date
+                                    </div>
+                                </div>
+                               
+                            </div>
+                        </div>
+                        <!-- changed -->
+                        {% for rec in notification %}
+                            <!-- prodcut box  -->
+                            <div class="product-box user-level bx-sd mb-1">
+                                <div class="row">
+                                    <div class="col-xl-1 col-lg-1">
+                                        <div class="product-content">
+                                            {{ start_index|add:forloop.counter0 }}
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-1 col-lg-1">
+                                        <div class="product-content">
+                                            <div class="notify-profile-img">
+                                            {% if rec.user_from.users.image %}
+                                            <img src="/media/{{rec.user_from.users.image}}" class="avatar img-fluid rounded me-1" alt="{{ rec.user_from.first_name }}" />
+                                            {% elif rec.user_from.users.avatar.image %}
+                                            <img src="/media/{{rec.user_from.users.avatar.image}}" class="avatar img-fluid rounded me-1" alt="{{ rec.user_from.first_name }}" />
+                                            {% else %}
+                                            <img src="{% static 'admin/assets/img/avatars/default-avatar.jpg' %}" class="avatar img-fluid rounded me-1" alt="{{ rec.user_from.first_name }}" />
+                                            {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-xl-6 col-lg-6">
+                                        <div class="product-content">
+                                            {% if rec.message %}
+                                                {{rec.message }}
+                                            {% else %}
+                                                ---
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class= "col-xl-3 col-lg-3">
+                                        <div class="product-content">
+                                            <h3 class="no-trim">{{ rec.created_at | to_default_timezone }}</h3>
+                                        </div>
+                                    </div>
+                                 
+                                   
+                                </div>
+                            </div>
+                        {% empty %}
+                        <div class="col-xl-12 col-lg-3 text-center mt-3">
+                            <h5>No Records</h5>
+                        </div>
+                        {% endfor %}
+                        <div class="pagination-count">Showing <span>{{ start_index }}</span> to <span>{{ end_index }}</span> of <span>{{ count }}</span> entries</div>
+
+                        <div class="col-sm-12 mt-3">
+                            <nav aria-label="Page navigation ">
+                                <ul class="pagination justify-content-end">
+                                    {% for i in page_range %}
+                                    <li id="pagination-count{{i}}"
+                                        class="page-item ">
+                                        <a
+                                            class="page-link {% if i  == page %} activedata {% endif %}" href="?page={{ i }}{{ params }}">{{i}}
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- prodcut box  end-->
+                </div>
+            </div>
+        </div>
+        {% csrf_token %}
+        <!-- right side content box  -->
+        </div>
+    </main>
+{% endblock body_block %}
+
+{% block page_script %}
+    <script>
+        function statusChange(id,msg)
+                    {
+                        Swal.fire({
+                            title: 'Are you sure?',  
+                            text: 'Do you want to '+msg+' this member!',  
+                            type: 'warning',
+                            confirmButtonText: 'Yes',
+                            confirmButtonColor: 'LightSeaGreen',
+                            cancelButtonColor: 'Crimson',
+                            cancelButtonText: 'No',
+                            showCancelButton: true,
+                            // reverseButtons: true
+                        })
+                        .then(function(e){
+                            if (e.value === true) {
+                            data = {}
+                            data['userid'] = id
+                            $.ajax({
+                            type:'PUT',
+                            url: '/gym/members-enabledisable/',
+                            data: data,
+                            success: function(response){
+                                Swal.fire({
+                                    type: 'success',
+                                    icon: 'success',
+                                    showConfirmButton: false,
+                                    title: response.msg,
+                                    timer: 4000
+                                });
+
+                                var btnid = '#statusBtn_'+id;
+                                if(msg == 'enable'){
+                                    $(btnid).text('DISABLE');
+                                    $(btnid).attr('onclick', 'statusChange('+id+',"disable")');
+                                }
+                                else{
+                                    $(btnid).text('ENABLE');
+                                    $(btnid).attr('onclick', 'statusChange('+id+',"enable")');
+                                }
+                            }
+                        })
+                      
+                    }
+                })
+                }
+
+
+        $("#sbmit").click(function()
+        {
+            name = $('#name').val()
+            usertype = $('#usertype').val()
+            userlevel = $('#userlevel').val()
+            if (name == '' && usertype == '' && userlevel == '')
+            {
+                $('#error_msg').text('This field is required')
+                return false;
+            }
+        })  
+    </script>
+    <style>
+        .row {
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+        }
+        .alert-container{
+            position: absolute;
+            top: 45%;
+            left: 20%;
+            right: auto;
+            margin: auto;
+            width: 75%;
+            height: 20px;
+            padding: 30px;
+        }
+        .alert-container .alert{
+            justify-content: center;
+            padding: 20px 20px;
+        }
+        .alert-container .alert-success{
+            border-radius: 12px;
+            border: 1px solid #117054;
+        }
+        
+        #error_msg{
+            color:red;
+        }
+        .pro2-img:hover{
+            opacity: 0.5;
+        }
+        #hovertest:hover{
+            color: #4A469E;
+            text-decoration: underline;
+        }
+        .notify-profile-img{
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+    </style>
+{% endblock %}
+   

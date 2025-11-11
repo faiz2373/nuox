@@ -1,0 +1,583 @@
+{% extends "admin/layout/user_base.html" %}
+{% load static %}
+{% block body_block %}
+{% load my_filters %}
+    <main class="content-area">
+        <div class="container-fluid p-0">
+            <div class="log-in-side-2">
+                <div class="form-box">
+                    <div class="card">
+                        <div class="form-box-inner">
+                            <div>
+                                <div class="log-head">
+                                    <h1 class=" mb-3">Gym</h1>
+                                </div>
+                                <!-- log in form area -->
+                                <div class="">
+                                    <form class="row" autocomplete="off" method="post" id="gymForm"
+                                          enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="tabs">
+                                            <ul id="tabs-nav">
+                                                <li id="englishli"><a href="#tab1" id="english">ENGLISH</a></li>
+                                                <li id="arabicli"><a href="#tab2" id="arabic">ARABIC</a></li>
+
+                                            </ul> <!-- END tabs-nav -->
+                                            <div id="tabs-content">
+                                                <div id="tab1" class="tab-content">
+                                                    <div class="mb-4 col-sm-12">
+                                                        <div class="input-wrapper">
+                                                            <label class="float" for="name">Name (in English)</label>
+                                                            {{ form.name }}
+                                                            <p class="text-danger errormsg mt-2 mb-0" id="nameError1" style="display:none">This field is required</p>
+                                                            <input type="hidden" id="hdnName" value ="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4 col-sm-12">
+                                                        <div class="input-wrapper">
+                                                            <label class="float" for="address">Address (in English)</label>
+                                                            {{ form.address }}
+                                                            <p class="text-danger errormsg mt-2 mb-0" id="addressError1" style="display:none">This field is required</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4 col-sm-12">
+                                                        <div class="input-wrapper">
+                                                            <label class="float" for="about">About (in English)</label>
+                                                            {{ form.media }}
+                                                            {{ form.about|safe }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="tab2" class="tab-content">
+                                                    <div class="mb-4 col-sm-12">
+                                                        <div class="input-wrapper">
+                                                            <label class="float" for="name_ar">Name (in Arabic)</label>
+                                                            {{ form.name_ar }}
+                                                            <p class="text-danger errormsg mt-2 mb-0" id="nameError2" style="display:none">This field is required</p>
+                                                            <input type="hidden" id="hdnName_ar" value ="">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mb-4 col-sm-12">
+                                                        <div class="input-wrapper">
+                                                            <label class="float" for="address_ar">Address (in Arabic)</label>
+                                                            {{ form.address_ar }}
+                                                            <p class="text-danger errormsg mt-2 mb-0" id="addressError2" style="display:none">This field is required</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4 col-sm-12">
+                                                        <div class="input-wrapper">
+                                                            <label class="float" for="about">About (in Arabic)</label>
+                                                            {{ form.media }}
+                                                            {{ form.about_ar|safe }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4 col-sm-12">
+                                                    <div class="input-wrapper image-field">
+                                                        <label for="user">Logo</label>
+                                                        <div class="image-filed">
+                                                            {{ form.logo }}
+                                                            
+                                                        </div>
+                                                        <p class="text-danger errormsg mt-2 mb-0" id="errormsg6" style="display:none">Image field should not be blank</p>
+                                                    </div>
+                                                    {% if form.logo.value %}
+                                                    <img id="logoImg" src="{{ form.logo.value.url }}"
+                                                         width="100px"> 
+                                                    {% endif %}
+                                                </div>
+                                                <div class="mb-4 col-sm-12">
+                                                    <div class="input-wrapper image-field">
+                                                        <label for="user">Image</label>
+                                                        <div class="image-filed">
+                                                            {{ form.image }}
+                                                            
+                                                        </div>
+                                                        <p class="text-danger errormsg mt-2 mb-0" id="errormsg6" style="display:none">Image field should not be blank</p>
+                                                    </div>
+                                                    {% if form.image.value %}
+                                                    <img id="gymImg" src="{{ form.image.value.url }}"
+                                                         width="100px"> 
+                                                    {% endif %}
+                                                </div>
+                                                <div class="mb-4 col-sm-12">
+                                                    <div class="input-wrapper image-field">
+                                                        <label for="user" class="float">Introduction Video</label>
+                                                        <div class="image-filed">
+                                                            {{ form.introduction_video }}
+                                                        </div>
+                                                        <p class="text-danger mt-2 mb-0" id="intro"></p>
+                                                    </div>
+                                                    {% if form.introduction_video %}
+                                                     <!-- <div id="show-up-vid" class="video_up_status_div"style="margin-top: 10px;width:100px;"> -->
+                                                        <!-- <a data-fancybox data-small-btn="true" class="popup-youtube" id="edit_video" href="{{ form.introduction_video.value.url }}"> -->
+                                                            <div class="video-wrapper">
+                                                                <video id="my-video" class="video-js vjs-default-skin" controls>
+                                                                    <source src="{{  form.introduction_video.value.url }}" type="video/mp4">
+                                                                    Your browser does not support the video tag.
+                                                                </video>
+                                                            </div>
+                                                        <!-- </a> -->
+                                                    <!-- </div> -->
+                                                    {% endif %}
+                                                </div>
+                                                {% with coordinates|cut:'SRID=4326;POINT ('|cut:')' as coords %}
+                                                    {% with coords|split_string:' ' as coordinates %}
+                                                    <div class="outer-wrapper">
+                                                        <div class="mb-4 col-sm-12 inner-wrapper">
+                                                            <div class="input-wrapper">
+                                                                <label class="float" for="location">Longitude</label>
+                                                                {% with Longitude=coordinates.1 %}
+                                                                    <input type="text" class="form-control effect" name="longitude" id="longitude" value="{{ Longitude }}">
+                                                                {% endwith %}
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="mb-4 col-sm-12 inner-wrapper">
+                                                            <div class="input-wrapper">
+                                                                <label class="float" for="location">Latitude</label>
+                                                                
+                                                                {% with Latitude=coordinates.0 %}
+                                                                    <input type="text" class="form-control effect" name="latitude" id="latitude" value="{{ Latitude }}">
+                                                                {% endwith %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endwith %}
+                                                {% endwith %}
+                                                
+                                                <div class="mb-4 col-sm-12">
+                                                    <div class="input-wrapper input-wrapper-mobile">
+                                                        <label class="float" for="mobile">Mobile</label>
+                                                        {{ form.mobile }}
+                                                       
+                                                        <span>+971</span>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4 col-sm-12">
+                                                    <div class="input-wrapper">
+                                                        <label class="float" for="email">Email</label>
+                                                        <input type="text" name="email" readonly class="form-control effect" maxlength="225" id="id_name"  value="{% if email %} {{ email }} {% endif %}">
+                                                        
+                                                    </div>
+                                                </div>
+                                               
+                                                <div>
+                                                    <button type="submit" id="saveBtn" class="btn btn-lg btn-primary">Save
+                                                    </button>
+                                                </div>
+
+                                            </div><!-- END tabs -->
+
+                                    {% if messages %}
+                                        {% for message in messages %}
+                                            <div class="alert-container">
+                                                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}"
+                                                     role="alert">{{ message|lower|capfirst }}</div>
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <!-- log in form area end -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+    {% endblock body_block %}
+    {% block page_script %}
+    <script>
+
+
+        CKEDITOR.on('instanceReady', function(event) {
+            var editor = event.editor;
+            if (editor.element.getAttribute('name') === 'about_ar') {
+                editor.document.getBody().setStyle('direction', 'RTL');
+                editor.document.getBody().setStyle('text-align', 'right');
+            }
+        });
+
+
+        $(document).ready(function() {
+            $('#hdnName').val($('#id_name').val())
+            $('#hdnName_ar').val($('#id_name_ar').val())
+            $('.popup-youtube').fancybox({
+                width  : 500,
+                height : 500,
+                autoSize : false
+            });
+           
+       });
+
+       // ckeditor validation
+       $('#gymForm').submit(function(e) {
+            error_flag=0
+            var html = $.trim($("#cke_id_about iframe").contents().find("body").text());
+            var html2 = $.trim($("#cke_id_about_ar iframe").contents().find("body").text());
+            
+            if (html == '') {
+                $('#id_aboutfield').css("display", "block")
+            }
+            else{
+                $('#id_aboutfield').css("display", "none")
+            }
+
+            if (html2 == '') {
+                $('#id_aboutfield_ar').css("display", "block")
+            }
+            else{
+                $('#id_aboutfield_ar').css("display", "none")
+            }
+
+            if( $('#id_name').val() == ''){
+                // for switching the tabs
+                $(".tab-content").hide();
+                $("#tab1").show();
+                $('#englishli').addClass('active')
+                $('#arabicli').removeClass('active')
+
+                $('#nameError1').text('This field is required')
+                $('#nameError1').show()
+                $('#id_name').focus();
+                error_flag++
+            }
+            
+            else{
+                $('#nameError1').hide()
+                
+                if( $('#id_name_ar').val() == ''){
+                    // for switching the tabs
+                    $(".tab-content").hide();
+                    $("#tab2").show();
+                    $('#englishli').removeClass('active')
+                    $('#arabicli').addClass('active')
+                    $('#nameError2').text('This field is required')
+    
+                    $('#nameError2').show();
+                    $('#id_name_ar').focus();
+                    error_flag++
+                }
+                else{
+                    $('#nameError2').hide()
+                    
+                }
+            }
+
+
+            if( $('#id_address').val() == ''){
+                // for switching the tabs
+                $(".tab-content").hide();
+                $("#tab1").show();
+                $('#englishli').addClass('active')
+                $('#arabicli').removeClass('active')
+
+                $('#addressError1').text('This field is required')
+                $('#addressError1').show()
+                $('#id_address').focus();   
+                error_flag++
+            }
+            else{
+                $('#addressError1').hide()
+                
+                if( $('#id_address_ar').val() == ''){
+                    // for switching the tabs
+                    $(".tab-content").hide();
+                    $("#tab2").show();
+                    $('#englishli').removeClass('active')
+                    $('#arabicli').addClass('active')
+                    $('#addressError2').text('This field is required')
+    
+                    $('#addressError2').show()
+                    $('#id_address_ar').focus();
+                    error_flag++
+                }
+                else{
+                    $('#addressError2').hide()
+                }
+            }
+
+            var fileInput = $('#id_introduction_video')[0]; // Get the file input element
+            var file = fileInput.files[0]; // Get the selected file
+            
+            if (file) {
+            // Check the file size
+                if (file.size > 5 * 1024 * 1024) {
+                    $('#intro').text('File is too large . Maximum file size allowed is 5Mb')
+                    $('#id_introduction_video').focus()
+                    error_flag++
+                }
+                else{
+                    $('#intro').text('')
+                }
+            }
+
+            if(error_flag==0){
+                return true
+                // var eng = 0
+                // var arb = 0
+                // checkExisit('english', function(result1) {
+                //     alert(result1+' 1')
+                //     if (result1 == 0) {
+                //         eng = 1
+                //     }
+                //     else{
+                //         alert('here')
+                //         $('#nameError1').text('Gym with the same name already exists');
+                //         $("#nameError1").show();
+
+                //         $(".tab-content").hide();
+                //         $("#tab1").show();
+                //         $('#englishli').addClass('active')
+                //         $('#arabicli').removeClass('active')                    
+                //         $('#id_name').focus();
+                //         return false
+                //     }
+                // });
+                // checkExisit('arabic', function(result2) {
+                //     alert(result2+' 2')
+
+                //     if (result2 == 0) {
+                //         arb = 1
+                //     }
+                //     else{
+                //         $('#nameError2').text('Gym with the same name already exists');
+                //         $("#nameError2").show();
+                //         $(".tab-content").hide();
+                //         $("#tab2").show();
+                //         $('#englishli').removeClass('active')
+                //         $('#arabicli').addClass('active')
+                //         $('#id_name_ar').focus();
+                //         return false
+                //     }
+                // });
+
+                // if(eng == 0 && arb == 0){
+                //     return false
+                // }
+                // else{
+                //     return true
+                // }
+                
+            }
+            else{
+                return false
+            }
+
+
+        })
+
+        // setup image preview
+        $("#id_logo").change(function(){
+            readURL(this);
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                
+                reader.onload = function (e) {
+                    $('#logoImg').attr('src', e.target.result);
+                }
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#id_image").change(function(){
+            readURL_2(this);
+        });
+
+        function readURL_2(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                
+                reader.onload = function (e) {
+                    $('#gymImg').attr('src', e.target.result);
+                }
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        
+        // intro video preview
+        $('#id_introduction_video').on('change', function() {
+            var file = this.files[0];
+            var fileURL = URL.createObjectURL(file);
+            // Update the data-src attribute of the Fancybox link
+            $('#gymVideo').attr('data-src', fileURL);
+            $('#gymVideo').attr('data-type', 'iframe');
+        });
+
+        // Initialize Fancybox
+        $('[data-fancybox]').fancybox({
+            youtube: {
+                controls: 1,
+                showinfo: 0
+            }
+        });
+
+        function change_err(id){
+            $('#'+id).text('')
+        }
+        // check for user exist
+        function checkExisit(type, callback) {
+            var val = '';
+            if (type == 'english') {
+                val = $('#id_name').val();
+                hdn = $('#hdnName').val()
+            } else if (type == 'arabic') {
+                val = $('#id_name_ar').val();
+                hdn = $('#hdnName_ar').val()
+            }
+
+            if (val != '' && val != hdn) {
+                var data = {
+                name: val,
+                type: type
+                };
+
+                $.ajax({
+                    type: 'PUT',
+                    url: '/sec-access/gym-check-nameexist/',
+                    data: data,
+                    success: function(response) {
+                        if (response.exist > 0) {
+                            if (type == 'english') {
+                                $('#nameError1').text('Gym with the same name already exists');
+                                $('#nameError1').show();
+                                $('#saveBtn').attr('disabled', true);
+                                $('#saveBtn').attr('type', 'button');
+                            } else if (type == 'arabic') {
+                                $('#nameError2').text('Gym with the same name already exists');
+                                $('#nameError2').show();
+                                $('#saveBtn').attr('disabled', true);
+                                $('#saveBtn').attr('type', 'button');
+                            }
+                        } 
+                        else {
+                            $('#nameError1').text('This field is required');
+                            $('#nameError2').text('This field is required');
+                            $('#saveBtn').attr('disabled', false);
+                            $('#saveBtn').attr('type', 'submit');
+                            $('#nameError1').hide();
+                            $('#nameError2').hide();
+                        }
+
+                        // Call the callback function with the response
+                        callback(response.exist);
+                    }
+                });
+            }
+        }
+
+       
+
+       $.validator.addMethod("checkname", function(value) {
+        return /^[a-zA-Z\s]+$/.test(value);
+        });
+
+        
+        
+
+       $("#gymForm").validate({ 
+                rules: {
+                    name:{
+                        required:true,
+                        checkname: true,
+                    },
+                    name_ar:{
+                        required:true,
+                    },
+                    location:{
+                        required:true,
+                        checkname: true,
+                    },
+                    about:{
+                        required:true,
+                    },
+                    image:{
+                        // required:true,
+                        accept: ".jpg|.jpeg|.png|.bmp"
+                    },
+                    logo:{
+                        // required:true,
+                        accept: ".jpg|.jpeg|.png|.bmp"
+                    },
+                    introduction_video:{
+                        accept: "mp4|.mov|flv|m3u8"
+                    },
+                    address:{
+                        required:true,
+                    },
+                    address_ar:{
+                        required:true,
+                    },
+                    mobile:{
+                        required:true,
+                        minlength:9,
+                        maxlength:9
+                    },
+                    
+                   
+            },
+            messages: {
+                
+                    name:{
+                    checkname: "Please enter only alphabets",
+                    },
+                    location:{
+                    checkname: "Please enter only alphabets",
+                    },
+                    mobile : {
+                    maxlength: jQuery.validator.format("Please enter a valid mobile number."),
+                    minlength: jQuery.validator.format("Please enter a valid mobile number."),
+                    }
+                    },
+        })
+        
+  </script>
+  <style>
+    .form-control[readonly] {
+    background-color: #fff;
+    }
+    .input-wrapper-mobile .form-control {
+    padding-left: 52px;
+    }
+
+    .input-wrapper-mobile span{
+        position: absolute;
+        left:20px;
+        top:34px;
+        font-size:14px;
+        font-weight: 500;
+    }
+    .django-ckeditor-widget {
+    display: block !important;
+}
+.outer-wrapper{ 
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+}
+.inner-wrapper{
+    width:48%;
+}
+.fancybox__content{
+    width: 30% !important;
+    height: auto!important;
+    background: none;
+
+}
+.video-js {
+    width: 220px;
+    height: 150px;
+    background-color: #ffff;
+    margin-top: 10px;
+}
+   </style>
+{% endblock %}

@@ -1,0 +1,471 @@
+{% extends "admin/layout/user_base.html" %}
+{% load static %}
+{% block body_block %}
+{% load my_filters %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <main class="content-area">
+        <div class="container-fluid p-0">
+            <section class="section about-section gray-bg" id="about">
+                <div class="container-fluid" style="padding-left: 0;">
+                    <div class="row flex-row mt-3">
+                        <div class="col-lg-12 col-xl-12">
+                            <div class="about-text go-to outerDiv">
+                                <div>
+                                    <div class="contenttd">
+                                        {% if record.users.image %}
+                                        <a data-fancybox data-small-btn="true" href="{{ record.users.image.url }}"><img src="{{ record.users.image.url }}" height="50px" class="proImg"> </a>
+                                        {% elif record.users.avatar.image %}
+                                        <a data-fancybox data-small-btn="true" href="{{ record.users.avatar.image.url }}"><img src="{{ record.users.avatar.image.url }}" height="50px" class="proImg"> </a>
+                                        {% else %}
+                                        <a data-fancybox data-small-btn="true" href="{% static 'admin/icons/user.png' %}"><img src="{% static 'admin/icons/user.png' %}" alt="" height="50px" class="proImg"></a>
+                                        {% endif %}                                            
+                                    </div>
+                                    <div><h3 class="dark-color captilize">{{ record.first_name }}</h3></div>
+                                </div>
+                                <div class="row about-list tableDiv">
+                                    <table>
+                                        <tr class="spaceUnder">
+                                            <td class="labeltd">
+                                                <label>Created At</label>
+                                            </td>
+                                            <td class="contenttd">
+                                                <p>{{ record.created_at| to_default_timezone }}</p>
+                                            </td>
+                                        </tr>
+
+                                        <tr class="spaceUnder">
+                                            <td class="labeltd">
+                                                <label>Last login</label>
+                                            </td>
+                                            <td class="contenttd">
+                                                <p>{{ record.updated_at| to_default_timezone }}</p>
+                                            </td>
+                                        </tr>
+
+                                        <tr class="spaceUnder">
+                                            <td class="labeltd ">
+                                                <label>User Level</label>
+                                            </td>
+                                            <td class="contenttd">
+                                                <p class="captilize">{% if record.users.user_level %}{{ record.users.user_level }}{% else %}---{% endif %}</p>
+                                            </td>
+                                        </tr>
+
+                                        <tr class="spaceUnder">
+                                            <td class="labeltd ">
+                                                <label>Gender</label>
+                                            </td>
+                                            <td class="contenttd">
+                                                <p class="captilize">{% if record.users.gender %}{{ record.users.gender }}{% else %}---{% endif %}</p>
+                                            </td>
+                                        </tr>
+                                        <tr class="spaceUnder">
+                                            <td class="labeltd ">
+                                                <label>Age</label>
+                                            </td>
+                                            <td class="contenttd">
+                                                <p class="captilize">{% if record.users.age %}{{ record.users.age }}{% else %}---{% endif %}</p>
+                                            </td>
+                                        </tr>
+
+                                        <tr class="spaceUnder">
+                                            <td class="labeltd">
+                                                <label>Email</label>
+                                            </td>
+                                            <td class="contenttd">
+                                                <p>{% if record.email %}{{ record.email }}{% else %}---{% endif %}</p>
+                                            </td>
+                                        </tr>
+
+                                        <tr class="spaceUnder">
+                                            <td class="labeltd">
+                                                <label>Mobile</label>
+                                            </td>
+                                            <td class="contenttd">
+                                                <p>{% if record.mobile %}{{ record.mobile }}{% else %}---{% endif %}</p>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr class="spaceUnder">
+                                            <td class="labeltd">
+                                                <label>Weight</label>
+                                            </td>
+                                            <td class="contenttd">
+                                                <p>{% if record.users.weight %}{{ record.users.weight }} {{record.users.weight_unit}}{% else %}---{% endif %}</p>
+                                            </td>
+                                        </tr>
+
+                                        <tr class="spaceUnder">
+                                            <td class="labeltd">
+                                                <label>Height</label>
+                                            </td>
+                                            <td class="contenttd">
+                                                <p>{% if record.users.height %}{{ record.users.height }} {{record.users.height_unit}}{% else %}---{% endif %}</p>
+                                            </td>
+                                        </tr>
+
+                                        {% if document %} 
+                                            {% for doc in document %}
+                                                {% if doc.document_type == 'proof' %}
+
+                                                    <tr class="spaceUnder">
+                                                        <td class="labeltd">
+                                                            <label>Proof</label>
+                                                        </td>
+                                                        <td class="contenttd">
+                                                            <div class="alignDiv">
+                                                                <div class="imgDiv"><a data-fancybox data-small-btn="true" href="{{ doc.document.url }}"><img src="{{ doc.document.url }}" class="fancyImage" > </a></div>
+                                                                <div class="verifiedTag" id="verifyTag_{{doc.id}}">
+                                                                    {% if doc.is_approve == True%}
+                                                                        <i class="fa fa-check-circle" style="font-size:48px;color:green"></i>
+                                                                    {% endif %}
+                                                                </div>
+                                                                <div class="alignDiv ">
+                                                                    <button type="button" onclick="statusChange('{{doc.id}}',{% if doc.is_approve == True%}'reject'{% else %}'verify'{% endif %})" class="btn btn-detail" id="statusBtn_{{doc.id}}" >
+                                                                        {% if doc.is_approve == True%}
+                                                                            Reject
+                                                                        {% else %}
+                                                                            Verify
+                                                                        {% endif %}
+                                                                    </button>
+                                                                                                                                          
+                                                                </div>
+                                                            </td>
+                                                        </td>
+                                                    </tr>
+
+                                                {% elif doc.document_type == 'certificate' %}
+
+                                                    <tr class="spaceUnder">
+                                                        <td class="labeltd">
+                                                            <label>Certificate</label>
+                                                        </td>
+                                                        <td class="contenttd">
+                                                            <div class="alignDiv">
+                                                                <div class="imgDiv"><a data-fancybox data-small-btn="true" href="{{ doc.document.url }}"><img src="{{ doc.document.url }}" class="fancyImage"> </a></div>
+                                                                <div class="verifiedTag" id="verifyTag_{{doc.id}}">
+                                                                    {% if doc.is_approve == True%}
+                                                                        <i class="fa fa-check-circle" style="font-size:48px;color:green"></i>
+                                                                    {% endif %}
+                                                                </div>
+
+                                                                <div class="alignDiv ">
+                                                                    <button type="button" onclick="statusChange('{{doc.id}}',{% if doc.is_approve == True%}'reject'{% else %}'verify'{% endif %})" class="btn btn-detail" id="statusBtn_{{doc.id}}" >
+                                                                        {% if doc.is_approve == True%}
+                                                                            Reject
+                                                                        {% else %}
+                                                                            Verify
+                                                                        {% endif %}
+                                                                    </button>
+                                                                </div>                                                     
+                                                            </div>
+                                                        </td>
+                                      
+                                                    </tr>
+
+                                                {% endif %}
+
+                                            {% endfor %}
+                                                <!-- <tr class="spaceUnder">
+                                                    <td class="labeltd" colspan="2">
+                                                        <button type="button" class="btn btn-detail " id="btnSubmit" onclick="approve()">Reject</button>
+                                                    </td>
+                                                </tr> -->
+                                               
+                                            {% endif %}
+
+                                        
+
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <style>
+        .verifiedTag{
+            width:20px;
+            margin-bottom: 235px;
+            margin-left: -24px;
+        }
+        .imgDiv{
+            height: 250px;
+            width: 250px;
+        }
+        .uploaded-docs {
+            display: flex;
+            width: 100%;
+        }
+        .user-level .btn-detail:hover{
+                background: #ffffff;
+                color: #0264a7;
+            }
+        /* About Me
+        ---------------------*/
+        .about-text h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0 0 6px;
+            color: #20247b;
+        }
+        input[type="checkbox"] {
+            appearance: auto!important;
+        }
+        .btn{
+            margin-top: 3%;
+        }
+        @media (max-width: 767px) {
+            .about-text h3 {
+                font-size: 35px;
+            }
+        }
+
+        .btn-detail{
+            margin-left: 30px!important;
+        }
+
+        .about-text h6 {
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 767px) {
+            .about-text h6 {
+                font-size: 18px;
+            }
+        }
+
+        .about-text p {
+            font-size: 18px;
+            max-width: 450px;
+        }
+
+        .about-text p mark {
+            font-weight: 600;
+            color: #20247b;
+        }
+
+        .about-list {
+            padding-top: 16px;
+        }
+
+        .about-list .media {
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .about-list label {
+            color:#20247b;
+            font-weight: 600;
+            width: 150px;
+            margin: 0;
+            position: relative;
+            font-size: 15px;
+        }
+
+        .about-list label:after {
+            content: ":";
+            position: absolute;
+            top: -8px;
+            bottom: 3px;
+            right: 11px;
+            width: 1px;
+            height: 12px;
+            margin: auto;
+            opacity: 0.5;
+        }
+
+        .about-list p {
+            margin: 0;
+            font-size: 15px;
+        }
+
+        @media (max-width: 991px) {
+            .about-avatar {
+                margin-top: 30px;
+            }
+        }
+
+        .about-section .counter {
+            padding: 22px 20px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.096);
+        }
+
+        .about-section .counter .count-data {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .about-section .counter .count {
+            font-weight: 700;
+            color: #20247b;
+            margin: 0 0 5px;
+        }
+
+        .about-section .counter p {
+            font-weight: 600;
+            margin: 0;
+        }
+
+        mark {
+            background-image: linear-gradient(rgba(252, 83, 86, 0.6), rgba(252, 83, 86, 0.6));
+            background-size: 100% 3px;
+            background-repeat: no-repeat;
+            background-position: 0 bottom;
+            background-color: transparent;
+            padding: 0;
+            color: currentColor;
+        }
+
+        .theme-color {
+            color: #fc5356;
+        }
+
+        .dark-color {
+            color: #172B4D;
+        }
+
+        .video_up_status_div img {
+            max-width: 120px;
+            padding: 5px;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        @supports (object-fit: cover) {
+            .video_up_status_div img {
+                width: 120px;
+                object-fit: cover;
+            }
+        }
+        .tableDiv{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width:80%
+        }
+        .outerDiv{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-left: 20px;
+            padding-top: 20px;
+        }
+        .labeltd{
+            width:15%
+        }
+        
+    
+
+        tr.spaceUnder>td {
+            padding-bottom: 10px;
+        }
+        .row {
+            margin-left:unset!important;
+        }
+        .proImg{
+            border-radius: 50%;
+        }
+        .fancyImage{
+            max-width: 100%;
+            max-height: 100%;   
+        }
+        input.largerCheckbox {
+            width: 35px;
+            height: 35px;
+        }
+        /* .btn-detail {
+            margin-left: 70px!important;
+            width: 250px;
+        } */
+        .alignDiv{
+            display:flex;
+            align-items: center;
+        }
+        .padDiv{
+            padding: 15px;
+        }
+        .captilize{
+            text-transform: capitalize;
+        }
+        .table-bg-green{
+            background: rgba(50, 147, 111, 0.16) !important;
+            color: #519C66;
+            white-space: nowrap;
+            padding: 2px 15px;
+            border-radius: 8px;
+            }
+        .table-bg-red{
+            background: rgba(211, 38, 4, 0.16) !important;
+            color: #e40000;
+            white-space: nowrap;
+            padding: 2px 15px;
+            border-radius: 8px;
+        }
+    </style>
+{% endblock body_block %}
+
+{% block page_script %}
+    <script>
+        function statusChange(id,msg)
+        {
+            Swal.fire({
+                title: 'Are you sure?',  
+                text: 'Do you want to '+msg+' this document!',  
+                type: 'warning',
+                confirmButtonText: 'Yes',
+                confirmButtonColor: 'LightSeaGreen',
+                cancelButtonColor: 'Crimson',
+                cancelButtonText: 'No',
+                showCancelButton: true,
+                // reverseButtons: true
+            })
+            .then(function(e){
+                if (e.value === true) {
+                    data = {}
+                    data['docid'] = id
+                    $.ajax({
+                        type:'PUT',
+                        url: '/sec-access/user-document-enabledisable/',
+                        data: data,
+                        success: function(response){
+                            Swal.fire({
+                                type: 'success',
+                                icon: 'success',
+                                showConfirmButton: false,
+                                title: response.msg,
+                                timer: 2000
+                            });
+
+                            var btnid = '#statusBtn_'+id;
+                            if(msg == 'verify'){
+                                $('#verifyTag_'+id).html('<i class="fa fa-check-circle" style="font-size:48px;color:green"></i>');                                
+                                $(btnid).text('Reject');
+                                $(btnid).attr('onclick', 'statusChange('+id+',"reject")');
+                            }
+                            else{
+                                $('#verifyTag_'+id).html('');                                
+                                $(btnid).text('Verify');
+                                $(btnid).attr('onclick', 'statusChange('+id+',"verify")');
+                            }
+                        }
+                    })
+                }
+            })
+        }
+        
+        
+
+    
+    </script>
+{% endblock %}

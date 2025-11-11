@@ -1,0 +1,260 @@
+{% extends "admin/layout/user_base.html" %}
+{% load static %}
+{% block body_block %}
+<script src="{% static 'admindashboard/formvalidation.js' %}"></script>
+    <main class="content-area">
+        <div class="container-fluid p-0">
+            <div class="log-in-side-2">
+                <div class="form-box">
+                    <div class="card">
+                        <div class="form-box-inner">
+                            <div>
+                                <div class="log-head">
+                                    <h1 class=" mb-3">Help</h1>
+                                </div>
+                                <!-- log in form area -->
+                                <div class="">
+                                    <form method="post" class="row" autocomplete="off" id="formData">
+                                        {% csrf_token %}
+                                        <div class="tabs">
+                                            <ul id="tabs-nav">
+                                                <li id="englishli"><a href="#tab1" id="english">ENGLISH</a></li>
+                                                <li id="arabicli"><a href="#tab2" id="arabic">ARABIC</a></li>
+
+                                            </ul> <!-- END tabs-nav -->
+                                            <div id="tabs-content">
+                                                <div id="tab1" class="tab-content">
+                                                    <div class="mb-4 col-sm-12">
+                                                        <div class="input-wrapper">
+                                                            <label class="float" for="first_name">Question (in English)</label>
+                                                            <input type="text" value="{% if model.question %}{{model.question}}{% endif %}" name="questionname" class="form-control effect" maxlength="225" id="id_question" onkeydown="changeError('errormsg1')" />
+                                                            
+                                                            <p class="text-danger mt-2 mb-0 errormsg" id="errormsg1" style="display:none">This field is required</p>
+
+                                                        </div><br>
+                                                        <div class="input-wrapper">
+                                                            <label class="float" style="top: -7px;" for="first_name">Answer (in English)</label>
+                                                            {{ form.media }}
+                                                            {{ form.answer|safe }}
+                                                           
+                                                            <p class="text-danger mt-2 mb-0 errormsg" id="errortxt1" style="display:none">This field is required</p>
+                                                        </div>
+                                                    </div>
+                                                   
+                                                </div>
+                                                <div id="tab2" class="tab-content">
+                                                    <div class="mb-4 col-sm-12">
+                                                        <div class="input-wrapper">
+                                                            <label class="float" for="first_name">Question (in Arabic)</label>
+                                                            <input type="text" value="{% if model.question_ar %}{{model.question_ar}}{% endif %}" name="questionname_ar" class="form-control effect rtl-ar" maxlength="225" id="id_question_ar"  onkeydown="changeError('errormsg2')"/>
+                                                            
+                                                            <p class="text-danger mt-2 mb-0 errormsg" id="errormsg2" style="display:none">This field is required</p>
+
+                                                        </div><br>
+                                                        <div class="input-wrapper">
+                                                            <label class="float" style="top: -7px;" for="first_name">Answer (in Arabic)</label>
+                                                            {{ form.media }}
+                                                            {{ form.answer_ar|safe }}
+                                                           
+                                                            <label class="text-danger mt-2 mb-0 errormsg" id="errortxt2" style="display:none">This field is required.</label>
+                                                        </div>
+                                                    </div>
+                                          
+                                                </div>
+                                                  
+                                                <div>
+                                                    <button type="button" class="btn btn-lg btn-primary" onclick="helpvalidate()">Save
+                                                    </button>
+                                                    </div>
+
+
+                                            </div> <!-- END tabs-content -->
+                                        </div> <!-- END tabs -->
+
+                                    </form>
+                                </div>
+                                <!-- log in form area end -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+    <style>
+        .django-ckeditor-widget{
+            display: block !important;
+        }
+    </style>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
+    <script>
+        CKEDITOR.replace('id_answer_ar', {
+            contentsLangDirection: "rtl"
+        });
+        $("#formData").validate({
+                rules: {
+                    questionname:{
+                        required:true,
+                    },
+                    questionname_ar:{
+                        required:true,
+                    },
+                    
+            },
+        })
+
+        function helpvalidate()
+        {
+            error_flag=0
+
+            // for question_en
+            if($('#id_question').val()==''){
+                $('#errormsg1').show();
+                $('#id_question').focus()
+                $(".tab-content").hide();
+                $("#tab1").show();
+                $('#englishli').addClass('active')
+                $('#arabicli').removeClass('active')
+                error_flag++
+            }
+            else if($('#id_question').val().length <3 ){
+                $('#errormsg1').text('FAQ question shout contain atleast 3 charcters')
+                $('#errormsg1').show();
+                $(".tab-content").hide();
+                $("#tab1").show();
+                $('#englishli').addClass('active')
+                $('#arabicli').removeClass('active')
+                error_flag++
+            }
+            else{
+                $('#errormsg1').hide();            
+                // for question_ar
+                if($('#id_question_ar').val()==''){
+                    $('#errormsg2').show();
+                    $('#id_question_ar').focus()
+
+                    $(".tab-content").hide();
+                    $("#tab2").show();
+                    $('#englishli').removeClass('active')
+                    $('#arabicli').addClass('active')
+                    error_flag++
+                }
+                else if($('#id_question_ar').val().length <3 ){
+                    $('#errormsg2').text('FAQ question shout contain atleast 3 charcters')
+                    $('#errormsg2').show();
+                    $('#id_question_ar').focus()
+
+                    $(".tab-content").hide();
+                    $("#tab2").show();
+                    $('#englishli').removeClass('active')
+                    $('#arabicli').addClass('active')
+                    error_flag++
+                }
+                else{
+                    $('#errormsg2').hide();
+                }
+            }
+
+            var question_en = document.getElementById('id_question').value;
+            var question_ar = document.getElementById('id_question_ar').value;
+            if (question_en != '')
+            {
+                var allEditors = CKEDITOR.instances['id_answer'].getData();
+                html = $(allEditors).text();
+                if (html == '') {
+                    $('#errortxt1').show();
+                    $(".tab-content").hide();
+                    $("#tab1").show();
+                    $('#englishli').addClass('active')
+                    $('#arabicli').removeClass('active')
+                    error_flag++
+                } 
+                else {
+                    $('#errortxt1').hide();
+                }
+            }
+            
+            if(question_ar != '')
+            {
+                var allEditors = CKEDITOR.instances['id_answer_ar'].getData();
+                html = $(allEditors).text();
+                if (html == '') {
+                    $('#errortxt2').show();
+                    $(".tab-content").hide();
+                    $("#tab2").show();
+                    $('#arabicli').addClass('active')
+                    $('#englishli').removeClass('active')
+                    error_flag++
+                } else {
+                    $('#errortxt2').hide();
+                }
+            }
+
+            // answer_en
+            var allEditors = CKEDITOR.instances['id_answer'].getData();
+            html = $(allEditors).text();
+            if(html == '')
+            {
+                $('#errortxt1').show()
+                $(".tab-content").hide();
+                $("#tab1").show();
+                $('#englishli').addClass('active')
+                $('#arabicli').removeClass('active')
+                error_flag++;
+            }
+            else if(html.length < 3)
+            {
+                $('#errortxt1').text('Description must contain atleast 3 character')
+                $('#errortxt1').show()
+                $(".tab-content").hide();
+                $("#tab1").show();
+                $('#englishli').addClass('active')
+                $('#arabicli').removeClass('active')
+                error_flag++;
+            }
+            else{
+                $('#errortxt1').hide()
+
+                // answer_ar
+                var allEditors2 = CKEDITOR.instances['id_answer_ar'].getData();
+                html2 = $(allEditors2).text();
+                if(html2 == '')
+                {
+                    $('#errortxt2').show()
+
+                    $(".tab-content").hide();
+                    $("#tab2").show();
+                    $('#arabicli').addClass('active')
+                    $('#englishli').removeClass('active')
+                    error_flag++;
+                }
+                else if(html2.length < 3)
+                {
+                    $('#errortxt2').text('Description must contain atleast 3 character')
+                    $('#errortxt2').show()
+
+                    $(".tab-content").hide();
+                    $("#tab2").show();
+                    $('#arabicli').addClass('active')
+                    $('#englishli').removeClass('active')
+                    error_flag++;
+                }
+                else{
+                    $('#errortxt2').hide()
+                }
+               
+            }
+
+            if(error_flag==0){
+                $('#formData').submit()
+            }
+
+        }
+
+        function changeError(id){
+            $('#'+id).text('')
+        }
+      
+    </script>
+{% endblock body_block %}

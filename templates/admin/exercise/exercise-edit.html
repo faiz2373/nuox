@@ -1,0 +1,864 @@
+{% extends "admin/layout/user_base.html" %}
+{% load static %}
+{% block body_block %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <main class="content-area">
+        <div class="container-fluid p-0">
+            <div class="log-in-side-2">
+                <div class="form-box">
+                    <div class="card">
+                        <div class="form-box-inner">
+                            <div>
+                                <div class="log-head">
+                                    <h1 class=" mb-3">Exercise</h1>
+                                </div>
+                                <!-- log in form area -->
+                                <div class="">
+                                    <form method="post" class="row" autocomplete="off" id="exrciseForm" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="tabs">
+                                            <ul id="tabs-nav">
+                                                <li id="englishli"><a href="#tab1" id="english">ENGLISH</a></li>
+                                                <li id="arabicli"><a href="#tab2" id="arabic">ARABIC</a></li>
+
+                                            </ul> <!-- END tabs-nav -->
+                                            <div id="tabs-content">
+                                                
+                                                <div id="tabs-content">
+                                                    <div id="tab1" class="tab-content">
+                                                        <div class="mb-4 col-sm-12">
+                                                            <div class="input-wrapper">
+                                                                <label class="float" for="first_name">Name (in English)</label>
+                                                                <input type="text" value="{% if model.exercise_name %}{{ model.exercise_name }}{% endif %}" name="ename" class="form-control effect" maxlength="225" id="id_ename" onblur='checkExisit("english")'/>
+                                                                <p class="text-danger errormsg mt-2 mb-0"id="errormsg1" style="display:none"></p>
+                                                                <input type="hidden" id="hdnName" value ="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-4 col-sm-12">
+                                                            <div class="input-wrapper">
+                                                                <label class="float" for="first_name">Description (in English)</label>
+                                                                {{ form.media }}
+                                                                {{ form.description|safe }}
+                                                                
+                                                                <p class="text-danger errormsg mt-2 mb-0" id="desc_error"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="tab2" class="tab-content">
+                                                        <div class="mb-4 col-sm-12">
+                                                            <div class="input-wrapper">
+                                                                <label class="float" for="first_name">Name (in Arabic)</label>
+                                                                <input type="text" value="{% if model.exercise_name_ar %}{{ model.exercise_name_ar }}{% endif %}" name="ename_ar" class="form-control effect rtl-ar" maxlength="225" id="id_ename_ar" onblur='checkExisit("arabic")'/>
+                                                               
+                                                                <p class="text-danger errormsg mt-2 mb-0" id="errormsg2" style="display:none">Name field should not be blank</p>
+                                                                <input type="hidden" id="hdnName_ar" value ="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-4 col-sm-12">
+                                                            <div class="input-wrapper">
+                                                                <label class="float" for="first_name">Description (in Arabic)</label>
+                                                                {{ form.media }}
+                                                                {{ form.description_ar|safe }}
+                                                                
+                                                                <p class="text-danger errormsg mt-2 mb-0" id="desc_error_ar" style="display:none">Description field should not be blank</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4 col-sm-12">
+                                                        <div class="input-wrapper">
+                                                            <label class="float" for="user">Category</label>
+                                                               
+                                                                <div class="input-wrapper input-box choose-muscle" >
+                                                                    <select class="select-user form-control filter-sel" required name="category" id="id_category" >
+                                                                        <option selected disabled="true" hidden>Select</option>
+                                                                        {% for i in category %} 
+                                                                        {% if i.name == model.category.name  %}
+                                                                            <option value="{{i.id}}" class="form-control effect" selected="selected">{% if i.name %}{{i.name}}{% else %}{{i.name_ar}}{% endif %}</option>
+                                                                        {% else %}
+                                                                            <option value="{{i.id}}" class="form-control effect">{% if i.name %}{{i.name}}{% else %}{{i.name_ar}}{% endif %}</option>
+                                                                        {% endif %}
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                    <p class="text-danger errormsg mt-2 mb-0" id="errormsg3" style="display:none">Category field should not be blank</p>
+                                                                </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4 col-sm-12">
+                                                        <div class="input-wrapper">
+                                                            <label class="float" for="user">Rest Time</label>
+                                                            
+                                                            <div class="input-wrapper input-box choose-muscle" >
+                                                                <select class="select-user form-control filter-sel" name="resttime" required id="id_resttime" >
+                                                                    <option selected disabled="true" hidden>Select</option>
+                                                                    {% for i in resttime %} 
+                                                                    {% if i.time == model.rest_time.time  %}
+                                                                        <option value="{{i.id}}" class="form-control effect" selected="selected">{{i.time}}</option>
+                                                                    {% else %}
+                                                                        <option value="{{i.id}}" class="form-control effect">{{i.time}}</option>
+                                                                    {% endif %}
+                                                                    {% endfor %}
+                                                                </select>
+                                                                <p class="text-danger errormsg mt-2 mb-0" id="errormsg4" style="display:none">RestTime field should not be blank</p>
+                                                            </div>
+                                                        
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mb-4 col-sm-12">
+                                                        <div class="input-wrapper">
+                                                            <label class="float" for="user">Equipment</label>
+                                                            
+                                                            <div class="input-wrapper input-box choose-muscle" >
+                                                                <select class="select-user form-control filter-sel" name="equipment" id="id_equipment" >
+                                                                    <option selected disabled="true" hidden>Select</option>
+                                                                    {% for i in equipment %} 
+                                                                    {% if i.equipment_name|cut:" " == model.equipment|cut:" "  %}
+                                                                        <option value="{{i.id}}" class="form-control effect" selected="selected">{% if i.equipment_name %}{{i.equipment_name}}{% else %}{{i.equipment_name_ar}}{% endif %}</option>
+                                                                    {% else %}
+                                                                        <option value="{{i.id}}" class="form-control effect">{% if i.equipment_name %}{{i.equipment_name}}{% else %}{{i.equipment_name_ar}}{% endif %}</option>
+                                                                    {% endif %}
+                                                                    {% endfor %}
+                                                                </select>
+                                                                <p class="text-danger errormsg mt-2 mb-0" id="errormsg5" style="display:none">Equipment field should not be blank</p>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4 col-sm-12">
+                                                        <div class="input-wrapper image-field">
+                                                            <label for="user">Exercise Image</label>
+                                                            <div class="image-filed">
+                                                                <input type="file" name="thumbnail" accept="image/*" selected="selected" class="form-control effect" id="id_thumbnail" {% if not model.thumbnail %} required {% endif %}> 
+                                                            </div>
+                                                            <p class="text-danger errormsg mt-2 mb-0" id="errormsg6" style="display:none">Image field should not be blank</p>
+                                                        </div>
+                                                        {% if model.thumbnail %}
+                                                        <img src="{{ model.thumbnail.url }}" id="thumbImg"
+                                                             width="100px"> 
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="mb-4 col-sm-12">
+                                                        <div class="input-wrapper image-field">
+                                                            <label for="user">Introduction Video</label>
+                                                            <div class="image-filed">
+                                                                <input type="file" name="introduction_video" accept="video/*" onchange="filevalidate(this,'intro')" class="form-control effect" id="id_introduction_video" {% if not model.introduction_video %} required {% endif %}>
+                                                            </div>
+                                                            <p class="text-danger errormsg mt-2 mb-0" id="intro" style="display:none">Video field should not be blank</p>
+                                                        </div> 
+                                                        {% if model.introduction_video %}
+                                                        <!-- <div id="show-up-vid" class="video_up_status_div"style="margin-top: 10px;width:100px;"> -->
+                                                            <!-- <a data-fancybox data-small-btn="true" class="popup-youtube" id="edit_video" href="{{  model.introduction_video.url }}"> -->
+                                                                <div class="video-wrapper">
+                                                                    <video id="my-video" class="video-js vjs-default-skin" controls>
+                                                                        <source src="{{  model.introduction_video.url }}" type="video/mp4">
+                                                                        Your browser does not support the video tag.
+                                                                    </video>
+                                                                </div>
+                                                                <!-- </a> -->
+                                                        <!-- </div> -->
+                                                    {% endif %}
+                                                    </div>
+                                                    <!-- <div class="mb-4 col-sm-12">
+                                                        <div class="input-wrapper image-field">
+                                                            <label for="user">Exercise Image</label>
+                                                            <div class="image-filed">
+                                                                <input type="file" name="image" accept="image/*" class="form-control effect" id="id_image"  {% if not model.image %} required {% endif %}>
+                                                            </div>
+                                                            <p class="text-danger errormsg mt-2 mb-0" id="errormsg8" style="display:none">Image field should not be blank</p>
+                                                        </div>
+                                                        {% if model.image %}
+                                                        <img src="{{ model.image.url }}" id= "imageImg"
+                                                             width="100px"> 
+                                                        {% endif %}
+                                                    </div> -->
+
+                                                    <div class="mb-4 col-sm-12">
+                                                        <div class="input-wrapper image-field">
+                                                            <label for="user">Exercise Video</label>
+                                                            <div class="image-filed">
+                                                                <input type="file" name="video" accept="video/*" class="form-control effect" onchange="filevalidate(this,'intro1')" id="id_video" {% if not model.video %} required {% endif %}>
+                                                            </div>
+                                                            <p class="text-danger errormsg mt-2 mb-0" id="intro1" style="display:none">Video field should not be blank</p>
+                                                        </div>
+                                                        {% if model.video %}
+                                                        <!-- <div id="show-up-vid" class="video_up_status_div"style="margin-top: 10px;width:100px;"> -->
+                                                            <!-- <a data-fancybox data-small-btn="true" class="popup-youtube" id="edit_video" href="{{  model.video.url }}"> -->
+                                                                <div class="video-wrapper">
+                                                                    <video id="my-video" class="video-js vjs-default-skin" controls>
+                                                                        <source src="{{  model.video.url }}" type="video/mp4">
+                                                                        Your browser does not support the video tag.
+                                                                    </video>
+                                                                </div>
+                                                            <!-- </a> -->
+                                                        <!-- </div> -->
+                                                        {% endif %}
+                                                    </div>
+                                                    {% comment %} <div class="mb-4 col-sm-12">
+                                                        <div class="input-wrapper">
+                                                            <div class="input-wrapper">
+                                                                <label class="float" for="name">Youtube Link</label>
+                                                                <input type="text" name="link" value="{% if model.video_link %}{{ model.video_link }}{% endif %}" class="form-control effect" id="id_link">
+                                                                
+                                                                <p class="text-danger errormsg mt-2 mb-0"  style="display:none">Youtube field should not be blank</p>
+                                                            </div>
+                                                        </div>
+                                                    </div> {% endcomment %}
+                                                    <div id="createdata">
+                                                {% for i, k, z in mylist %}
+                                                    <div class="row" id="row1{{ forloop.counter }}">
+                                                        <div class="col-sm-5">
+                                                            <div class="input-wrapper">
+                                                                    <label class="float" for="user">Muscle</label>
+                                                                    <!-- onchange="musclechange()" -->
+                                                                    <select id="id_muscle{{forloop.counter}}" class="form-control effect" disabled name="muscle" >
+                                                                        <option selected disabled="true" hidden value="">Select</option>
+                                                                        {% for x in muscle %} 
+                                                                            {% if x.name|cut:" " == i|cut:" "  %}
+                                                                                <option value="{{x.id}}" class="form-control effect" selected="selected">{% if x.name %}{{x.name}}{% else %}{{x.name_ar}}{% endif %}</option>
+                                                                            {% else %}
+                                                                                <option value="{{x.id}}" class="form-control effect">{% if x.name %}{{x.name}}{% else %}{{x.name_ar}}{% endif %}</option>
+                                                                            {% endif %}
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                <p class="text-danger errormsg mt-2 mb-0" id="errormsg10" style="display:none">Muscle field should not be blank</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class=" col-sm-5">
+                                                            <div class="input-wrapper">                                                                
+                                                                <label class="float" for="user">Type</label>
+                                                                <select id="id_type{{forloop.counter}}" class="form-control effect" name="muscletype" disabled required >
+                                                                    <option selected disabled="true" hidden value="">Select</option>
+                                                                    {% for y in musclechoice %} 
+                                                                        {% if y|cut:" " == k|cut:" "  %}
+                                                                            <option value="{{y}}" class="form-control effect" selected="selected">{{y}} Muscle</option>
+                                                                        {% else %}
+                                                                            <option value="{{y}}" class="form-control effect">{{y}}</option>
+                                                                        {% endif %}
+                                                                    {% endfor %}
+                                                                </select>
+                                                                <p class="text-danger errormsg mt-2 mb-0" id="errormsg11" style="display:none">Type field should not be blank</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <div class="input-wrapper">
+                                                                <label class="float" for="user" style="visibility: hidden; opacity: 0;">Type</label>
+                                                                {% if forloop.counter == 1 %}
+                                                                    {% comment %} <div class="btn-add btn-lg btn-add-new" id="validateform" onclick="addRow()">+</div> {% endcomment %}
+                                                                    <div class="btn-add btn-lg btn-add-new" id="{{z}}" onclick="addRow('{{ exercise_id }}','{{z}}')">+</div>
+                                                                {% else %}
+                                                                    <div class="btn-add btn-lg btn-add-new" onclick="btnok('{{ forloop.counter }}','{{ exercise_id }}','{{z}}')">-</div>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    {% endfor %}
+                                                    <input type="hidden" name="exercise_id" id="exercise_id" value="{{exercise_id}}">
+                                                </div>
+                                                <div class="justify-content-end row">
+                                                        <p class="text-danger errormsg mt-2 mb-0" id="muscleerrormsg" style="display:none">You have to give atleat one muscle and its type.</p>
+                                                </div>
+                     
+                                                    <div>
+                                                        <button type="submit" id= "saveBtn"  onclick="formValidate()" class="btn btn-lg btn-primary">Save
+                                                        </button>
+                                                        <p class="text-danger errormsg mt-2 mb-0" id="submiterr" style="display:none">Some mandatory fields have not been filled.</p>
+                                                    </div>
+    
+                                                </div>
+                                                  
+                                                <input type="hidden" id="hdndeletedId" name="hdndeletedId">
+
+                                            </div> <!-- END tabs-content -->
+                                        </div> <!-- END tabs -->
+
+                                    </form>                        
+                                </div>
+                                <!-- log in form area end -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+    {% endblock %}
+    {% block page_script %}
+    <script>
+        
+        CKEDITOR.on('instanceReady', function(event) {
+            var editor = event.editor;
+            if (editor.element.getAttribute('name') === 'description_ar') {
+                editor.document.getBody().setStyle('direction', 'RTL');
+                // editor.document.getBody().setStyle('text-align', 'right');
+            }
+        })
+
+
+        var dltArray = []; // for deleted muscle
+        var muscleList2 = []; // Create an empty list
+        var data_i= '{{length}}';
+        for(i=1; i<parseInt(data_i); i++){
+            var selMuscle = $('#id_muscle'+i).val();
+            muscleList2.push(selMuscle); // Append value to the list
+        }
+        
+        existingDataCount = data_i
+        oldLength = muscleList2.length
+        var delCount = 0
+        var alldelterFlag = 0
+        $(document).ready(function() {
+            $('#hdnName').val($('#id_ename').val())
+            $('#hdnName_ar').val($('#id_ename_ar').val())
+            $('.popup-youtube').fancybox({
+                width  : 500,
+                height : 500,
+                autoSize : false
+            });
+
+
+            // var data_i= '{{length}}';
+            // for(i=1;i<data_i;i++){
+            //     var selMuscle = $('#id_muscle'+i).val();
+            //     muscleList2.push(selMuscle); // Append value to the list
+            // }
+
+            // console.log(muscleList2)
+            
+        });
+
+
+        // check for user exist
+        function checkExisit(type){
+            if(type == 'english'){
+                val = $('#id_ename').val()
+                hdn = $('#hdnName').val()
+            }
+            else if(type == 'arabic'){
+                val = $('#id_ename_ar').val()
+                hdn = $('#hdnName_ar').val()
+            }
+
+            if (val != '' && val != hdn) {
+                data = {}
+                data['name'] = val
+                data['type'] = type
+                $.ajax({
+                    type:'PUT',
+                    url: '/sec-access/exercise-check-nameexist/',
+                    data: data,
+                    success: function(response){
+                        if(response.exist > 0){
+                            if(type == 'english'){
+                                $('#errormsg1').text('Exercise with same name already exists')
+                                $('#errormsg1').show()
+                                $('#saveBtn').attr('disabled', true);
+                                $('#saveBtn').attr('type', 'button');
+
+                            }
+                            else if(type == 'arabic'){
+                                $('#errormsg2').text('Exercise with same name already exists')
+                                $('#errormsg2').show()
+                                $('#saveBtn').attr('disabled', true);
+                                $('#saveBtn').attr('type', 'button');
+
+                            }
+                        }
+                        else{
+                            $('#errormsg1').text('This field is required')
+                            $('#errormsg2').text('This field is required')
+
+                            $('#errormsg1').hide()
+                            $('#errormsg2').hide()
+                            $('#saveBtn').attr('disabled', false);
+                            $('#saveBtn').attr('type', 'submit');
+
+                        }
+
+                    }
+                })
+            }
+            
+
+        }
+
+
+        // setup image preview
+        $("#id_thumbnail").change(function(){
+            readURL(this);
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                
+                reader.onload = function (e) {
+                    $('#thumbImg').attr('src', e.target.result);
+                }
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // setup image preview
+        // $("#id_image").change(function(){
+        //     readURL2(this);
+        // });
+
+        // function readURL2(input) {
+        //     if (input.files && input.files[0]) {
+        //         var reader = new FileReader();
+                
+        //         reader.onload = function (e) {
+        //             $('#imageImg').attr('src', e.target.result);
+        //         }
+                
+        //         reader.readAsDataURL(input.files[0]);
+        //     }
+        // }
+
+        // intro video preview
+        $('#id_introduction_video').on('change', function() {
+            var file = this.files[0];
+            var fileURL = URL.createObjectURL(file);
+            // Update the data-src attribute of the Fancybox link
+            $('#intoVid').attr('data-src', fileURL);
+            $('#intoVid').attr('data-type', 'iframe');
+        });
+
+        // intro video preview
+        $('#id_video').on('change', function() {
+            var file = this.files[0];
+            var fileURL = URL.createObjectURL(file);
+            // Update the data-src attribute of the Fancybox link
+            $('#gymVideo').attr('data-src', fileURL);
+            $('#gymVideo').attr('data-type', 'iframe');
+        });
+
+
+        function formValidate(){
+            error_flag = 0
+            var editor = $.trim($("#cke_desc_editor iframe").contents().find("body").text());
+            var editor2 = $.trim($("#cke_id_description_ar iframe").contents().find("body").text());
+
+            // for name_en  
+            if( $('#id_ename').val() == ''){
+                // for switching the tabs
+                $(".tab-content").hide();
+                $("#tab1").show();
+                $('#englishli').addClass('active')
+                $('#arabicli').removeClass('active')
+
+                $('#errormsg1').show();
+                $('#id_ename').focus();
+                error_flag++;
+            }
+            else{
+                // for name_ar
+                if( $('#id_ename_ar').val() == ''){
+                    // for switching the tabs
+                    $(".tab-content").hide();
+                    $("#tab2").show();
+                    $('#englishli').removeClass('active')
+                    $('#arabicli').addClass('active')
+
+                    // $('#errormsg2').show();
+                    // $('#errormsg2').text('This field is required');
+                    $('#id_ename_ar').focus();
+                    error_flag++;
+                }            
+            }
+
+        
+            // for description_en
+            if( editor == '')
+            {
+                $('#desc_error').text('Description field should not be blank')
+                $(".tab-content").hide();
+                $("#tab1").show();
+                $('#englishli').addClass('active')
+                $('#arabicli').removeClass('active')
+                error_flag++;
+            }
+            else if(editor.length < 3)
+            {
+                $('#desc_error').text('Description must contain atleast 3 character')
+                $(".tab-content").hide();
+                $("#tab1").show();
+                $('#englishli').addClass('active')
+                $('#arabicli').removeClass('active')
+                error_flag++;
+            }
+            else{
+                $('#desc_error').text('')
+            
+                // for description_ar
+                if( editor2 == '')
+                {
+                    $('#desc_error_ar').text('Description field should not be blank')
+                    $('#desc_error_ar').show()
+
+                    $(".tab-content").hide();
+                    $("#tab2").show();
+                    $('#englishli').removeClass('active')
+                    $('#arabicli').addClass('active')
+                    error_flag++;
+                }
+                else if(editor2.length < 3)
+                {
+                    $('#desc_error_ar').text('Description must contain atleast 3 character')
+                    $('#desc_error_ar').show()
+
+                    $(".tab-content").hide();
+                    $("#tab2").show();
+                    $('#englishli').removeClass('active')
+                    $('#arabicli').addClass('active')
+                    error_flag++;
+                }
+                else{
+                    $('#desc_error_ar').text('')
+
+                }
+            }
+
+            if(alldelterFlag==1){
+                var x = j-1
+                // for muscle
+                if($('#id_muscle'+x).val()==null){
+                    $('#muscleerrormsg').show()
+                    error_flag++
+                }
+                else{
+                    $('#muscleerrormsg').hide()
+                }
+                // for type
+                if($('#id_type'+x).val()==null){
+                    $('#typeerrormsg').show()
+                    error_flag++
+                }
+                else{
+                    $('#typeerrormsg').hide()
+                }
+            }
+
+        }
+
+       
+        var i = 1
+        var j ={{length}}
+        function addRow(exId,idd) {             
+            var newId = parseInt(idd)+1;
+            $('#dlt_error').hide()
+
+            // create option before
+            $('#createdata').prepend(
+                '<div class = "row newrow" id="row1' + (j) + '">' +
+                '<div class="mb-4 col-sm-5">' +
+                '<div class="input-wrapper newdiv">' +
+                '<label class="float" for="user">Muscle</label>' +
+                '<select id="id_muscle' + (j) + '" class="form-control effect" name="muscle" onchange="checkMuscle(this)">' +
+                '<option selected disabled="true" hidden>Select</option>' +
+                '{% for i in muscle %}' +
+                    '<option value="{{i.id}}" class="form-control effect" {% if emodel.muscle %} selected="selected" {% endif %}>{% if i.name %}{{i.name}}{% else %}{{i.name_ar}}{% endif %}</option>' +
+                '{% endfor %}' +
+                '</select>' +
+                '</div>'  + '</div>' +
+
+                '<div class="mb-4 col-sm-5">' +
+                '<div class="input-wrapper newdiv">' +
+                '<label class="float" for="user">Type</label>' +
+                '<select id="id_type' + (j) + '" class="form-control effect" name="muscletype">' +
+                '<option selected disabled="true" hidden>Select</option>' +
+                '<option value="Primary" class="form-control effect">Primary Muscle</option>' +
+                '<option value="Secondary" class="form-control effect">Secondary Muscle</option>' +
+                '</select>' +
+                '</div>'  + '</div>' + 
+
+                '<div class="mb-4 col-sm-2">' +
+                '<div class="input-wrapper newdiv">' +
+                    '<label class="float" for="user" style="visibility: hidden;opacity: 0;">Type</label>'+
+                '<div class="btn-add btn-add-new btn-lg" id="'+newId+'" onclick="addRow(0,'+newId+')">+</div>' +
+                '</div>'  + '</div>' + '</div>' 
+            )
+            if(i == 1){
+                $('#'+idd).text('-')
+
+                $('#'+idd).attr("onclick", "btnok('1','"+exId+"','"+idd+"')");
+            }
+            else{
+                var k = j-1;
+                $('#'+idd).text('-')
+                $('#'+idd).attr("onclick", "delRow("+k+")");               
+            }
+
+            disableSelectedMuscles()
+        }
+
+        function disableSelectedMuscles(){
+            var muscleList = []; // Create an empty list
+            newid ='#id_muscle'+j
+            for(m=1;m<j;m++){
+                var selMuscle = $('#id_muscle'+m).val();
+                muscleList.push(selMuscle); // Append value to the list
+            }
+            console.log(muscleList)
+            var countMap = {}; // Object to store counts
+            $.each(muscleList, function(index, value) {
+                if (countMap[value]) {
+                countMap[value]++; // Increment count if already present
+                } else {
+                countMap[value] = 1; // Initialize count if not present
+                }
+            });
+            // Find muscle names occurring two times
+            $.each(countMap, function(key, value) {
+                if (value >= 1) { //changed the value==2 because one muscle one time
+                    $(newid+' option[value="' + key + '"]').hide();
+                }
+            });
+
+            i++;
+            j++
+        }
+
+        function checkMuscle(el){
+            console.log(muscleList2+'---muscleList2')
+
+            var curMuscle = $(el).val();
+
+            console.log(curMuscle+'----curMuscle')
+
+            var isInArray = ($.inArray(curMuscle, muscleList2) !== -1);
+            console.log(isInArray+'---isInArray')
+            if (isInArray) {
+                var curLength = muscleList2.length;
+
+                console.log("Element is present in the list.");
+                console.log( oldLength+'---check')
+                console.log( curLength+'---check2')
+                console.log(oldLength == curLength)
+                if(oldLength == curLength   ){
+                    console.log('in')
+                    var index = $.inArray(curMuscle, muscleList2)+1;
+                }
+                else{
+                    var index = $.inArray(curMuscle, muscleList2)+2;
+                }
+
+                console.log(index+'---index')
+                var selType = $('#id_type'+index).val();
+                console.log(selType+'---selType')
+
+                if(!selType){
+                    for(q=1;q<=i-2;q++){
+                        muscleVal = $('#id_muscle'+q).val();
+                        if(curMuscle == muscleVal){
+                            break;
+                        }
+                    }
+                    selType = $('#id_type'+q).val();
+                }
+                console.log(selType+'---selType2')
+                
+                var curid = j-1;
+                $('#id_type'+curid+' option[value="' + selType + '"]').hide();
+                // muscleList2.push(curMuscle); // Append value to the list
+
+            } 
+            else {
+                console.log("Element is not present in the list.");
+                muscleList2.push(curMuscle); // Append value to the list
+            }
+            console.log(muscleList2)
+
+        }
+
+        function delRow(data)
+        {   
+            latId = j-1
+            if(data< oldLength){
+                delCount++
+                if(delCount == oldLength){
+                    alldelterFlag = 1
+                }
+            }
+
+            var delMuscle = $('#id_muscle'+data).val();
+            $('#id_muscle'+latId+' option[value="' + delMuscle + '"]').show();
+            
+            $('#row1'+parseInt(data+1)).remove()
+        }
+
+        $("#exrciseForm").validate({
+    rules: {
+        ename:{
+            required:true,
+        },
+        ename_ar:{
+            required:true,
+        },
+        category:{
+            required:true
+        },
+        resttime:{
+            required:true
+        },
+        // equipment:{
+        //     required:true
+        // },
+        thumbnail:{
+            accept: "jpg|jpeg|png|ico|bmp"
+        },
+        introduction_video:{
+            accept: "mp4|.mov|flv|m3u8"
+        },
+        image:{
+            accept: "jpg|jpeg|png|ico|bmp"
+        },
+        video:{
+            accept: "mp4|.mov|flv|m3u8"
+        },
+        link:{
+            url:true
+        },
+        //muscle:{
+        //    required:true
+        //},
+        //muscletype:{
+        //    required:true
+        //}
+        
+    },
+    messages:{
+        ename:"Name is required"
+    },
+    submitHandler: function(e){
+        if(error_flag == 0){
+            $(e).preventDefault();
+            $("#exrciseForm").submit();
+        }
+    }
+
+})
+
+
+
+    // function musclechange()
+    //     {
+    //         // muscle = document.getElementById('id_muscle').value
+    //         // type = document.getElementById('id_type').value
+    //         type = $('#id_type option:selected').val()
+    //         muscle = $('#id_muscle option:selected').val()
+    //         exercise_id = document.getElementById('exercise_id').value
+    //         var csrftoken = $("input[name=csrfmiddlewaretoken]").val();
+    //         $.ajax({
+    //             url: '/sec-access/exercise-check-muscle',
+    //             headers:{ 'X-CSRFToken': csrftoken },
+    //             method: 'POST',
+    //             data: {'muscle':muscle, 'type':type,'exercise_id':exercise_id},
+    //             success: function(response){
+    //                 Swal.fire({
+    //                         type: 'success',
+    //                         icon: 'info',
+    //                         showConfirmButton: false,
+    //                         title:response.msg
+    //                     });
+    //             }
+
+    //         })
+    //     }
+  </script>
+<style>
+    .btn-add-new {
+    font-size: 30px;
+    font-weight: 700;
+    padding-top: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+.fancybox__content{
+    width: 30% !important;
+    height: auto!important;
+    background: none;
+
+}
+.django-ckeditor-widget{
+    width: 100%;
+}
+.video-js {
+    width: 260px;
+    height: 150px;
+    background-color: #ffff;
+    margin-top: 10px;
+}
+</style>
+<script>
+        function btnok(jVal,id,newid)
+        {
+            // console.log('{{length}}')
+
+            // checkCount = existingDataCount-1
+            // if(checkCount>1){
+                Swal.fire({
+                    title: 'Are you sure?',  
+                    text: 'Do you want to remove it ?', 
+                    type: 'warning',
+                    confirmButtonText: 'Yes',
+                    confirmButtonColor: 'LightSeaGreen',
+                    cancelButtonColor: 'Crimson',
+                    cancelButtonText: 'No',
+                    showCancelButton: true,
+                    // reverseButtons: true
+                })
+                .then(function(e){
+                    if (e.value === true) {
+                        
+                        dltArray.push(newid);
+                        if (dltArray.includes(newid)){
+                            $('#hdndeletedId').val(dltArray)
+                            
+                            // existingDataCount--
+                            rmId = jVal-1
+                            console.log(jVal,'---jVal')
+                            console.log(rmId,'---rmId')
+                            delRow(parseInt(rmId))
+                            // $('#'+l).attr("onclick", "onclick='addRow(0,"+jVal+")'");
+                            var delMuscle = $('#id_muscle'+jVal).val();
+                            $('#id_muscle'+latId+' option[value="' + delMuscle + '"]').show();
+                        } 
+
+                        
+                        // data = {}
+                        // data['userid'] = id
+                        // data['nuserid'] = newid
+                        // $.ajax({
+                        //     type:'GET',
+                        //     url: '/sec-access/exercise-muscleitemremove/'+id+'/'+newid,
+                        //     data: data,
+                        //     success: function(response){
+
+                        //         existingDataCount--
+
+                        //         rmId = jVal-1
+                        //         delRow(parseInt(rmId))
+                        //         // $('#'+l).attr("onclick", "onclick='addRow(0,"+jVal+")'");
+                        //         var delMuscle = $('#id_muscle'+jVal).val();
+                        //         $('#id_muscle'+latId+' option[value="' + delMuscle + '"]').show();
+                                
+
+                        //     }
+                        // })
+
+                    }
+                })
+            // }
+            // else{
+            //     $('#dlt_error').show()
+            // }
+                
+        }
+</script>
+
+{% endblock %}

@@ -1,0 +1,623 @@
+{% extends "admin/layout/user_base.html" %}
+{% load static %}
+{% block body_block %}
+{% load my_filters %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <main class="content-area">
+        <div class="container-fluid p-0">
+            <!-- top search bar -->
+            <div class="top-seach-bar mb-0">
+                <!-- top bar form  -->
+                <form class="search-form mt-2">
+                    <div class="add-product-filter user_table_product_filter">
+                        <div class="row align-items-center">
+                            <div class="col-xl-2 col-lg-2">
+                                <h3 class="top-bar-heading">Frame</h3>
+                            </div>
+                            <div class="col-xl-10 col-lg-10">
+                                <div class="row_2 align-items-top justify-content-end">
+                                    <div class="top-search-wrapper">
+                                        <div class="form-group">
+                                            <input type="text" id="search" name="search" value="{{ request.GET.search }}"
+                                                   class="form-control" placeholder="Search Value">
+                                        </div>
+                                        <div ><span id="error_msg"></span></div>
+
+                                    </div>
+                                    <div class="date-selector-wrapper">
+                                        <div class="form-group">
+                                          <input type="text" name="stDate" value="{{ request.GET.stDate }}" class="form-control" id="stDate" placeholder="From Date">
+                                        </div>
+                                    </div> 
+                                    
+                                    <div class="date-selector-wrapper">
+                                        <div class="form-group">
+                                          <input type="text" name="endDate" value="{{ request.GET.endDate }}" class="form-control" id="endDate" placeholder="To Date">
+                                        </div>
+                                    </div> 
+                                    <div class=" top-action-wrapper d-flex align-items-top">
+                                        <button class="btn btn-detail" id="sbmit">Filter</button>
+                                        <a href="{% url 'appdashboard:frame' %}" class="reset">Reset</a>
+                                        <button type="button" class="btn btn-detail"  id="myBtn">Create</button>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            <!-- <div class="col-xl-7 col-lg-7 d-flex ">
+                    <a href="{% url 'appdashboard:frame-add'%}">
+                        <button type="button" class="btn btn-detail">Create</button>
+                    </a> -->
+                </div>
+                        </div>
+                </form>
+
+            </div>
+
+            <!-- top bar form  end-->
+        </div>
+        <!-- top search bar end-->
+
+        <!-- right side content box  -->
+        <div class="main-box pd-0">
+
+            <div class="add-product-sec">
+                <div class="product-area-list">
+                </div>
+                <div class="product-area-list list-head">
+                    <div class="product-box-heading bx-sd mb-1">
+                        <div class="row">
+                            <div class="col-xl-1 col-lg-1">
+
+                            </div>
+                            <div class="col-xl-2 col-lg-2">
+                                <div class="product-content">
+                                    SL
+                                </div>
+                            </div>
+                            <div class="col-xl-2 col-lg-2">
+                                <div class="product-content">
+                                    Name
+                                </div>
+                            </div>
+                            <div class="col-xl-2 col-lg-2">
+                                <div class="product-content">
+                                    Image
+                                </div>
+                            </div>
+                            
+                            <div class="col-xl-3 col-lg-3">
+                              <div class="product-content">
+                                    Created Date
+                              </div>
+                          </div>
+                            <div class="col-xl-2 col-lg-3 text-left">
+                                <div class="product-content">
+                                    Action
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% for rec in records %}
+                        <!-- prodcut box  -->
+                        <div class="product-box user-level bx-sd mb-1">
+                            <div class="row">
+                                <div class="col-xl-1 col-lg-1">
+
+                                </div>
+                                <div class="col-xl-2 col-lg-2">
+                                    <div class="product-content">
+                                        <h3>{{ start_index|add:forloop.counter0 }}</h3>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-xl-2 col-lg-2">
+                                    <div class="product-content">
+                                        <h3>{{ rec.frame_name  }}</h3>
+                                    </div>
+                                </div>                          
+                                <div class="col-xl-2 col-lg-2">
+                                    <div class="product-content">
+                                        <a data-fancybox data-small-btn="true" class="person-image" href="{{ rec.image.url }}"><img
+                                            src="{{ rec.image.url }}" width="64" height="64"></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-lg-3">
+                                     <div class="product-content">
+                                         <h3>{{ rec.created_at| to_default_timezone  }}</h3>
+                                     </div>
+                                 </div>      
+                                    <div class="col-xl-2 col-lg-3 user-activity">
+                                <button type="button" class="btn btn-detail" onclick="editPopup('{{ rec.frame_name  }}','{{ rec.frame_name_ar  }}','{{ rec.image.url }}',{{ rec.id }})">Edit</button>
+
+                                <button type="button" onclick="statusChange('{{rec.id}}',{% if rec.is_active == 0 %}'enable'{% else %}'disable'{% endif %})" {% if rec.is_active == 0 %} class="btn btn-detail" {% else %} class="btn btn-detail disb_btn" {% endif %} id="statusBtn_{{rec.id}}" >
+                                    {% if rec.is_active == 0 %} 
+                                        Enable
+                                    {% else %}
+                                        Disable
+                                    {% endif %}
+                                </button>
+                            </div>
+
+                                <div class="col-xl-2 col-lg-3 text-center">
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                    <div class="col-xl-12 col-lg-3 text-center mt-3">
+                        <h5>No Records</h5>
+                    </div>
+                    {% endfor %}
+
+                    {% if records %}
+                    <div class="row">
+                        <div class="col-sm-6 mt-3 pagination-count">Showing <span>{{ start_index }}</span> to <span>{{ end_index }}</span> of <span>{{ count }}</span> entries</div>
+
+                        <div class="col-sm-6 mt-3">
+                            <nav aria-label="Page navigation ">
+                                <ul class="pagination justify-content-end">
+                                    {% for i in page_range %}
+                                    <li id="pagination-count{{i}}"
+                                        class="page-item"><a
+                                            class="{% if i  == page %} activedata {% endif %} page-link" href="?page={{ i }}{{ params }}">{{i}}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    {%endif%}
+                    
+                </div>
+
+                <div id="myModal" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <form method="post" class="row popupInput" id="frameForm" autocomplete="off" enctype="multipart/form-data" action="/sec-access/frame-add/">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                {% csrf_token %}
+                                <div class="tabs">
+                                    <ul id="tabs-nav">
+                                        <li id="englishli"><a href="#tab1" id="english">ENGLISH</a></li>
+                                        <li id="arabicli"><a href="#tab2" id="arabic">ARABIC</a></li>
+    
+                                    </ul> <!-- END tabs-nav -->
+                                    <div id="tabs-content">
+                                        <div id="tab1" class="tab-content">
+                                            <div class="mb-4 col-sm-12">
+                                                <div class="input-wrapper image-field">
+                                                    <label class="mb-2" for="name">Frame Name (in English)</label>
+                                                    {{ form.frame_name }}
+                                                    <p class="text-danger mt-2 mb-0" id="error_text"></p>
+                                                </div>
+                                                
+                                            </div>
+                                           
+                                        </div>
+
+                                        <div id="tab2" class="tab-content">
+                                            <div class="mb-4 col-sm-12">
+                                                <div class="input-wrapper image-field">
+                                                    <label class="mb-2" for="name">Frame Name (in Arabic)</label>
+                                                    {{ form.frame_name_ar }}
+                                                    <p class="text-danger mt-2 mb-0" id="error_text_ar"></p>
+                                                </div>
+                                                
+                                            </div>
+                                           
+                                        </div>
+                                        <div class="mb-4 col-sm-12">
+                                            <div class="input-wrapper image-field">
+                                                <label class="mb-2" for="name">Frame</label>
+                                                {{ form.image }}
+                                                <p class="text-danger mt-2 mb-0" id="error_img"></p>
+                                            </div>
+                                        </div>
+
+                                        <span id ="editImg"></span> 
+                                          
+                                        <input type="hidden" id="hiddenId" name="hiddenId" value="0">                               
+
+                                        <div>
+                                            <button type="button" id="saveBtn" onclick="validate()" class="btn btn-lg btn-primary">Save
+                                            </button>
+                                            </div>
+
+
+                                    </div> <!-- END tabs-content -->
+                                </div> <!-- END tabs -->
+
+                            </form>
+
+                        </div>
+                        </div>
+                        <input type="hidden" id="hdName" value ="">
+                        <input type="hidden" id="hdnName_ar" value ="">
+                    </div>
+                <!-- prodcut box  end-->
+            </div>
+        </div>
+        </div>
+        <!-- right side content box  -->
+        </div>
+    </main>
+{% endblock body_block %}
+
+{% block page_script %}
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+    flatpickr("#stDate", {
+      allowInput: true,
+      dateFormat: "Y-m-d",
+      maxDate: "today",
+    });
+    flatpickr("#endDate", {
+      allowInput: true,
+      dateFormat: "Y-m-d",
+      maxDate: "today",
+    });
+
+        var modal = document.getElementById("myModal");
+
+        var btn = document.getElementById("myBtn");
+        btn.onclick = function() {
+            modal.style.display = "block";
+            $('#editImg').html('')
+            $('#hiddenId').val(0)
+            $('#error_text').text('')
+        }
+
+
+        modal.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                // If it is, close the modal
+                closeModal();
+            }
+        });
+        $(".close").click(function () {
+            closeModal();
+    });
+
+        // Function to close the modal
+        function closeModal() {
+            var modal = document.querySelector('.modal');
+            modal.style.display = 'none';
+        }
+
+        function editPopup(framName,framName_ar,imgurl,Id){
+            modal.style.display = "block";
+            $('#error_text').text('')
+            $('#hiddenId').val(Id)
+            $('#id_frame_name').val(framName)
+            $('#editImg').html('<a data-fancybox data-small-btn="true" class="popup-image person-image" href="'+imgurl+'" style="width: 150px; height: 100px;"> <img src="'+imgurl+'" width="100px"> </a>')
+
+            $('#hdName').val(framName)
+            $('#hdName_ar').val(framName_ar)
+        }
+
+        // check for user exist
+        function checkExisit(type){
+            id = parseInt($('#hiddenId').val())
+            if(id == 0){
+                if(type == 'english'){
+                    val = $('#id_frame_name').val()
+                }
+                else if(type == 'arabic'){
+                    val = $('#id_frame_name_ar').val()
+                }
+                if(val != ''){
+                    data = {}
+                    data['name'] = val
+                    data['type'] = type
+                    $.ajax({
+                        type:'PUT',
+                        url: '/sec-access/frame-check-nameexist/',
+                        data: data,
+                        success: function(response){
+                            if(response.exist > 0){
+
+                                if(type == 'english'){
+                                    $('#error_text').text('Frame with same name already exists')
+                                    $('#saveBtn').attr('disabled', true);
+
+                                    $(".tab-content").hide();
+                                    $("#tab1").show();
+                                    $('#englishli').addClass('active')
+                                    $('#arabicli').removeClass('active')
+                                }
+                                else if(type == 'arabic'){
+                                    $('#error_text_ar').text('Frame with same name already exists')
+                                    $('#saveBtn').attr('disabled', true);
+
+                                    $(".tab-content").hide();
+                                    $("#tab2").show();
+                                    $('#englishli').removeClass('active')
+                                    $('#arabicli').addClass('active')
+                                }
+                            }
+                            else{
+                                $('#error_text').text('')
+                                $('#error_text_ar').text('')
+                                $('#saveBtn').attr('disabled', false);
+
+                            }
+
+                        }
+                    })
+                }
+
+            }
+            else{
+                if(type == 'english'){
+                    val = $('#id_frame_name').val()
+                    hdn = $('#hdnName').val()
+
+                }
+                else if(type == 'arabic'){
+                    val = $('#id_frame_name_ar').val()
+                    hdn = $('#hdnName_ar').val()
+
+                }
+                
+
+                if (val != '' && val != hdn) {
+                    data = {}
+                    data['name'] = val
+                    data['type'] = type
+                    $.ajax({
+                        type:'PUT',
+                        url: '/sec-access/frame-check-nameexist/',
+                        data: data,
+                        success: function(response){
+                            if(response.exist > 0){
+
+                                if(type == 'english'){
+                                    $('#error_text').text('Frame with same name already exists')
+                                    $('#saveBtn').attr('disabled', true);
+
+                                }
+                                else if(type == 'arabic'){
+                                    $('#error_text_ar').text('Frame with same name already exists')
+                                    $('#saveBtn').attr('disabled', true);
+
+                                }
+                            }
+                            else{
+                                $('#error_text').text('')
+                                $('#error_text_ar').text('')
+                                $('#saveBtn').attr('disabled', false);
+
+                            }
+
+                        }
+                    })
+                }
+                else{
+                    $('#error_text').text('')
+                    $('#error_text_ar').text('')
+                    $('#saveBtn').attr('disabled', false);
+
+                }
+                
+            }
+            
+
+        }
+
+        function validate(){
+            error_flag = 0
+
+            if($('#id_frame_name').val() == ''){
+                $('#error_text').text('This field is required')
+                $('#id_frame_name').focus()
+
+                $(".tab-content").hide();
+                $("#tab1").show();
+                $('#englishli').addClass('active')
+                $('#arabicli').removeClass('active')
+                error_flag++;
+            }
+            else{
+                $('#error_text').text('')
+
+                if($('#id_frame_name_ar').val() == ''){
+                    $('#error_text_ar').text('This field is required')
+                    $('#id_frame_name_ar').focus()
+
+                    $(".tab-content").hide();
+                    $("#tab2").show();
+                    $('#englishli').removeClass('active')
+                    $('#arabicli').addClass('active')
+                    error_flag++;
+                }
+                else{
+                    $('#error_text_ar').text('')
+                }
+            }
+            
+            if($('#hiddenId').val() == 0){
+                if($('#id_image').val() == ''){
+                    $('#error_img').text('This field is required')
+                    error_flag++;
+                }
+                else{
+                    extn = ['jpg', 'jpeg', 'png', 'gif']
+                    file = $('#id_image').val()
+                    var ext = file.split('.').pop();
+                    ext = ext.toLowerCase()
+                    if ($.inArray(ext, extn) == -1){
+                        $('#error_img').text('Unsupported file extension. Only .jpg, .jpeg, .png and .gif are allowed.')
+                        error_flag++;
+                    }
+                    else{
+                        $('#error_img').text('')
+                    }
+                }
+            }
+            else{
+                if($('#id_image').val() != ''){
+                    extn = ['jpg', 'jpeg', 'png', 'gif']
+                    file = $('#id_image').val()
+                    var ext = file.split('.').pop();
+                    ext = ext.toLowerCase()
+                    if ($.inArray(ext, extn) == -1){
+                        $('#error_img').text('Unsupported file extension. Only .jpg, .jpeg, .png and .gif are allowed.')
+                        error_flag++;
+                    }
+                    else{
+                        $('#error_img').text('')
+                    }
+                }
+                else{
+                    if($('#editImg img').attr('src') === undefined || $('#editImg img').attr('src') === '') {
+                        $('#error_img').text('This field is required');
+                        error_flag++;
+                    }
+                    else{
+                        $('#error_img').text('')
+                    }
+                        
+                }
+            
+            }
+
+            if(error_flag == 0){
+                $('#frameForm').submit()
+            }
+            
+        }
+
+        
+        $("#sbmit").click(function()
+        {
+            search = $('#search').val()
+            stDate = $('#stDate').val()
+            endDate = $('#endDate').val()
+            date_flag = 0
+
+            if(stDate != '' && endDate != ''){
+                date_flag=1
+            }
+            else{
+                if(stDate!='' && endDate ==''){
+                    $('#error_msg').text('You cannot leave to date empty')
+                    date_flag = 0
+                    return false
+                }
+                else if(stDate =='' && endDate !=''){
+                    $('#error_msg').text('You cannot leave from date empty')
+                    date_flag = 0
+                    return false
+                }
+                else  if(stDate =='' && endDate ==''){
+                    date_flag = 0
+                }
+            }
+           
+            if (search == '' && date_flag == 0)
+            {
+                $('#error_msg').text('Choose any filtering option')
+                return false;
+            }
+        })  
+
+        function changeError(id){
+            $('#'+id).text('')
+        }
+
+        function statusChange(id,msg)
+            {
+                Swal.fire({
+                    title: 'Are you sure?',  
+                    text: 'Do you want to '+msg+' this frame!',    
+                    type: 'warning',
+                    confirmButtonText: 'Yes',
+                    confirmButtonColor: 'LightSeaGreen',
+                    cancelButtonColor: 'Crimson',
+                    cancelButtonText: 'No',
+                    showCancelButton: true,
+                    // reverseButtons: true
+                })
+                .then(function(e){
+                    if (e.value === true) {
+                    data = {}
+                    data['userid'] = id
+                    $.ajax({
+                    type:'PUT',
+                    url: '/sec-access/frame-enabledisable/',
+                    data: data,
+                    success: function(response){
+                        Swal.fire({
+                            type: 'success',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            title: response.msg,
+                            timer: 2000
+                        });
+
+                        var btnid = '#statusBtn_'+id;
+                        if(msg == 'enable'){
+                            $(btnid).text('DISABLE');
+                            $(btnid).addClass('disb_btn')
+                            $(btnid).attr('onclick', 'statusChange('+id+',"disable")');
+                        }
+                        else{
+                            $(btnid).text('ENABLE');
+                            $(btnid).removeClass('disb_btn')
+                            $(btnid).attr('onclick', 'statusChange('+id+',"enable")');
+                        }
+                    }
+                })
+                
+            }
+        })
+        }
+
+    </script>
+        <style>
+            .popupInput{
+                width:230%;
+            }
+           
+            .alert-container{
+                position: absolute;
+                top: 45%;
+                left: 20%;
+                right: auto;
+                margin: auto;
+                width: 75%;
+                height: 20px;
+                padding: 30px;
+            }
+            .alert-container .alert{
+                justify-content: center;
+                padding: 20px 20px;
+            }
+            .alert-container .alert-success{
+                border-radius: 12px;
+                border: 1px solid #117054;
+            }
+          
+        </style>
+        {% if messages %}
+        {% for message in messages %}
+            <script> 
+            Swal.fire({
+               type: 'success',
+               icon: 'success',
+               showConfirmButton: false,
+               title:'{{message}}'
+               });
+               setTimeout(function(){
+                window.location.reload(1);
+                }, 1000);
+            </script>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+   

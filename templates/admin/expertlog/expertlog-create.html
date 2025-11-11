@@ -1,0 +1,1300 @@
+{% extends "admin/layout/user_base.html" %}
+{% load static %}
+{% block body_block %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
+    <main class="content-area">
+        <div class="container-fluid p-0">
+            <div class="log-in-side-2">
+                <div class="form-box">
+                    <div class="card">
+                        <div class="form-box-inner">
+                            <div>
+                                <div class="log-head">
+                                    <h1 class=" mb-3">Expert Log</h1>
+                                </div> 
+                                <!-- log in form area -->
+                                <div class="">
+                                    <form class="row" id="equipmentForm" autocomplete="off" method="post"
+                                        enctype="multipart/form-data" action="/sec-access/expertlog-add/">
+                                        {% csrf_token %}
+                                        <div class="tabs">
+                                            <ul id="tabs-nav">
+                                                <li id="englishli"><a href="#tab1" id="english">ENGLISH</a></li>
+                                                <li id="arabicli"><a href="#tab2" id="arabic">ARABIC</a></li>
+
+                                            </ul> <!-- END tabs-nav -->
+                                            <div id="tabs-content">
+                                                <div id="tab1" class="tab-content">
+                                                    <div class="mb-4 col-sm-12">
+                                                        <div class="input-wrapper">
+                                                            <label class="float" for="name">Name (in English)</label>
+                                                            {{ form.title }}
+                                                        
+                                                            <p class="text-danger mt-2 mb-0" id="id_title_er"></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4 col-sm-12">
+                                                        <div class="input-wrapper">
+                                                            <label class="float" for="address">Description (in English)</label>
+                                                            {{ form.media }}
+                                                            {{ form.description|safe }}
+                                                            <p class="text-danger mt-2 mb-0" id="desc_error"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="tab2" class="tab-content">
+                                                    <div class="mb-4 col-sm-12">
+                                                        <div class="input-wrapper">
+                                                            <label class="float" for="name_ar">Name (in Arabic)</label>
+                                                                {{ form.title_ar }}
+                                                            <p class="text-danger mt-2 mb-0" id="id_title_ar_er"></p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mb-4 col-sm-12">
+                                                        <div class="input-wrapper"> 
+                                                            <label class="float" for="address_ar">Description (in Arabic)</label>
+                                                            {{ form.media }}
+                                                            {{ form.description_ar|safe }}
+                                                        
+                                                            <p class="text-danger mt-2 mb-0" id="desc_error_ar"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-4 col-sm-12">
+                                                    <div class="input-wrapper wrapperCls">
+                                                        <label class="float" for="name_ar">User Level</label>
+                                                        {{ form.user_level }}
+                                                        <p class="text-danger mt-2 mb-0" id="id_user_level_er"></p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-4 col-sm-12">
+                                                    <div class="input-wrapper">
+                                                        <label class="float" for="name_ar">Workout Image (Female)</label>
+                                                        
+                                                        <!-- {{ form.workout_image }} -->
+
+                                                            <!-- Trigger/Open The Modal -->
+                                                            <div class="d-flex">
+                                                                <button type="button" id="myBtn"   class="myBtn" style="min-width:95px">Choose File</button>
+                                                                <input type="text" placeholder="No file chosen" id="choosedimg_female" disabled name="choosed" class="inputImg">    
+                                                            </div>
+                                                            
+                                                            <p class="text-danger mt-2 mb-0" id="choosedimg_female_er"></p>
+
+                                                            <!-- The Modal -->
+                                                            <div id="myModal" class="modal">
+
+                                                            <!-- Modal content -->
+                                                            <div class="modal-dialog modal-dialog-centered" role="document" >
+                                                                <div class="modal-content">
+                                                                    
+                                                                    <div style="width:100%;">
+                                                                        <div class="modal-header">
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">×</span>
+                                                                            </button>
+                                                                        </div>
+                                                                    <!-- <span class="close">&times;</span> -->
+                                                                    <div class="modal-layout-wrapper">
+                                                                    {% for data in images %}
+                                                                        {% if data.gender == 'female'%}
+                                                                            <label class="radio-img">
+                                                                                <input type="radio"  name="layout" value="{{ data.id }}$${{ data.image.url }}" onclick="selImage('female',this)"/>
+                                                                                <div class="image" style="background-image: url('{{ data.image.url }}')"></div>
+                                                                            </label>
+                                                                        {% endif %}
+                                                                    {% endfor %}
+                                                                    </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                            </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-4 col-sm-12">
+                                                    <div class="input-wrapper">
+                                                        <label class="float" for="name_ar">Workout Image (Male)</label>
+                                                        
+                                                        <!-- {{ form.workout_image }} -->
+
+                                                            <!-- Trigger/Open The Modal -->
+                                                            <div class="d-flex">
+                                                                <button type="button" id="myBtn2"   class="myBtn" style="min-width:95px">Choose File</button>
+                                                                <input type="text" placeholder="No file chosen" id="choosedimg_male" disabled name="choosed" class="inputImg">    
+                                                            </div>
+                                                            
+                                                            <p class="text-danger mt-2 mb-0" id="choosedimg_male_er"></p>
+
+                                                            <!-- The Modal -->
+                                                            <div id="myModal3" class="modal">
+
+                                                            <!-- Modal content -->
+                                                            <div class="modal-dialog modal-dialog-centered" role="document" >
+                                                                <div class="modal-content">
+                                                                    
+                                                                    <div style="width:100%;">
+                                                                        <div class="modal-header">
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">×</span>
+                                                                            </button>
+                                                                        </div>
+                                                                    <!-- <span class="close">&times;</span> -->
+                                                                    <div class="modal-layout-wrapper">
+                                                                    {% for data in images %}
+                                                                        {% if data.gender == 'male'%}
+                                                                            <label class="radio-img">
+                                                                                <input type="radio"  name="layout" value="{{ data.id }}$${{ data.image.url }}" onclick="selImage('male',this)"/>
+                                                                                <div class="image" style="background-image: url('{{ data.image.url }}')"></div>
+                                                                            </label>
+                                                                        {% endif %}
+                                                                    {% endfor %}
+                                                                    </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                            </div>
+                                                    </div>
+                                                </div>
+
+                                                <input type="hidden" id="hiddenImg_female" name="hiddenImg_female">
+                                                <input type="hidden" id="hiddenImg_male" name="hiddenImg_male">
+                                                <input type="hidden" id="id_exercises" name="exercises" >
+                                                <input type="hidden" id="exerciseOrder" name="exerciseOrder">
+
+                                                                                        
+                                                <div class="mb-4 col-sm-12">
+                                                    <div class="input-wrapper image-field">
+                                                        <label for="user" class="float">Choose Exercise</label>
+                                                        <div class="image-filed">
+                                                            <button type="button" id="choose_exercise" class="choose_exercise btn btn-lg btn-primary">Choose Exercise</button>                                                           
+                                                        </div>
+                                                        <p class="text-danger mt-2 mb-0" id="id_exercises_er"></p>
+                                                        <table id="exercise-table" style="display:none">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Exercise</th>
+                                                                <th>RestTime</th>
+                                                                <th>Reps</th>
+                                                                <th>Weight</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody id="tableData">
+                                                                <!-- <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                </tr> -->
+                                                            </tbody>
+                                                        </table>
+                                                    
+                                                        <!-- The Modal -->
+                                                        <div id="myModal2" class="modal">
+                                                        
+                                                        <!-- Modal content -->
+                                                        <div class="modal-dialog modal-dialog-centered" role="document" >
+                                                            <div class="modal-content popuDiv">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class=" wrapperCls">
+                                                                    <label>Choose Muscle</label>
+                                                                    {{ form.muscle }}
+                                                                    <p class="text-danger mt-2 mb-0" id="muscle_error"></p>
+                                                                </div>
+                                                                <div class="WrapperDiv">
+                                                                    
+                                                                    <!-- <div class="InnerDiv wrapperCls">
+                                                                        <label>Choose Exercise</label>
+                                                                        {{ form.exercise }}
+                                                                        <p class="text-danger mt-2 mb-0" id="exercise_error"></p>
+                                                                    </div> -->
+                                                                    <div class="InnerDiv wrapperCls">
+                                                                        <label>Choose Exercise</label>
+                                                                        <div class="input-wrapper input-box choose-muscle" >
+                                                                            <select class="select-user form-control filter-select" name="exercise" id="id_exercise" >
+                                                                                
+                                                                            </select>
+                                                                            <p class="text-danger mt-2 mb-0" id="exercise_error"></p>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+
+                                                                    <div class="InnerDiv wrapperCls">
+                                                                        <label>Choose Rest Time</label>
+                                                                        {{ form.rest_time }}
+                                                                        <p class="text-danger mt-2 mb-0" id="resttime_error"></p>
+                                                                    </div>
+                                                                </div>
+                                                                <div id="createdata">
+                                                                    <div class="WrapperDiv"  id="row11">
+                                                                        <div class="InnerDiv wrapperCls">
+                                                                            <label>Reps</label>
+                                                                            {{ form.reps }}
+                                                                            <p class="text-danger mt-2 mb-0" id="id_reps_error"></p>
+
+                                                                        </div >
+                                                                        <div class="InnerDiv wrapperCls">
+                                                                            <label>Weight</label>
+                                                                            <div class="add-column-wrapper">
+                                                                                {{ form.weight }}
+                                                                        
+                                                                            <div class="ButtonDiv">
+                                                                                <button type="button" class="addRow btn-add btn-lg btn-add-new" id="butnchange1" onclick="addRow()">
+                                                                                    +
+                                                                                </button> 
+                                                                            </div>
+                                                                            </div>
+                                                                            <p class="text-danger mt-2 mb-0" id="id_weight_error"></p>
+            
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                                <div id="flash_message_error"></div>
+
+                                                                    
+
+                                                                <div class="WrapperDiv">
+                                                                    <div class="ButtonDiv">
+                                                                    
+                                                                        <button type="button" class="divButton btn-primary newButton" onclick="saveData()">Add Exercise</button>
+                                                                    </div>
+                                                                    <div class="ButtonDiv">
+                                                                        <input type="button" value="Reset" id="resetButton" class="divButton btn-primary newButton">
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <!-- for exercis order -new change --start -->
+                                                <div class="mb-4 col-sm-12">
+                                                    <div class="input-wrapper image-field">
+                                                        <label for="user" id="orderExrcise" style="display:none;margin-top: 20px;" class="float">Choose exercise order for workout</label>
+                                                        <p class="text-danger mt-2 mb-0" id="id_exercises_er"></p>
+                                                        <table id="exercise-order" style="display:none">
+                                                            <thead>
+                                                            <tr>
+                                                                <th class="hidden-column">Id</th>
+                                                                <!-- <th>Sl No</th> -->
+                                                                <th>Exercise</th>
+                                                                <th>RestTime</th>
+                                                            
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody id="OrdertableData" class="ui-state-default">
+                                                                <!-- <tr>
+                                                                    <td>dsfs1&nbsp;</td>
+                                                                    <td>fdsf&nbsp;</td>
+                                                                    <td>dsfsf&nbsp;</td>
+                                                                    <td>dfsfd&nbsp;</td>
+                                                                    <td>fds&nbsp;</td>
+                                                                </tr> -->
+                                                                
+                                                            </tbody>
+                                                            
+                                                        </table>
+                                                    
+                                                    </div>
+                                                </div>
+                                                <!-- ends -->
+
+                                            </div>
+
+                                            <button type="button" id="saveBtn" onclick="validateForm()" class="btn btn-lg btn-primary">Save</button>
+                                            </div>
+{#                                                </div>#}
+
+                                            </div> <!-- END tabs-content -->
+                                        </form>
+                                        </div> <!-- END tabs -->
+                                </div>
+                                <!-- log in form area end -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <style>
+        .wrapperCls{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        /* Hide the select element with the hideClass */
+        .form-control.hideClass {
+            display: none;
+        }
+
+        /* Show the p element with the hideClass if it follows a select element with the hideClass */
+        .form-control.hideClass ~ .form-control.hideClass {
+            display: block;
+        }
+        
+        table, th, td {
+            border: 1px solid black;
+        }
+        .ExFancyDiv{
+            display: flex;
+            width: 80%;
+            max-height: 700px;
+        }
+        .WrapperDiv{
+            display: flex;
+            justify-content: center;
+            padding:5px 2px;
+            align-items: flex-end;
+
+        }
+        .InnerDiv{
+            display: flex;
+            flex-direction: column;
+            width:50%
+        }
+        .divButton{
+            letter-spacing: 0px;
+            color: #060606 !important;
+            font-size: 14px;
+            font-weight: 500;
+            height: 35px;
+            border-radius: 5px;
+        }
+        .radio-img {
+    display: inline-block;
+    width: 50%;
+}
+
+        input[type="radio"] {
+            display: none;
+        }
+
+        label img {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="radio"]:checked + label img {
+            border: 1px solid blue;
+        }
+
+        .newButton{
+            color:#ffff!important;
+        }
+
+        .django-ckeditor-widget{
+            display: block !important;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 6% auto;
+            padding: 3% 3.3%;
+            border: 1px solid #888;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+        }
+        .modal-header{
+            border-bottom: 0;
+            padding: 0; 
+            justify-content: flex-end;
+        }
+
+        .popuDiv{
+            display: flex;
+            flex-direction: column;
+        }
+        .myBtn{
+            height: 35px;
+            border: none;
+            width: 13%;
+            font-size: 15px;
+        }
+
+        .inputImg{
+            background-color: white;
+            border-radius: 5px;
+            height: 35px;
+            width: 86%;
+            border:1px solid #D8D8D8 !important;
+            font-size: 14px;
+            font-weight: 600;
+            padding-left: 10px;
+            color: black;
+        }
+
+        /* The Close Button */
+        button.close {
+    background: transparent;
+    border: 0;
+    font-size: 32px;
+    line-height: 32px;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+
+        .radio-img .image {
+    opacity: 0.8;
+    width: calc(100% - 20px);
+    height: 200px;
+    background-position: center center;
+    background-color: gray;
+    display: inline-block;
+    margin: 10px;
+}
+
+        .image:hover {
+            opacity: 1;
+        }
+        .radio-img > input {
+            display: none;
+        }
+        .radio-img > .image {
+            cursor: pointer;
+            border: 2px solid black;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .radio-img > input:checked + .image {
+            border: 2px solid orange;
+        }
+        .WrapperDiv{
+            display: flex;
+            justify-content: center;
+            padding:5px 2px;
+            align-items: flex-end;
+            margin-left: unset;
+            margin-right: unset;
+            align-items: flex-start;
+
+        }
+        .InnerDiv{
+            display: flex;
+            flex-direction: column;
+            width:50%;
+            margin: -1px;
+            padding: 
+            4px;
+        }
+        table {
+        border-collapse: collapse;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        background-color: #fff;
+        color: #333;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.4;
+        }
+        th,
+        td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
+        }
+        th {
+        background-color: #f5f5f5;
+        font-weight: 600;
+        }
+        tr:nth-child(even) {
+        background-color: #f2f2f2;
+        }
+        tr:hover {
+        background-color: #ddd;
+        }
+        .empty-row td {
+        background-color: #fff;
+        border-top: none;
+        }
+        .empty-row td:first-child {
+        border-left: none;
+        }
+        .empty-row td:last-child {
+        border-right: none;
+        }
+
+        .empty-row td:not(:first-child):not(:last-child) {
+        border: none;
+        }
+        .fa {
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        cursor: pointer;
+        /* color: #cc0033; */
+        -webkit-font-smoothing: antialiased;
+        }
+        .add-column-wrapper{
+            display: flex;
+        }
+        .add-column-wrapper .SumoSelect{
+            flex-grow: 1;
+        }
+        .add-column-wrapper select{
+            width: unset;
+            flex-grow: 1;
+        }
+        .ButtonDiv{
+            margin-left: 0;
+            margin: 0 3px;
+        }
+        .modal-layout-wrapper{
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+        .btn-add{
+            max-height: 32.8px;
+            margin-left: 8px;
+        }
+
+    </style>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
+    <script>
+        CKEDITOR.on('instanceReady', function(event) {
+            var editor = event.editor;
+            if (editor.element.getAttribute('name') === 'description_ar') {
+                editor.document.getBody().setStyle('direction', 'RTL');
+                // editor.document.getBody().setStyle('text-align', 'right');
+            }
+        })
+
+        $('#id_exercise').on('sumo:opened', function() {
+            console.log('in')
+            var selectElement = $(this);
+            var optionsCount = selectElement.children('option').length;
+            if (optionsCount === 0) {
+                $('#muscle_error').text('Choose muscle to get exercise')
+            }
+            else{
+                $('#muscle_error').text('')
+            }
+        });
+
+        // get the exercise according to thhe muscle
+        function setExercise()
+        {
+            $('#muscle_er').text('')
+            muscle_id = $('#id_muscle').val()
+            console.log(muscle_id)
+            data = {}
+            data['muscle_id'] = muscle_id
+            $.ajax({
+                type:'PUT',
+                url: '/sec-access/expertexercise-filter/',
+                data:data,
+                success: function(response){
+                    console.log(response)
+
+                    var selectElement = $('#id_exercise');
+                    selectElement.empty();
+
+                    var optionElement = $('<option>', {
+                        value: '',
+                        text: '------',
+                    });
+                    selectElement.append(optionElement);
+
+                    for (const record of response.records) {
+                        // html += '<option value="'+record.exercise_id+'">'+ record.exercise_name +'</option>'
+                        var optionElement = $('<option>', {
+                            value: record.exercise_id,
+                            text: record.exercise_name,
+                        });
+                        selectElement.append(optionElement);
+                    }
+                    // $('#id_exercise').html(html)
+                    selectElement[0].sumo.reload();
+
+                    
+                }
+            })
+        }
+
+        // check for user exist
+        function checkExisit(type){
+            if(type == 'english'){
+                val = $('#id_title').val()
+            }
+            else if(type == 'arabic'){
+                val = $('#id_title_ar').val()
+            }
+
+            if( val != ''){
+                data = {}
+                data['name'] = val
+                data['type'] = type
+                $.ajax({
+                    type:'PUT',
+                    url: '/sec-access/expertlog-check-nameexist/',
+                    data: data,
+                    success: function(response){
+                        if(response.exist > 0){
+                            if(type == 'english'){
+                                $('#id_title_er').text('Expert Log with same name is existing. Please try with new name.')
+                                $('#saveBtn').attr('disabled', true);
+                            }
+                            else if(type == 'arabic'){
+                                $('#id_title_ar_er').text('Expert Log with same name is existing. Please try with new name.')
+                                $('#saveBtn').attr('disabled', true);
+                            }
+                        }
+                        else{
+                            $('#id_title_er').text('')
+                            $('#id_title_ar_er').text('')
+                            $('#saveBtn').attr('disabled', false);
+                        }
+                    }
+                })
+            }
+            
+        }
+
+        $('#resetButton').click(function() {
+            $('#id_exercise').prop('selectedIndex',0);
+            $('#id_rest_time').prop('selectedIndex',0);
+            $('#id_reps').prop('selectedIndex',0);
+            $('#id_weight').prop('selectedIndex',0);
+        });
+
+        var i = 2
+        var rowCount = 1;
+
+        // Get the modal
+        var modal = document.getElementById("myModal");
+        var modal2 = document.getElementById("myModal2");
+        var modal3 = document.getElementById("myModal3");
+
+        // Get the button that opens the modal for female
+        var btn = document.getElementById("myBtn");
+
+        // Get the button that opens the modal male
+        var btn2 = document.getElementById("myBtn2");
+
+        var choose_exercise = document.getElementById("choose_exercise");
+
+        // When the user clicks on the button, open the modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on the button, open the modal
+        btn2.onclick = function() {
+            modal3.style.display = "block";
+        }
+
+        
+        choose_exercise.onclick = function() 
+        {
+            document.getElementById("id_exercise").value = "";
+            document.getElementById("id_rest_time").value = "";
+            document.getElementById("id_reps").value = "";
+            document.getElementById("id_weight").value = "";
+            $('.newrow').empty()
+            i = 2
+            rowCount = 1;
+            $('#butnchange1').text('+')
+            $('#butnchange1').attr('onclick','addRow()')
+            modal2.style.display = "block";
+        }
+
+
+        // When the user clicks anywhere outside of the modal, close it
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Get the modal overlay element
+        var modalOverlay = document.querySelector('#myModal');
+        var modalOverlay2 = document.querySelector('#myModal2');
+        var modalOverlay3 = document.querySelector('#myModal3');
+
+        // Add a click event listener to the modal overlay
+        modalOverlay.addEventListener('click', function(event) {
+            // Check if the clicked element is the modal overlay itself
+            if (event.target === modalOverlay) {
+                // If it is, close the modal
+                closeModal();
+            }
+            
+        });
+
+        modalOverlay2.addEventListener('click', function(event) {
+            if (event.target === modalOverlay2) {
+                // If it is, close the modal
+                closeModal();
+            }
+        });
+        $(".close").click(function () {
+            closeModal();
+        });
+
+        modalOverlay3.addEventListener('click', function(event) {
+            if (event.target === modalOverlay3) {
+                // If it is, close the modal
+                closeModal();
+            }
+        });
+        $(".close").click(function () {
+            closeModal();
+        });
+
+        // Function to close the modal
+        function closeModal() {
+            // Get the modal element
+            var modal = document.querySelector('.modal');
+
+            // Hide the modal and overlay
+            modal.style.display = 'none';
+            modalOverlay.style.display = 'none';
+            modalOverlay2.style.display = 'none';
+            modalOverlay3.style.display = 'none';
+        }
+
+
+        function addRow(){
+            $('#createdata').prepend(
+                '<div class = "row newrow WrapperDiv" id="row1' + (i) + '">' +
+                    '<div class="InnerDiv">' +
+                        '<label class="float" for="user">Reps</label>' +
+                        '<select id="id_reps' + (i) + '" class="form-control effect" name="reps">' +
+                            '<option selected disabled="true" hidden>----------</option>' +
+                            '{% for i in reps %}' +
+                                '<option value="{{i.id}}" class="form-control effect">{% if i.value %}{{i.value}}{% endif %}</option>' +
+                            '{% endfor %}' +
+                        '</select>' +
+                        '<p class="text-danger mt-2 mb-0" id="id_reps_error'+ (i) +'"></p>'+
+                    '</div>'+
+
+                    '<div class="InnerDiv">' +
+                        '<label class="float" for="user">Weight</label>' +
+                        '<div class="add-column-wrapper">'+
+                            '<select id="id_weight' + (i) + '" class="form-control effect" name="weight">' +
+                                '<option selected disabled="true" hidden>----------</option>' +
+                                '{% for i in weight %}' +
+                                    '<option value="{{i.id}}" class="form-control effect">{% if i.value %}{{i.value}}{% endif %}</option>' +
+                                '{% endfor %}' +
+                            '</select>' +
+                            '<div class="ButtonDiv">'+
+                                '<button type="button" class="addRow btn-add btn-lg btn-add-new" id="butnchange'+i+'" onclick="addRow()">+'+
+                                '</button>'+
+                                '</div>'+
+                        '</div>'+
+                        '<p class="text-danger mt-2 mb-0" id="id_weight_error'+ (i) +'"></p>'+
+                    '</div>'+
+                '</div>'
+            )
+
+            rowCount++; 
+            var j = i-1;
+            $('#butnchange'+j).text('-')
+            $('#butnchange'+j).attr('onclick','delRow('+j+')')
+            i++
+
+
+        }
+
+        function delRow(data)
+        {
+            $('#row1'+data).remove()
+        }
+
+        var exercises = [];
+        var uniqueExercise = []
+        // var slno = 1
+
+        function saveData(){
+            exercise = $('#id_exercise').val()
+            rest_time = $('#id_rest_time').val()
+            exercise_txt = $( "#id_exercise option:selected" ).text();
+            rest_time_txt = $( "#id_rest_time option:selected" ).text();
+            
+            er_flag=0
+            // exercise validation
+            if(exercise == '' || exercise == null ){
+                $('#exercise_error').html('Please select exercise')
+                er_flag++
+            }
+            else{
+                $('#exercise_error').html('')
+            }
+
+            // exercise rest_time
+            if(rest_time == ''){
+                $('#resttime_error').html('Please select rest time')
+                er_flag++
+            }
+            else{
+                $('#resttime_error').html('')
+            } 
+            // exercise reps & weight
+            for (let val = 1; val <= rowCount; val++) {
+
+                if(val == 1){
+                    reps = $('#id_reps').val()
+                    weight = $('#id_weight').val()
+                    rep_er = '#id_reps_error'
+                    weight_er = '#id_weight_error'
+
+                    repsId = '#id_reps'
+                    weightId = '#id_weight'
+                }
+                else{
+                    var exercise_id = $('#id_exercise'+val).val();
+                    reps = $('#id_reps'+val).val()
+                    weight = $('#id_weight'+val).val()
+                    rep_er = '#id_reps_error'+val
+                    weight_er = '#id_weight_error'+val
+
+                    repsId = '#id_reps'+val
+                    weightId = '#id_weight'+val
+                }
+
+                if ($(repsId).length && $(weightId).length)
+                {
+                    if(reps == '' || reps == '----------' || reps == null){
+                        $(rep_er).html('Select a proper reps')
+                        er_flag++
+                    }
+                    else{
+                        $(rep_er).html('')
+                    }
+                
+                    if(weight == '' || weight == '----------' ||  weight == null){
+                        $(weight_er).html('Select a proper weight')
+                        er_flag++
+                    }
+                    else{
+                        $(weight_er).html('')
+                    }
+                }
+                
+            }
+
+
+            if(er_flag == 0){   
+                final_reps = ''
+                final_reps_txt = ''
+                final_weight = ''
+                final_weight_txt = ''
+                for (let val = 1; val <= rowCount; val++) {
+                    
+                    if(val == 1){
+                        reps = $('#id_reps').val()
+                        weight = $('#id_weight').val()
+                        
+                        sel_reps = $( "#id_reps option:selected" ).text();
+                        sel_weight = $( "#id_weight option:selected" ).text();
+                        
+                    }
+                    else if(val != undefined){
+                        reps = $('#id_reps'+val).val()
+                        weight = $('#id_weight'+val).val()
+
+                        sel_reps = $( "#id_reps"+val+" option:selected" ).text();
+                        sel_weight = $( "#id_weight"+val+" option:selected" ).text();
+                        
+                    }
+                    // Get the value of the exercise input field
+                    var exercise_id = $('#id_exercise').val();
+                    
+                    // Push the exercise ID into the exercises array
+                    exercises.push({ exercise_id: exercise_id,rest_time:rest_time,reps:sel_reps,weight:sel_weight});
+
+                    
+                    // Update the value of the exercises input field
+                    $('#id_exercises').val(JSON.stringify(exercises));
+
+                    
+                    if (reps && weight) {
+                        // Check if the exercise with different rest time already exists in the tableData
+                        var exists = false;
+                        $("#tableData tr").each(function(){
+                            var exercise = $(this).find("td:eq(0)").text();
+                            var rest = $(this).find("td:eq(1)").text();
+                            if (exercise == exercise_txt && rest != rest_time_txt) {
+                                exists = true;
+                                return false; // break out of the loop
+                            }
+                        });
+                        if (exists) {
+                            $("#flash_message_error").attr("style", "display:block; background-color:#dc3545; color:white;padding:5px 10px;border-radius:5px;margin: 0 5px;");
+                            $("#flash_message_error").text("Exercise with different rest time already chosen! Pick another.");
+                            setTimeout(function() {
+                                $("#flash_message_error").attr("style", "display:none;");
+                            }, 5000);
+                            $('#id_exercise').val('');
+                            $('#id_rest_time').val('');
+                            $('#id_reps').val('');
+                            $('#id_weight').val('');
+                            return; // stop the function from executing further
+                        }
+                        $('#exercise-table').show()
+                        $('#exercise-order').show()
+                        $('#orderExrcise').show()
+                    
+                        $('#id_exercises_er').text('')
+                        
+                        // If exercise with different rest time not present in tableData, add it to the tableData
+                        $("#tableData").append(
+                            '<tr>'+
+                                '<td>'+exercise_txt+'</td>'+
+                                '<td>'+rest_time_txt+'</td>'+
+                                '<td>'+sel_reps+'</td>'+
+                                '<td>'+sel_weight+'</td>'+
+                                '<td><i class="fa fa-trash delete-row"></i></td>'+
+                            '</tr>'
+                        );
+                        if (!uniqueExercise.includes(exercise_id)) {
+                            $("#OrdertableData").append(
+                            '<tr id="row'+exercise_id+'">'+
+                                '<td class="hidden-column">'+exercise_id+'</td>'+
+                                // '<td>'+slno+'</td>'+
+                                '<td>'+exercise_txt+'</td>'+
+                                '<td>'+rest_time_txt+'</td>'+
+                            '</tr>'
+                            );
+                            uniqueExercise.push(exercise_id)
+                        }
+                        
+                    }
+                    // slno+=1
+                }
+                $('#exerciseOrder').val(uniqueExercise)
+                final_reps = final_reps.replace(/,\s*$/, "")
+                final_weight = final_weight.replace(/,\s*$/, "")
+                
+                final_reps_txt = final_reps_txt.replace(/,\s*$/, "")
+                final_weight_txt = final_weight_txt.replace(/,\s*$/, "")
+                closeModal();
+                // console.log(uniqueExercise,'------uniqueExercise')
+            }
+            
+            // document.getElementById("id_exercise").value = "";
+            // document.getElementById("id_rest_time").value = "";
+            // document.getElementById("id_reps").value = "";
+            // document.getElementById("id_weight").value = "";
+            // $('.newrow').empty()
+        }
+
+        function changeError(id){
+            $('#'+id).text('')
+        }
+
+        function validateForm(){
+            error_flag=0
+            var editor = $.trim($("#cke_desc_editor iframe").contents().find("body").text());
+            var editor2 = $.trim($("#cke_id_description_ar iframe").contents().find("body").text());
+            // for name_en
+            if($('#id_title').val() ==''){
+                $('#id_title_er').text('This field is required')
+                // $('#id_title').css({'border': '1px solid red'});
+                $(".tab-content").hide();
+                $("#tab1").show();
+                $('#englishli').addClass('active')
+                $('#arabicli').removeClass('active')
+                $('#id_title').focus()
+                error_flag++
+            }
+            else if($('#id_title').val().length <3 ){
+                $('#id_title_er').text('Workout name shout contain atleast 3 charcters')
+                // $('#id_title').css({'border': '1px solid red'});
+                $(".tab-content").hide();
+                $("#tab1").show();
+                $('#englishli').addClass('active')
+                $('#arabicli').removeClass('active')
+                $('#id_title').focus() 
+                error_flag++
+            }
+            else{
+                $('#id_title_er').text('')
+                // $('#id_title').css({'border': '1px solid #D8D8D8'});
+
+                // for name_ar
+                if($('#id_title_ar').val() ==''){
+                    $('#id_title_ar_er').text('This field is required')
+                    // $('#id_title_ar').css({'border': '1px solid red'});
+                    $(".tab-content").hide();
+                    $("#tab2").show();
+                    $('#englishli').removeClass('active')
+                    $('#arabicli').addClass('active')
+                    $('#id_title_ar').focus()
+                    error_flag++
+                }
+                else if($('#id_title_ar').val().length <3 ){
+                    $('#id_title_ar_er').text('Workout name shout contain atleast 3 charcters')
+                    // $('#id_title_ar').css({'border': '1px solid red'});
+                    $(".tab-content").hide();
+                    $("#tab2").show();
+                    $('#englishli').removeClass('active')
+                    $('#arabicli').addClass('active')
+                    $('#id_title_ar').focus()
+                    error_flag++
+                }
+                else{
+                    $('#id_title_ar_er').text('')
+                    // $('#id_title_ar').css({'border': '1px solid #D8D8D8'});
+
+                }
+            }
+
+            
+            
+            // for description
+            if( editor == '')
+            {
+                $('#desc_error').text('This field is required')
+                // $("#cke_desc_editor iframe").css({'border': '1px solid red'});
+                $(".tab-content").hide();
+                $("#tab1").show();
+                $('#englishli').addClass('active')
+                $('#arabicli').removeClass('active')
+                $('#cke_desc_editor iframe').focus()
+                error_flag++;
+            }
+            else if(editor.length < 3)  
+            {
+                $('#desc_error').text('Description must contain atleast 3 character')
+                // $("#cke_desc_editor iframe").css({'border': '1px solid red'});
+                $(".tab-content").hide();
+                $("#tab1").show();
+                $('#englishli').addClass('active')
+                $('#arabicli').removeClass('active')
+                $('#cke_desc_editor iframe').focus()
+                error_flag++;
+            }
+            else{
+                $('#desc_error').text('')
+                // $('#cke_desc_editor iframe').css({'border': '1px solid #D8D8D8'});
+
+                // for description_ar
+                if( editor2 == '')
+                {
+                    $('#desc_error_ar').text('This field is required')
+                    // $("#cke_desc_editor iframe").css({'border': '1px solid red'});
+
+                    $(".tab-content").hide();
+                    $("#tab2").show();
+                    $('#englishli').removeClass('active')
+                    $('#arabicli').addClass('active')
+                    $('#cke_id_description_ar iframe').focus()
+                    error_flag++;
+                }
+                else if(editor2.length < 3)  
+                {
+                    $('#desc_error_ar').text('Description must contain atleast 3 character')
+                    // $("#cke_desc_editor iframe").css({'border': '1px solid red'});
+                    $(".tab-content").hide();
+                    $("#tab1").show();
+                    $('#englishli').removeClass('active')
+                    $('#arabicli').addClass('active')
+                    error_flag++;
+                    $('#cke_id_description_ar iframe').focus()
+                }
+                else{
+                    $('#desc_error_ar').text('')
+                    // $('#cke_desc_editor iframe').css({'border': '1px solid #D8D8D8'});
+                }
+            }
+
+            
+                        
+            // for userlevel
+            if($('#id_user_level').val() ==''){
+                $('#id_user_level_er').text('This field is required')
+                $('#id_user_level').focus()
+                // $('#id_user_level').css({'border': '1px solid red'});
+                error_flag++
+            }
+            else{
+                $('#id_user_level_er').text('')
+                // $('#id_user_level').css({'border': '1px solid #D8D8D8'})
+            }
+
+            
+            //for workout image
+            if($('#choosedimg_female').val() =='' && $('#choosedimg_female').val() ==''){
+                $('#choosedimg_male_er').text('Choose workout image for any of the above category')
+            }
+            else{
+                $('#choosedimg_male_er').text('')
+            }
+
+            /*
+            if($('#choosedimg_female').val() ==''){
+                $('#choosedimg_female_er').text('This field is required')
+                $('#choosedimg_female').focus()
+                error_flag++
+            }
+            else{
+                $('#choosedimg_female_er').text('')
+            }
+
+            if($('#choosedimg_male').val() ==''){
+                $('#choosedimg_male_er').text('This field is required')
+                $('#choosedimg_male').focus()
+                error_flag++
+            }
+            else{
+                $('#choosedimg_male_er').text('')
+            }
+            */
+
+            // for exercise
+            if($('#id_exercises').val() ==''){
+                $('#id_exercises').focus()
+                // $('#id_exercises').css({'border': '1px solid red'});
+                $('#id_exercises_er').text('Choose atleast one exercise for create workout')
+                error_flag++
+            }
+            else{
+                $('#id_exercises_er').text('')
+                // $('#id_exercises').css({'border': '1px solid #D8D8D8'})
+
+            }
+
+            
+
+            if(error_flag == 0){
+            
+                $('#equipmentForm').submit();
+            }
+        }
+        
+        $(document).on('click', '.delete-row', function() {
+
+            exercises = $.parseJSON($('#id_exercises').val())
+            console.log(exercises,'-----exercises first')
+            var index = $(this).closest('tr').index();
+            var dltd_id = exercises.splice(index, 1);
+            $(this).closest('tr').remove();
+            $('#id_exercises').val(JSON.stringify(exercises));
+
+            console.log(dltd_id[0].exercise_id,'-----dltd_id')
+
+            // for remove from order table
+            console.log(exercises,'------exerciseslist')
+            
+            var exerciseId = dltd_id[0].exercise_id;
+            console.log(exerciseId,'----exerciseId')
+            var isExerciseIdPresent = exercises.some(function(item) {
+                return item.exercise_id === exerciseId;
+            });
+
+            console.log(isExerciseIdPresent,'------is present -for checking all sets are delted')
+            if (isExerciseIdPresent) {
+                console.log('already exist')
+            }
+            else{
+                
+                exercisesorder = $('#exerciseOrder').val()
+                var exercisesArray = exercisesorder.split(',');
+                console.log(exercisesArray,'------orderArry')
+                var indexToRemove = exercisesArray.indexOf(exerciseId);
+                console.log(indexToRemove,'------indexToRemove')
+
+                if (indexToRemove !== -1) {
+                    console.log('innnn')
+                    exercisesArray.splice(indexToRemove, 1);
+                }
+
+                console.log(exercisesArray,'----exercisesArray after splice')
+                var updatedExercisesOrder = exercisesArray.join(',');
+                console.log(updatedExercisesOrder,'----updatedExercisesOrder after splice')
+
+                $('#exerciseOrder').val(updatedExercisesOrder)
+
+                // Remove the found row from the table
+                var rowId = 'row'+exerciseId
+                var row = document.getElementById(rowId);
+                if (row) {
+                    row.parentNode.removeChild(row);
+                }
+                
+
+            }
+
+        });
+        
+        function selImage(type,val){
+            if(type=='female'){
+                sel_val = val.value
+                const myArray = sel_val.split("$$");
+                $('#choosedimg_female').val(myArray[1])
+                $('#hiddenImg_female').val(myArray[0])
+                $('#choosedimg_female_er').text('')
+                modal.style.display = "none";
+            }
+            else if(type == 'male'){
+                sel_val = val.value
+                const myArray = sel_val.split("$$");
+                $('#choosedimg_male').val(myArray[1])
+                $('#hiddenImg_male').val(myArray[0])
+                $('#choosedimg_male_er').text('')
+                modal3.style.display = "none";
+            }
+            
+            // choosedimg
+        }
+            
+    </script>
+    <style>
+        .hidden-column { 
+            display: none;
+        }
+    </style>
+{% endblock body_block %}
+{% block page_script %}
+
+{% endblock %}

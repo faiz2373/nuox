@@ -1,0 +1,140 @@
+{% load static %}
+<nav id="sidebar" class="sidebar js-sidebar">
+    {#            {% urlchange  request.path as current_url %}#}
+    <div class="sidebar-content js-simplebar">
+        <div class="sidebar-brand" href="" data-aos="fade-right" data-aos-anchor-placement="top-bottom"
+           data-aos-delay="100">
+           <span class="align-middle">
+            <img src="{% static 'admin/img/logo.png' %}" class="expand-image">
+            <img src="{% static 'admin/img/logo-collapse.png' %}" class="collapse-image">
+            </span>
+            <span class="close-btn">
+                <img src="{% static 'admin/img/close-mob-menu.svg' %}" class="image-close">
+                <img src="{% static 'admin/img/close-mob-menu-purple.svg' %}" class="image-close-purple">
+              </span>
+        </div>
+        <ul class="sidebar-nav">
+            {% url 'gym:dashboard' as dashboard %}
+            <li class="sidebar-item {% if request.path == dashboard %} active {% endif %}">
+                <a class="sidebar-link" href="{% url 'gym:dashboard'%}" data-aos="fade-right" data-aos-anchor-placement="top-bottom"
+                   data-aos-delay="200">
+                        <span class="icon-side">
+                           <img src="{% static 'admin/assets/img/icons/dashboard.svg' %}" class="icon-2">
+                           <img src="{% static 'admin/assets/img/icons/dashboard-white.svg' %}" class="icon-1">
+                        </span>
+                    <span class="align-middle">
+                        Dashboard</span>
+                </a>
+            </li>
+            {% url 'gym:members' as members_url %}
+            <li class="sidebar-item members-detail {% if request.path == members_url %} active {% endif %}">
+                <a class="sidebar-link" href="{% url 'gym:members'%}" data-aos="fade-right" data-aos-anchor-placement="top-bottom"
+                   data-aos-delay="200">
+                        <span class="icon-side">
+                           <img src="{% static 'admin/assets/img/icons/user.svg' %}" class="icon-2">
+                           <img src="{% static 'admin/assets/img/icons/user-white.svg' %}" class="icon-1">
+                        </span>
+                    <span class="align-middle">
+                        Members</span>
+                </a>
+            </li>
+            {% url 'gym:trainers' as trainers_url %}
+            <li class="sidebar-item trainers-detail {% if request.path == trainers_url %} active {% endif %}">
+                <a class="sidebar-link" href="{% url 'gym:trainers'%}" data-aos="fade-right" data-aos-anchor-placement="top-bottom"
+                   data-aos-delay="200">
+                        <span class="icon-side">
+                           <img src="{% static 'admin/assets/img/icons/trainer.svg' %}" class="icon-2">
+                           <img src="{% static 'admin/assets/img/icons/trainer-white.svg' %}" class="icon-1">
+                        </span>
+                    <span class="align-middle">
+                        Trainers</span>
+                </a>
+            </li>
+            {% url 'gym:equipments' as gym_url %}
+            <li class="sidebar-item  {% if request.path == gym_url %} active {% endif %}">
+                <a class="sidebar-link" href="{% url 'gym:equipments'%}" data-aos="fade-right" data-aos-anchor-placement="top-bottom"
+                   data-aos-delay="200">
+                        <span class="icon-side">
+                           <img src="{% static 'admin/assets/img/icons/equipments.svg' %}" class="icon-2">
+                           <img src="{% static 'admin/assets/img/icons/equipments-white.svg' %}" class="icon-1">
+                        </span>
+                    <span class="align-middle">
+                        Equipments</span>
+                </a>
+            </li>
+            
+            {% url 'gym:enquiries' as enquiries %}
+            <li class="sidebar-item  {% if request.path == enquiries %} active {% endif %}">
+                <a class="sidebar-link" href="{% url 'gym:enquiries'%}" data-aos="fade-right" data-aos-anchor-placement="top-bottom"
+                   data-aos-delay="200">
+                        <span class="icon-side">
+                           <img src="{% static 'admin/assets/img/icons/enquiry_icon.svg' %}" class="icon-2">
+                           <img src="{% static 'admin/assets/img/icons/enquiry_icon-white.svg' %}" class="icon-1">
+                        </span>
+                    <span class="align-middle">
+                        Enquiries</span>
+                </a>
+            </li>
+            {% url 'gym:edit-profile' as edit_profile %}
+            <li class="sidebar-item  {% if request.path == edit_profile %} active {% endif %}">
+                <a class="sidebar-link" href="{% url 'gym:edit-profile'%}" data-aos="fade-right" data-aos-anchor-placement="top-bottom"
+                   data-aos-delay="200">
+                        <span class="icon-side">
+                           <img src="{% static 'admin/assets/img/icons/user-edit.svg' %}" class="icon-2">
+                           <img src="{% static 'admin/assets/img/icons/user-edit-white.svg' %}" class="icon-1">
+                        </span>
+                    <span class="align-middle">
+                        Edit Profile</span>
+                </a>
+            </li>
+            {% url 'gym:change-password' as change_password %}
+            <li class="sidebar-item  {% if request.path == change_password %} active {% endif %}">
+                <a class="sidebar-link" href="{% url 'gym:change-password'%}" data-aos="fade-right" data-aos-anchor-placement="top-bottom"
+                   data-aos-delay="200">
+                        <span class="icon-side">
+                           <img src="{% static 'admin/assets/img/icons/password-reset.svg' %}" class="icon-2">
+                           <img src="{% static 'admin/assets/img/icons/password-reset-white.svg' %}" class="icon-1">
+                        </span>
+                    <span class="align-middle">
+                        Change Password</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="{% url 'appdashboard:logout' %}" data-aos="fade-right" data-aos-anchor-placement="top-bottom"
+                   data-aos-delay="1000">
+                        <span class="icon-side">
+                           <img src="{% static 'admin/assets/img/icons/exit.svg' %}" class="icon-2">
+                           <img src="{% static 'admin/assets/img/icons/exit-white.svg' %}" class="icon-1">
+                        </span>
+                    <span class="align-middle">Logout</span>
+                </a>
+            </li>
+            <script>
+                $(document).ready(function() {
+                var pathname = window.location.pathname
+
+                if (pathname.split('/').length >= 2) {
+                    url = pathname.split('/')[2]
+                }
+                user_sub_menu = ['members-detail']
+                if (user_sub_menu.includes(url))
+                {
+                    $("."+url).addClass("active");
+                }
+
+                user_sub_menu2 = ['trainers-detail']
+                if (user_sub_menu2.includes(url))
+                {
+                    $("."+url).addClass("active");
+                }
+            })
+            </script>
+        </ul>
+    </div>
+</nav>
+
+<style>
+    .sidebar .sidebar-nav .sidebar-item.active {
+        background-color: #fff !important;
+    }
+</style>

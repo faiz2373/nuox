@@ -1,0 +1,10 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [{
+                "appID": "52JA96CSC5.com.e8demo.trainpad",
+                "paths": [ "*" ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,445 @@
+{% extends "admin/layout/user_base.html" %}
+{% load static %}
+{% block body_block %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<link href="https://vjs.zencdn.net/8.0.4/video-js.css" rel="stylesheet" />
+
+    <main class="content-area">
+        <div class="container-fluid p-0">
+            <div class="log-in-side-2">
+                <div class="form-box">
+                    <div class="card">
+                        <div class="form-box-inner">
+                            <div>
+                                <div class="log-head">
+                                    <h1 class=" mb-1">Equipment</h1>
+                                </div>
+                                <!-- log in form area -->
+                                <div class="">
+                                    <!-- <form class="row" autocomplete="off" method="post" id="equipmentForm"
+                                          enctype="multipart/form-data" onsubmit="return equipmentvalidate();"> -->
+                                          <form class="row" id="equipmentForm" autocomplete="off" method="post"  enctype="multipart/form-data">
+
+                                        {% csrf_token %}
+                                        <div class="tabs">
+                                            <ul id="tabs-nav">
+                                                <li id="englishli"><a href="#tab1" id="english">ENGLISH</a></li>
+                                                <li id="arabicli"><a href="#tab2" id="arabic">ARABIC</a></li>
+
+                                            </ul> <!-- END tabs-nav -->
+                                            <div id="tabs-content">
+                                                <div id="tab1" class="tab-content">
+                                                    <div class="mb-4 col-sm-12">
+                                                        <div class="input-wrapper">
+                                                            <label class="float" for="name">Name</label>
+                                                            {{ form.equipment_name }}
+                                                            
+                                                            <p class="text-danger mt-2 mb-0" id="name_error">{{ form.equipment_name.errors.as_text }}</p>
+                                                            <input type="hidden" id="hdnName" value ="">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4 col-sm-12">
+                                                        <div class="input-wrapper">
+                                                            <label class="float" for="address">Description</label>
+                                                            {{ form.media }}
+                                                            {{ form.description|safe }}
+                                                            
+                                                            <p class="text-danger mt-2 mb-0" id="desc_error">{{ form.description.errors.as_text }}</p>
+                                                            <input type="hidden" id="hdnName_ar" value ="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="tab2" class="tab-content">
+                                                    <div class="mb-4 col-sm-12">
+                                                        <div class="input-wrapper">
+                                                            <label class="float" for="name_ar">اسم</label>
+                                                            {{ form.equipment_name_ar }}
+                                                            
+                                                            <p class="text-danger mt-2 mb-0" id="name_error_ar">{{ form.equipment_name_ar.errors.as_text }}</p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mb-4 col-sm-12">
+                                                        <div class="input-wrapper">
+                                                            <label class="float" for="address_ar">وصف</label>
+                                                            {{ form.media }}
+                                                            {{ form.description_ar|safe }}
+                                                            
+                                                            <p class="text-danger mt-2 mb-0" id="desc_error_ar">{{ form.address_ar.errors.as_text }}</p>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="mb-4 col-sm-12">
+                                                    <div class="input-wrapper image-field">
+                                                        <label for="user">Qr code</label>
+                                                        <div class="image-filed">
+                                                            {{ form.qr_code }}
+                                                        </div>
+
+                                                        <p class="text-danger mt-2 mb-0">{{ form.qr_code.errors.as_text }}</p>
+                                                    </div>
+                                                    {% if form.introduction_video %}
+                                                        <img src="{{ form.qr_code.value.url }}"
+                                                             width="100px"> {% endif %}
+                                                </div> -->
+
+                                                <div class="mb-4 col-sm-12">
+                                                    <div class="input-wrapper image-field">
+                                                        <label for="user" class="float">Image</label>
+                                                        <div class="image-filed">
+                                                            {{ form.equipment_image }}
+                                                        </div>
+
+                                                        <p class="text-danger mt-2 mb-0" id="image_error">{{ form.equipment_image.errors.as_text }}</p>
+                                                        
+                                                        {% if form.equipment_image.value.url %}
+                                                        <img src="{{ form.equipment_image.value.url }}" id="edit_img" width="100px"> 
+                                                    </div>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+
+                                                    <div class="mb-4 col-sm-12">
+                                                        <div class="input-wrapper image-field">
+                                                            <label for="user" class="float">Introduction Video</label>
+                                                            <div class="image-filed">
+                                                                {{ form.introduction_video }}
+                                                            </div>
+
+                                                            <p class="text-danger mt-2 mb-0" id="intro">{{ form.introduction_video.errors.as_text }}</p>
+                                                            
+                                                            {% if form.introduction_video.value.url %}
+                                                             <!-- <div id="show-up-vid" class="video_up_status_div"style="margin-top: 10px;width:100px;"> -->
+                                                                <!-- <a data-fancybox data-small-btn="true" class="popup-youtube" id="edit_video" href="{{ form.introduction_video.value.url }}"> -->
+                                                                    <div class="video-wrapper">
+                                                                        <video id="my-video" class="video-js vjs-default-skin" controls>
+                                                                            <source src="{{ form.introduction_video.value.url }}" type="video/mp4">
+                                                                            Your browser does not support the video tag.
+                                                                        </video>
+                                                                        </div>
+                                                                     <!-- </a> -->
+                                                                <!-- </div> -->
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                
+                                                <div>
+                                                    <button type="button" onclick="validate()" class="btn btn-lg btn-primary">Save
+                                                    </button>
+                                                    </div>
+{#                                                </div>#}
+
+                                            </div> <!-- END tabs-content -->
+                                        </form>
+                                        </div> <!-- END tabs -->
+
+                                </div>
+                                <!-- log in form area end -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+    <style>
+        .django-ckeditor-widget{
+            display: block !important;
+        }
+        .fancybox__content{
+            width: 30% !important;
+            height: auto!important;
+            background: none;
+        }
+        .video-js {
+            width: 220px;
+            height: 150px;
+            background-color: #ffff;
+        }
+    </style>
+    <script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            CKEDITOR.on('instanceReady', function(event) {
+                var editor = event.editor;
+                if (editor.element.getAttribute('name') === 'description_ar') {
+                    editor.document.getBody().setStyle('direction', 'RTL');
+                    // editor.document.getBody().setStyle('text-align', 'right');
+                }
+            });
+
+            $('#hdnName').val($('#id_equipment_name').val())
+            $('#hdnName_ar').val($('#id_equipment_name_ar').val())
+
+            $('.popup-youtube').fancybox({
+            width  : 500,
+            height : 500,
+            autoSize : false
+            });
+
+            $.validator.addMethod("checkname", function(value) {
+                return /^[a-zA-Z\s]+$/.test(value);
+            });
+        });
+
+        // setup image preview
+        $("#id_equipment_image").change(function(){
+            readURL(this);
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                
+                reader.onload = function (e) {
+                    $('#edit_img').attr('src', e.target.result);
+                }
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // intro video preview
+        $('#id_introduction_video').on('change', function() {
+            var file = this.files[0];
+            var fileURL = URL.createObjectURL(file);
+            // Update the data-src attribute of the Fancybox link
+            $('#edit_video').attr('data-src', fileURL);
+            $('#edit_video').attr('data-type', 'iframe');
+        });
+
+        // check for user exist
+        function checkExisit(type){
+            if(type == 'english'){
+                val = $('#id_equipment_name').val()
+                hdn = $('#hdnName').val()
+            }
+            else if(type == 'arabic'){
+                val = $('#id_equipment_name_ar').val()
+                hdn = $('#hdnName_ar').val()
+
+            }
+            if( val != '' && val != hdn){
+                data = {}
+                data['name'] = val
+                data['type'] = type
+                $.ajax({
+                    type:'PUT',
+                    url: '/sec-access/equipment-check-nameexist/',
+                    data: data,
+                    success: function(response){
+                        console.log(response.exist)
+                        if(response.exist > 0){
+                            if(type == 'english'){
+                                $('#name_error').text('Equipment with same name already exists')
+                                $('#saveBtn').attr('disabled', true);
+                            }
+                            else if(type == 'arabic'){
+                                $('#name_error_ar').text('Equipment with same name already exists')
+                                $('#saveBtn').attr('disabled', true);
+                            }
+                        }
+                        else{
+                            $('#name_error').text('')
+                            $('#name_error_ar').text('')
+  
+                            $('#saveBtn').attr('disabled', false);
+
+                        }
+
+                    }
+                })
+            }
+
+        }
+
+       
+
+       function validate(){
+            error_flag = 0
+            var editor = $.trim($("#cke_desc_editor iframe").contents().find("body").text());
+            var editor2 = $.trim($("#cke_id_description_ar iframe").contents().find("body").text());
+
+            // for name_en
+            if( $('#id_equipment_name').val() == '')
+            {
+                $('#name_error').text('This field is required')
+                $('#id_equipment_name').focus()
+                
+                $(".tab-content").hide();
+                $("#tab1").show();
+                $('#englishli').addClass('active')
+                $('#arabicli').removeClass('active')
+                // $('#id_equipment_name').css({'border': '1px solid red'});
+                error_flag++;
+            }
+            else if($('#id_equipment_name').val().length < 3)
+            {
+                $('#name_error').text('Name must contain atleast 3 character')
+                // $('#id_equipment_name').css({'border': '1px solid red'});
+                $('#id_equipment_name').focus()
+                $(".tab-content").hide();
+                $("#tab1").show();
+                $('#englishli').addClass('active')
+                $('#arabicli').removeClass('active')
+                error_flag++;
+            }
+            else{
+                $('#name_error').text('')
+                // $('#id_equipment_name').css({'border': '1px solid #D8D8D8'});
+                
+                // for name_ar
+                if( $('#id_equipment_name_ar').val() == '')
+                {
+                    $('#name_error_ar').text('This field is required')
+                    
+                    $(".tab-content").hide();
+                    $("#tab2").show();
+                    $('#englishli').removeClass('active')
+                    $('#arabicli').addClass('active')
+                    // $('#id_equipment_name_ar').css({'border': '1px solid red'});
+                    $('#id_equipment_name_ar').focus()
+
+                    error_flag++;
+                }
+                else if($('#id_equipment_name_ar').val().length < 3)
+                {
+                    $('#name_error_ar').text('Name must contain atleast 3 character')
+                    // $('#id_equipment_name_ar').css({'border': '1px solid red'});
+                    $(".tab-content").hide();
+                    $("#tab2").show();
+                    $('#englishli').removeClass('active')
+                    $('#arabicli').addClass('active')
+                    
+                    $('#id_equipment_name_ar').focus()
+                    error_flag++;
+                }
+                else{
+                    $('#name_error_ar').text('')
+                    // $('#id_equipment_name_ar').css({'border': '1px solid #D8D8D8'});
+
+                }
+
+
+            }
+
+            // for description_en
+            if( editor == '')
+            {
+                $('#desc_error').text('This field is required')
+                // $("#cke_desc_editor iframe").css({'border': '1px solid red'});
+                $(".tab-content").hide();
+                $("#tab1").show();
+                $('#englishli').addClass('active')
+                $('#arabicli').removeClass('active')
+                error_flag++;
+            }
+            else if(editor.length < 3)
+            {
+                $('#desc_error').text('Description must contain atleast 3 character')
+                // $("#cke_desc_editor iframe").css({'border': '1px solid red'});
+                $(".tab-content").hide();
+                $("#tab1").show();
+                $('#englishli').addClass('active')
+                $('#arabicli').removeClass('active')
+                error_flag++;
+            }
+            else{
+                $('#desc_error').text('')
+                // $('#cke_desc_editor iframe').css({'border': '1px solid #D8D8D8'});
+
+                // for description_ar
+                if( editor2 == '')
+                {
+                    $('#desc_error_ar').text('This field is required')
+                    // $("#cke_desc_editor iframe").css({'border': '1px solid red'});
+                    $(".tab-content").hide();
+                    $("#tab2").show();
+                    $('#englishli').removeClass('active')
+                    $('#arabicli').addClass('active')
+                    error_flag++;
+                }
+                else if(editor2.length < 3)
+                {
+                    $('#desc_error_ar').text('Description must contain atleast 3 character')
+                    // $("#cke_desc_editor iframe").css({'border': '1px solid red'});
+                    $(".tab-content").hide();
+                    $("#tab2").show();
+                    $('#englishli').removeClass('active')
+                    $('#arabicli').addClass('active')
+                    error_flag++;
+                }
+                else{
+                    $('#desc_error_ar').text('')
+                    // $('#cke_desc_editor iframe').css({'border': '1px solid #D8D8D8'});
+                }
+
+            }
+            // for image
+            if($('#id_equipment_image').val() == '' && $('#edit_img').attr('src') ==''){
+                $('#image_error').text('This field is required')
+                error_flag++;
+            }
+            else{
+                if($('#edit_img').attr('src') ==''){
+                    extn = ['jpg', 'jpeg', 'png', 'gif']
+                    file = $('#id_equipment_image').val()
+                    var ext = file.split('.').pop();
+                    ext = ext.toLowerCase()
+                    if ($.inArray(ext, extn) == -1){
+                        $('#image_error').text('Unsupported file extension. Only .jpg, .jpeg, .png and .gif are allowed.')
+                        error_flag++;
+                    }
+                    else{
+                        $('#image_error').text('')
+                    }
+                }
+                else{
+                    $('#image_error').text('')
+                }
+            }
+
+            // for video
+            if($('#id_introduction_video').val() == '' && $('#edit_video').attr('href') ==''){
+            $('#intro').text('This field is required')
+                error_flag++;
+            }
+            else{
+                if($('#edit_video').attr('href') ==''){
+                    extn = ['mp4', 'mov', 'wmv']
+                    file = $('#id_introduction_video').val()
+                    var ext = file.split('.').pop();
+                    ext = ext.toLowerCase()
+                    if ($.inArray(ext, extn) == -1){
+                        $('#intro').text('Unsupported file extension. Only .mp4, .mov and .wmv are allowed.')
+                        error_flag++;
+                    }
+                    else{
+                        $('#intro').text('')
+                    }
+                }
+                else{
+                    $('#intro').text('')
+                }
+            }
+
+            if(error_flag == 0){
+                var url = window.location.href;
+                var matches = url.match(/\/(\d+)\/$/);
+                var id = matches[1];
+                $('#equipmentForm').attr('action','/sec-access/equipments-edit/'+id+'/')
+                $('#equipmentForm').submit()
+            }
+        }
+
+        function changeError(id){
+            $('#'+id).text('')
+        }
+    
+    </script>
+{% endblock body_block %}

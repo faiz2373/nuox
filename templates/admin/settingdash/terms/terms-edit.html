@@ -1,0 +1,248 @@
+{% extends "admin/layout/user_base.html" %}
+{% load static %}
+{% block body_block %}
+    <main class="content-area">
+        <div class="container-fluid p-0">
+            <div class="log-in-side-2">
+                <div class="form-box">
+                    <div class="card">
+                        <div class="form-box-inner">
+                            <div>
+                                <div class="log-head">
+                                    <h1 class=" mb-3">Terms and Condition</h1>
+                                </div>
+                                <!-- log in form area -->
+                                <div class="">
+                                    <form method="post" class="row" autocomplete="off" id="formData" >
+                                        {% csrf_token %}
+                                        <div class="tabs">
+                                            <ul id="tabs-nav">
+                                                <li id="englishli"><a href="#tab1" id="english">ENGLISH</a></li>
+                                                <li id="arabicli"><a href="#tab2" id="arabic">ARABIC</a></li>
+
+                                            </ul> <!-- END tabs-nav -->
+                                            <div id="tabs-content">
+                                                <div id="tab1" class="tab-content">
+                                                    <div class="mb-4 col-sm-12">   
+                                                        <div class="input-wrapper">
+                                                            <label class="float" style="top: 2px;" for="first_name">Terms Type (in English)</label>
+                                                            {{ form.terms_type }}
+                                                            <!-- <label class="float" style="top: 2px;" for="first_name">Terms Type</label> -->
+                                                            <label class="errortxt1 tsterror" id ="type_error_en" generated="true" style="color: #cc0033;"></label>
+                                                        </div><br>                                               
+                                                        <div class="input-wrapper">
+                                                            <label class="float" style="top: 2px;" for="first_name">Description (in English)</label>
+                                                            {{ form.media }}
+                                                            {{ form.description|safe }}
+                                                          
+                                                            <label class="errortxt1 tsterror" id ="descerror_en"  generated="true" style="color: #cc0033;"></label>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div id="tab2" class="tab-content">
+                                                <div class="mb-4 col-sm-12">
+                                                    <div class="input-wrapper">
+                                                        <label class="float" style="top: 2px;" for="first_name">Terms Typee (in Arabic)</label>
+                                                        {{ form.terms_type_ar }}
+                                                        <label class="errortxt1 tsterror" id ="type_error_ar" generated="true" style="color: #cc0033;"/label>
+                                                    </div><br>
+                                                    <div class="input-wrapper">
+                                                        <label class="float" style="top: 2px;" for="first_name">Description (in Arabic)</label>
+                                                    {{ form.media }}
+                                                    {{ form.description_ar|safe }}
+                                                    
+                                                    <label class="errortxt2 tsterror" id ="descerror_ar" generated="true" style="color: #cc0033;"></label>                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                  
+                                                <div>
+                                                    <button type="button" class="btn btn-lg btn-primary" onclick="termsvalidate()">Save
+                                                    </button>
+                                                    </div>
+
+
+                                            </div> <!-- END tabs-content -->
+                                        </div> <!-- END tabs -->
+
+                                    </form>
+                                </div>
+                                <!-- log in form area end -->
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="hdName" value ="">
+                    <input type="hidden" id="hdnName_ar" value ="">
+                </div>
+            </div>
+        </div>
+    </main>
+    <style>
+        .django-ckeditor-widget{
+            display: block !important;
+        }
+        
+    
+    </style>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
+    <script>
+         $(document).ready(function() {
+            $('#hdnName').val($('#id_terms_type').val())
+            $('#hdnName_ar').val($('#id_terms_type_ar').val())
+        });
+
+        // check for user exist
+        function checkExisit(type){
+            if(type == 'english'){
+                val = $('#id_terms_type').val()
+                hdn = $('#hdnName').val()
+            }
+            else if(type == 'arabic'){
+                val = $('#id_terms_type_ar').val()
+                hdn = $('#hdnName_ar').val()
+            }
+
+            if (val != '' && val != hdn) {
+                data = {}
+                data['name'] = val
+                data['type'] = type
+                $.ajax({
+                    type:'PUT',
+                    url: '/sec-access/terms-check-nameexist/',
+                    data: data,
+                    success: function(response){
+                        if(response.exist > 0){
+                            if(type == 'english'){
+                                $('#type_error_en').text('Terms and conditions with same type already exists')
+                                $('#saveBtn').attr('disabled', true);
+                               
+                                $(".tab-content").hide();
+                                $("#tab1").show();
+                                $('#englishli').addClass('active')
+                                $('#arabicli').removeClass('active')
+                            }
+                            else if(type == 'arabic'){
+                                $('#type_error_ar').text('Terms and conditions with same type already exists')
+                                $('#saveBtn').attr('disabled', true);
+
+                                $(".tab-content").hide();
+                                $("#tab2").show();
+                                $('#englishli').removeClass('active')
+                                $('#arabicli').addClass('active')
+                            }
+                        }
+                        else{
+                            $('#type_error_en').text('')
+                            $('#type_error_ar').text('')
+
+                            $('#saveBtn').attr('disabled', false);
+
+                        }
+
+                    }
+                })
+            }
+            
+
+        }
+
+        CKEDITOR.replace('id_answer_ar', {
+            contentsLangDirection: "rtl"
+        });
+
+
+        function termsvalidate()
+        {
+            error_flag = 0
+            if($('#id_terms_type').val() == ''){
+                $('#type_error_en').text('This field is required')
+                
+                $(".tab-content").hide();
+                $("#tab1").show();
+                $('#englishli').addClass('active')
+                $('#arabicli').removeClass('active')
+                $('#id_terms_type').focus()
+                error_flag++;
+            }
+            else{
+                $('#type_error_en').text('')
+
+                if($('#id_terms_type_ar').val() == ''){
+                    $('#type_error_ar').text('This field is required')
+                    
+                    $(".tab-content").hide();
+                    $("#tab2").show();
+                    $('#englishli').removeClass('active')
+                    $('#arabicli').addClass('active')
+                    $('#id_terms_type_ar').focus()
+                    error_flag++;
+                }
+                else{
+                    $('#type_error_ar').text('')
+                }
+            }
+
+            // answer_en
+            var allEditors = CKEDITOR.instances['id_description'].getData();
+            html = $(allEditors).text();
+            if(html == '')
+            {
+                $('#descerror_en').text('This field is required')
+
+                $(".tab-content").hide();
+                $("#tab1").show();
+                $('#englishli').addClass('active')
+                $('#arabicli').removeClass('active')
+                error_flag++;
+            }
+            else if(html.length < 3)
+            {
+                $('#descerror_en').text('Description must contain atleast 3 character')
+
+                $(".tab-content").hide();
+                $("#tab1").show();
+                $('#englishli').addClass('active')
+                $('#arabicli').removeClass('active')
+                error_flag++;
+            }
+            else{
+                $('#descerror_en').text('')
+
+                // answer_ar
+                var allEditors2 = CKEDITOR.instances['id_description_ar'].getData();
+                html2 = $(allEditors2).text();
+                if(html2 == '')
+                {
+                    $('#descerror_ar').text('This field is required')
+
+                    $(".tab-content").hide();
+                    $("#tab2").show();
+                    $('#arabicli').addClass('active')
+                    $('#englishli').removeClass('active')
+                    error_flag++;
+                }
+                else if(html2.length < 3)
+                {
+                    $('#descerror_ar').text('Description must contain atleast 3 character')
+
+                    $(".tab-content").hide();
+                    $("#tab2").show();
+                    $('#arabicli').addClass('active')
+                    $('#englishli').removeClass('active')
+                    error_flag++;
+                }
+                else{
+                    $('#descerror_ar').text('')
+                }
+               
+            }
+
+            if(error_flag==0){
+                $('#formData').submit()
+            }
+        };
+
+
+    </script>
+{% endblock body_block %}

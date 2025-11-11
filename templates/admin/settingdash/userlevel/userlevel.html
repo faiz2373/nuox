@@ -1,0 +1,557 @@
+{% extends "admin/layout/user_base.html" %}
+{% load static %}
+{% block body_block %}
+{% load my_filters %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <main class="content-area">
+        <div class="container-fluid p-0">
+            <!-- top search bar -->
+            <div class="top-seach-bar mb-0">
+                <!-- top bar form  -->
+                <form class="search-form mt-2">
+
+                    <div class="add-product-filter user_table_product_filter">
+                        <div class="row align-items-center">
+                            <div class="col-xl-2 col-lg-2">
+                                <h3 class="top-bar-heading">User Level</h3>
+                            </div>
+                            <div class="col-xl-10 col-lg-10">
+                                <div class="row_2 align-items-top justify-content-end">
+                                    <div class="top-search-wrapper">
+                                        <div class="form-group">
+                                            <input type="text" id="search" name="search" value="{{ request.GET.search }}" class="form-control"
+                                                placeholder="Search Name">
+                                        </div>
+                                        <div><span id="error_msg"></span></div>
+                                    </div>
+                                    <div class="date-selector-wrapper">
+                                        <div class="form-group">
+                                          <input type="text" name="stDate" value="{{ request.GET.stDate }}" class="form-control" id="stDate" placeholder="From Date">
+                                        </div>
+                                    </div> 
+                                    
+                                    <div class="date-selector-wrapper">
+                                        <div class="form-group">
+                                          <input type="text" name="endDate" value="{{ request.GET.endDate }}" class="form-control" id="endDate" placeholder="To Date">
+                                        </div>
+                                    </div> 
+                                    <div class=" top-action-wrapper d-flex align-items-top">
+                                        <button class="btn btn-detail" id="sbmit">Filter</button>
+                                        <a href="{% url 'appdashboard:user-level' %}" class="reset">Reset</a>
+                                        <button type="button" class="btn btn-detail"  id="myBtn">Create</button>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                </form>
+                
+            </div>
+
+            <!-- top bar form  end-->
+        </div>
+        <!-- top search bar end-->
+
+        <!-- right side content box  -->
+        <div class="main-box pd-0">
+            <div id="textchange">
+            <div class="add-product-sec">
+                <div class="product-area-list">
+                </div>
+                <div class="product-area-list list-head">
+                    <div class="product-box-heading bx-sd mb-1">
+                        <div class="row">
+                            <div class="col-xl-1 col-lg-1">
+
+                            </div>
+                            <div class="col-xl-2 col-lg-2">
+                                <div class="product-content">
+                                    SL
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-3">
+                                <div class="product-content">
+                                    Name
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-3">
+                              <div class="product-content">
+                                  Created Date
+                              </div>
+                          </div>
+                           
+                            <div class="col-xl-3  col-lg-3 text-left">
+                                <div class="product-content">
+                                    Action
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% for rec in records %}
+                        <!-- prodcut box  -->
+                        <div class="product-box user-level bx-sd mb-1">
+                            <div class="row">
+                                <div class="col-xl-1 col-lg-1">
+
+                                </div>
+                                <div class="col-xl-2 col-lg-2">
+                                    <div class="product-content">
+                                        <h3>{{ start_index|add:forloop.counter0 }}</h3>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3">
+                                    <div class="product-content">
+                                        <h3>{% if rec.name %}{{ rec.name }}{% else %}{{ rec.name_ar }}{% endif %}</h3>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3">
+                                 <div class="product-content">
+                                     <h3>{{ rec.created_at| to_default_timezone }}</h3>
+                                 </div>
+                             </div>                                
+                                <div class="col-xl-3 col-lg-3 user-activity">
+                                    <button type="button" class="btn btn-detail" onclick="editPopup('{{ rec.name }}','{{ rec.name_ar }}',{{ rec.id }})" >Edit</button>
+
+                                    <button type="button" onclick="statusChange('{{rec.id}}',{% if rec.is_active == 0 %}'enable'{% else %}'disable'{% endif %})" {% if rec.is_active == 0 %} class="btn btn-detail" {% else %} class="btn btn-detail disb_btn" {% endif %} id="statusBtn_{{rec.id}}" >
+                                        {% if rec.is_active == 0 %} 
+                                            Enable
+                                        {% else %}
+                                            Disable
+                                        {% endif %}
+                                    </button>
+                                </div>
+
+                                <div class="col-xl-2 col-lg-3 text-center">
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="col-xl-12 col-lg-3 text-center mt-3">
+                            <h5>No Records</h5>
+                        </div>
+                    {% endfor %}
+
+                    {% if records %}
+                    <div class="row">
+                        <div class="col-sm-6 mt-3 pagination-count">Showing <span>{{ start_index }}</span> to <span>{{ end_index }}</span> of <span>{{ count }}</span> entries</div>
+
+                        <div class="col-sm-6 mt-3">
+                            <nav aria-label="Page navigation ">
+                                <ul class="pagination justify-content-end">
+                                    {% for i in page_range %}
+                                    <li id="pagination-count{{i}}"
+                                        class="page-item"><a
+                                            class="{% if i  == page %} activedata {% endif %} page-link" href="?page={{ i }}{{ params }}">{{i}}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    {%endif%}
+
+                </div>
+                <div id="myModal" class="modal">
+
+                    <!-- Modal content -->
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <form method="post" class="popup" id="PopForm"  autocomplete="off" enctype="multipart/form-data" action="/sec-access/user-level-add/">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            {% csrf_token %}
+                            <div class="tabs">
+                                <ul id="tabs-nav">
+                                    <li id="englishli"><a href="#tab1" id="english">ENGLISH</a></li>
+                                    <li id="arabicli"><a href="#tab2" id="arabic">ARABIC</a></li>
+
+                                </ul> <!-- END tabs-nav -->
+                                <div id="tabs-content">
+                                    <div id="tab1" class="tab-content">
+                                        <div class="mb-4 col-sm-12">
+                                            <div class="input-wrapper">
+                                                <label class="float" for="first_name">Name (in English)</label>
+                                                <input type="text" value="{% if model.name %}{{model.name}}{% endif %}" name="userlevelname" onkeydown="change_err()" class="form-control effect " maxlength="225" id="id_name" />
+                                                
+                                                <p class="text-danger mt-2 mb-0 errormsg" id="errormsg1" ></p>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                    <div id="tab2" class="tab-content">
+                                        <div class="mb-4 col-sm-12">
+                                            <div class="input-wrapper">
+                                                <label class="float" for="first_name">Name (in Arabic)</label>
+                                                <input type="text" value="{% if model.name_ar %}{{model.name_ar}}{% endif %}" name="userlevelnamear" onkeydown="change_err()" class="form-control effect rtl-ar " maxlength="225" id="id_name_ar" required/>
+                                                
+                                                <p class="text-danger mt-2 mb-0 errormsg" id="errormsg2"></p>
+                                            </div>
+                                        </div>
+                              
+                                    </div>
+
+                                    <input type="hidden" id="hiddenId" name="hiddenId" value="0">                               
+
+                                    <div>
+                                        <button type="button"   onclick="validate()" class="btn btn-lg btn-primary">Save
+                                        </button>
+                                        </div>
+
+
+                                </div> <!-- END tabs-content -->
+                            </div> <!-- END tabs -->
+
+                        </form>
+
+                    </div>
+                    </div>
+
+                </div>
+                <!-- prodcut box  end-->
+            </div></div>
+        </div>
+        </div>
+        <input type="hidden" id="hdnName" value ="">
+        <input type="hidden" id="hdnName_ar" value ="">
+        <!-- right side content box  -->
+        </div>
+    </main>
+{% endblock body_block %}
+
+{% block page_script %}
+<script src="{% static 'admin/searchsetting.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr("#stDate", {
+        allowInput: true,
+        dateFormat: "Y-m-d",
+        maxDate: "today",
+        });
+        flatpickr("#endDate", {
+        allowInput: true,
+        dateFormat: "Y-m-d",
+        maxDate: "today",
+        });
+        var modal = document.getElementById("myModal");
+
+        var btn = document.getElementById("myBtn");
+        btn.onclick = function() {
+            modal.style.display = "block";
+            $('#errormsg1').text('')
+            $('#hiddenId').val(0)
+            $('#id_name').val('')
+            $('#id_name_ar').val('')
+        }
+
+        function editPopup(value,value_ar,Id){
+            modal.style.display = "block";
+            $('#errormsg1').text('')
+            $('#errormsg2').text('')
+            $('#hiddenId').val(Id)
+            $('#id_name').val(value)
+            $('#id_name_ar').val(value_ar)
+
+            $('#hdnName').val(value)
+            $('#hdnName_ar').val(value_ar)
+        }
+
+        function validate(){
+            error_flag = 0;
+            // for english
+            if($('#id_name').val() == ''){
+                $('#errormsg1').text('This field is required')
+                $('#id_name').focus()
+
+                $(".tab-content").hide();
+                $("#tab1").show();
+                $('#englishli').addClass('active')
+                $('#arabicli').removeClass('active')
+                error_flag++;
+            }
+            else{
+                $('#errormsg1').hide()
+
+                // for arabic
+                if($('#id_name_ar').val() == ''){
+                    $('#errormsg2').text('This field is required')
+                    $('#id_name_ar').focus()
+
+                    $(".tab-content").hide();
+                    $("#tab2").show();
+                    $('#englishli').removeClass('active')
+                    $('#arabicli').addClass('active')
+                    error_flag++;
+                }
+                else{
+                    $('#errormsg2').hide()
+                }
+            }
+
+            if(error_flag==0){
+                id = $('#hiddenId').val()
+                hdnName = $('#hdnName').val()
+                hdnName_ar = $('#hdnName_ar').val()
+                name = $('#id_name').val()
+                name_ar = $('#id_name_ar').val()
+
+                if( name != hdnName || name_ar != hdnName_ar ){
+                    if(name != hdnName && name_ar != hdnName_ar){
+                        change_flag = 'BOTH'
+                    }
+                    else if(name != hdnName){
+                        change_flag = 'ENG'
+                    }
+                    else if(name_ar != hdnName_ar){
+                        change_flag = 'ARB'
+                    }
+                    data = {}
+                    data['name'] = $('#id_name').val()
+                    data['name_ar'] = $('#id_name_ar').val()
+                    data['type'] = 'userlevel'
+                    data['change_flag'] = change_flag
+                    $.ajax({
+                        type:'PUT',
+                        url: '/sec-access/check_name_exist_settings/',
+                        data: data,
+                        success: function(response){
+
+                            if(response.exist > 0){
+                                $('#errormsg1').text('Userlevel with same name already exists')
+                                $('#errormsg1').show()
+                                $('#id_name').focus()
+
+                                $(".tab-content").hide();
+                                $("#tab1").show();
+                                $('#englishli').addClass('active')
+                                $('#arabicli').removeClass('active')
+                                return false
+                            }
+                            else if(response.exist_ar > 0){
+                                $('#errormsg2').text('Userlevel with same name already exists')
+                                $('#errormsg2').show()
+                                $('#id_name_ar').focus()
+
+                                $(".tab-content").hide();
+                                $("#tab2").show();
+                                $('#englishli').removeClass('active')
+                                $('#arabicli').addClass('active')
+                                return false
+                            }
+                            else{
+                                $('#name_er_en').text('')
+                                $('#name_er_ar').text('')
+                                $('#PopForm').submit()
+
+                            }
+
+                        }
+                    })
+                }
+                else{
+                    $('#PopForm').submit()
+                }
+
+                
+            }
+            
+        }
+
+        function change_err(){
+            $('#errormsg1').text('')
+            $('#errormsg2').text('')
+        }
+
+        modal.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                // If it is, close the modal
+                closeModal();
+            }
+        });
+        $(".close").click(function () {
+            closeModal();
+    });
+
+        // Function to close the modal
+        function closeModal() {
+            var modal = document.querySelector('.modal');
+            modal.style.display = 'none';
+        }
+
+        function statusChange(id,msg)
+            {
+                Swal.fire({
+                    title: 'Are you sure?',  
+                    text: 'Do you want to '+msg+' this userlevel!',    
+                    type: 'warning',
+                    confirmButtonText: 'Yes',
+                    confirmButtonColor: 'LightSeaGreen',
+                    cancelButtonColor: 'Crimson',
+                    cancelButtonText: 'No',
+                    showCancelButton: true,
+                    // reverseButtons: true
+                })
+                .then(function(e){
+                    if (e.value === true) {
+                    data = {}
+                    data['userid'] = id
+                    $.ajax({
+                    type:'PUT',
+                    url: '/sec-access/userlevel-enabledisable/',
+                    data: data,
+                    success: function(response){
+                        Swal.fire({
+                            type: 'success',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            title: response.msg,
+                            timer: 2000
+                        });
+
+                        var btnid = '#statusBtn_'+id;
+                        if(msg == 'enable'){
+                            $(btnid).text('DISABLE');
+                            $(btnid).addClass('disb_btn')
+                            $(btnid).attr('onclick', 'statusChange('+id+',"disable")');
+                        }
+                        else{
+                            $(btnid).text('ENABLE');
+                            $(btnid).removeClass('disb_btn')
+                            $(btnid).attr('onclick', 'statusChange('+id+',"enable")');
+                        }
+                    }
+                })
+                
+            }
+        })
+        }
+
+        $("#sbmit").click(function()
+        {
+            search = $('#search').val()
+            stDate = $('#stDate').val()
+            endDate = $('#endDate').val()
+            date_flag = 0
+
+            if(stDate != '' && endDate != ''){
+                date_flag=1
+            }
+            else{
+                if(stDate!='' && endDate ==''){
+                    $('#error_msg').text('You cannot leave to date empty')
+                    date_flag = 0
+                    return false
+                }
+                else if(stDate =='' && endDate !=''){
+                    $('#error_msg').text('You cannot leave from date empty')
+                    date_flag = 0
+                    return false
+                }
+                else  if(stDate =='' && endDate ==''){
+                    date_flag = 0
+                }
+            }
+           
+
+            if (search == '' && date_flag==0)
+            {   
+                $('#error_msg').text('This field is required')
+                return false;
+            }
+        })  
+    </script>
+    <style>
+        .popup{
+                width:100%;
+            }
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            }
+
+            /* Modal Content/Box */
+            .modal-content {
+                background-color: #fefefe;
+                margin: 6% auto;
+                padding: 3% 3.3%;
+                border: 1px solid #888;
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: row;
+         
+                overflow-x: hidden;
+                overflow-y: auto;
+            
+            }
+
+
+        #error_msg{
+            color:red;
+            }
+    
+        .alert-container{
+            position: absolute;
+            top: 45%;
+            left: 20%;
+            right: auto;
+            margin: auto;
+            width: 75%;
+            height: 20px;
+            padding: 30px;
+        }
+        .alert-container .alert{
+            justify-content: center;
+            padding: 20px 20px;
+        }
+        .alert-container .alert-success{
+            border-radius: 12px;
+            border: 1px solid #117054;
+        }
+        .activedata{
+                background-color: #4A469E!important;
+                color:white!important;
+            }
+            .modal-header{
+            border-bottom: 0;
+            padding: 0; 
+            justify-content: flex-end;
+        }
+                /* The Close Button */
+
+        button.close {
+    background: transparent;
+    border: 0;
+    font-size: 32px;
+    line-height: 32px;
+        }
+            .ButtonDiv{
+            margin-left: 8px;
+        }
+    </style>
+     {% if messages %}
+     {% for message in messages %}
+         <script> 
+         Swal.fire({
+            type: 'success',
+            icon: {% if message.tags == 'error' %} 'error' {% else %} '{{message.tags}}' {% endif %},
+            showConfirmButton: false,
+            title:'{{message}}'
+            });
+            setTimeout(function(){
+                    window.location.reload(1);
+            }, 1000);
+         </script>
+     {% endfor %}
+ {% endif %}
+{% endblock %}
+   

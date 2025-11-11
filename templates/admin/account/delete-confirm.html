@@ -1,0 +1,240 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'images/favicon-32x32.png' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+    <title>Account Removal</title>
+</head>
+<body>
+   <div class="privacy-container">
+        <div class="policy-header">
+            <img src="/static/admin/img/logo.png" alt="logo">
+        </div>
+        <div class="delete-success">
+            <img src="/static/admin/img/tick-circle.svg" alt="icon" />
+            <h4>Account deleted successfully!</h4>
+        </div>      
+    </div>
+        <!-- You agree that there is no way to reverse this decision -->
+        
+
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+    }
+    .privacy-container{
+        max-width: 1280px;
+        padding: 0 20px;
+        margin: 0 auto;
+    }
+    .content{
+        margin: 50px 0;
+    }
+    .content h3{
+        font-size: 28px;
+        line-height: 32px;
+        margin-bottom: 20px;
+    }
+    .content h4{
+        font-size: 22px;
+        line-height: 32px;
+        margin-bottom: 20px;
+    }
+    .content p{
+        font-size: 15px;
+        line-height: 1.5;
+        font-weight: 400;
+        margin-bottom: 16px;
+        color: #495057;
+    }
+     .content ul{
+        padding-left: 20px;
+    }
+    .content ul li{
+        font-size: 15px;
+        line-height: 1.5;
+        font-weight: 400;
+        color: #495057;
+    }
+    .policy-header{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-top: solid 20px #4A8BD9;
+        border-bottom: solid 20px #B479E4;
+    }
+    .policy-header img{
+        width: 150px;
+        margin: 10px 0;
+    }
+    .account_form{
+        width: 50%;
+        display: flex;
+        margin-top: 10px;
+        flex-direction: column;
+    }
+    .account_form_inner{
+        flex-grow: 1;
+        display: flex;  
+        margin:0 -5px
+    }
+    .account_form_inner > *{
+       margin:0 5px
+    }
+    .account_form_inner .account-email{
+       flex-grow: 1;
+        height: 35px;
+        padding: 8px 15px;
+        border-radius: 0.3rem;
+        border: 1px solid #cccccc;
+        outline: none;
+        font-size: 14px;
+    }
+    .account_form_inner .account-email:focus-visible{
+        border: 1px solid #4A469E;
+    }
+    .violet-btn{
+        background-color:#4A469E;
+        border: 1px solid #4A469E;
+        color: #ffffff;
+        padding: 8px 15px;
+        border-radius: 0.3rem;
+        height: 35px;
+        cursor: pointer;
+        font-size: 12px;
+        text-transform: uppercase;
+        transition: all .2s ease-in;
+        outline: none;
+    }
+    .violet-btn:hover{
+        background-color:#605db5;
+        border: 1px solid #605db5;
+        
+    }
+    .confirm-title{
+        font-size: 16px;
+        font-weight: 600;
+        color: #6e7079;
+    }
+    button:disabled {
+    cursor: not-allowed; /* Change the cursor style to indicate it's not clickable */
+    }
+    .error_validation{
+        color: red;
+        font-size: 14px ;
+        display: inline-block;
+        margin-top: 5px;
+    }
+    .modal-header .btn-close{
+        position: absolute;
+        border: 0;
+        background: none;
+        font-size: 29px;
+        outline: none;
+        right: 10px;
+        top:0;
+    }
+    .modal-header{
+        position: relative;
+    }
+    .modal-content{
+        padding-bottom: 20px;
+    }
+    .modal-bottom{
+        display: flex;
+        justify-content: center;
+    }
+   .delete-success{
+    margin:25px 0 ;
+    min-height: 300px;
+    background-color: #f5f5ff;;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -o-border-radius: 15px;
+    border-radius: 15px;
+   }
+   .delete-success h4{
+    font-size:32px ;
+    margin-top: 15px;
+    color: #495057;
+    text-align: center;
+   }
+
+       
+    @media only screen and (max-width: 820px){
+        .account_form{
+            width: 100%;
+        }
+        .delete-success img{
+            width: 60px;
+        }
+        .delete-success h4 {
+            font-size: 28px;
+        }
+        .delete-success {
+        margin: 20px 0;
+        min-height: 248px;
+        }
+        .policy-header img {
+            width: 115px;
+        }
+        .policy-header {
+            border-top: solid 15px #4A8BD9;
+            border-bottom: solid 15px #B479E4;
+        }
+
+    }
+    @media only screen and (max-width: 400px){
+        .account_form_inner{
+            flex-direction: column;
+        }
+        .account_form_inner > :last-child{
+            margin-top: 15px ;
+        }
+        .delete-success h4 {
+            font-size: 26px;
+        }
+        .delete-success {
+        margin: 20px 0;
+        min-height: 248px;
+        }
+        .delete-success img {
+             width: 48px;
+        }
+        .policy-header img {
+            width: 100px;
+        }
+        .policy-header {
+            border-top: solid 12px #4A8BD9;
+            border-bottom: solid 12px #B479E4;
+        }
+
+    }
+
+</style>
+<script>
+    // Close the tab after a delay
+    setTimeout(function() {
+        window.close();
+    }, 15000); // Adjust the delay time as needed
+</script>
+    
+</div></body>
+</html>

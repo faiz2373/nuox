@@ -1,0 +1,437 @@
+{% extends "admin/layout/user_base.html" %}
+{% load static %}
+{% block body_block %}
+{% load my_filters %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <main class="content-area">
+        <div class="container-fluid p-0">
+            <!-- top search bar -->
+            <div class="top-seach-bar mb-0">
+                <!-- top bar form  -->
+                <form class="search-form mt-2" id="userForm">
+                    <div class="add-product-filter user_table_product_filter">
+                        <div class="row tbData" >
+                            <div class="col-xl-2 col-lg-2">
+                                <h3 class="top-bar-heading">Users</h3>
+                            </div>
+                            <div class="col-xl-10 col-lg-10">
+                                <div class=" row_2 align-items-top justify-content-end ">
+                                    <div class="top-search-wrapper ">
+                                        <div class="form-group">
+                                            <input type="text" name="search" value="{{ request.GET.search }}" class="form-control" placeholder="Search" id="name">
+                                        </div>
+                                        <div><span id="error_msg"></span></div>
+
+                                    </div>
+                                    
+                                <div class="table-filter">
+                                    <div class="filter-box">
+                                        <p>More Filters</p>
+                                        <img src="{% static 'admin/img/filter_icon.svg' %}"/>
+                                        
+                                    </div>
+                                    <div class="filter-wrapper ">
+                                        <div class="filter-title">
+                                            <!-- <h5>Sort By</h5> -->
+                                            <div><span id="error_msg2"></span></div>
+                                            <span class="close-filter">×</span></div>
+                                        <ul class="filter-list"> 
+                                            <li class="filter-item">
+                                                <div class="top-select-wrapper ">
+                                                    <div class="form-group">
+                                                        <select class="form-control filter-select" name="gym" id="gym">
+                                                            <option value="">Select Gym</option>
+                                                            {% for gym in gym_filter %}
+                                                                <option value={{gym.id}} {% if request.GET.gym|to_int == gym.id|to_int %}selected{% endif %}>{% if gym.name %} {{gym.name}} {% elif gym.name_ar %} {{gym.name_ar}} {% endif %}</option>    
+                                                            {% endfor %}   
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="filter-item">
+                                                <div class="top-select-wrapper ">
+                                                    <div class="form-group">
+                                                        <select class="form-control filter-select" name="userlevel" id="userlevel">
+                                                            <option value="">Select User Level</option>
+                                                            {% for userlevel in user_level %}
+                                                                <option value={{userlevel.id}} {% if request.GET.userlevel|to_int == userlevel.id|to_int %}selected{% endif %}>{% if userlevel.name %} {{userlevel.name}} {% elif userlevel.name_ar %} {{userlevel.name_ar}} {% endif %}</option>    
+                                                                {% endfor %}   
+                                                                <option value='Incomplete' {% if request.GET.userlevel == 'Incomplete' %}selected{% endif %}>Incomplete</option>    
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="filter-item">
+                                                <div class="top-select-wrapper ">
+                                                    <div class="form-group">
+                                                        <select class="form-control filter-select" name="document_approval" id="document_approval">
+                                                            <option value="">Select Approval Type</option>
+                                                            <option value="pending_approval" {% if request.GET.document_approval == 'pending_approval' %}selected{% endif %}>Pendng</option>    
+                                                            <option value="approved_approval" {% if request.GET.document_approval == 'approved_approval' %}selected{% endif %}>Approved</option>    
+                                                            <option value="rejected_approval" {% if request.GET.document_approval == 'rejected_approval' %}selected{% endif %}>Rejected</option>    
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="filter-item two-item-filter">
+                                                <div class="date-selector-wrapper">
+                                                    <div class="form-group">
+                                                      <input type="text" name="stDate" value="{{ request.GET.stDate }}" class="form-control" id="stDate" placeholder="From Date">
+                                                    </div>
+                                                </div> 
+                                                <div class="date-selector-wrapper">
+                                                    <div class="form-group">
+                                                      <input type="text" name="endDate" value="{{ request.GET.endDate }}" class="form-control" id="endDate" placeholder="To Date">
+                                                    </div>
+                                                </div>  
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class=" top-action-wrapper d-flex align-items-top">
+                                    <button type="submit" class="btn btn-detail" id="sbmit">Filter</button>
+                                    <a href="{% url 'appdashboard:trainer'%}" class="reset">Reset</a>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {#         <div class="row top-bar-heading-box mt-4 align-items-center">#}
+                    {#            <div class="col-sm-6">#}
+                    {#               <h3 class="top-bar-heading">Users <small>( {{count}} )</small></h3>#}
+                    {#            </div>#}
+                    {#            <div class="col-sm-6">#}
+                    {#               <div class="row justify-content-end">#}
+                    {#                  <div class="col-sm-4">#}
+                    {#                     <select class="form-control" name="sort_order">#}
+                    {#                        <option value="">Order By</option>#}
+                    {#                        {% for i, v in sort_orders.items %}#}
+                    {#                        <option value="{{i}}" {% if i == request.GET.sort_order %}selected{% endif %} class="order_by_data">{{v.name}}</option>#}
+                    {#                        {% endfor %}#}
+                    {#                     </select>#}
+                    {#                  </div>#}
+                    {#               </div>#}
+                    {#            </div>#}
+                    {#         </div>#}
+                </form>
+                <!-- top bar form  end-->
+            </div>
+            <!-- top search bar end-->
+
+            <!-- right side content box  -->
+            <div class="main-box pd-0">
+
+                <div class="add-product-sec">
+                    <div class="product-area-list">
+                        <!-- prodcut box  -->
+
+                    </div>
+                    <div class="product-area-list list-head list-head">
+                        <div class="product-box-heading bx-sd mb-1">
+                            <div class="row">
+                                <!-- <div class="col-xl-1 col-lg-1">
+                                    
+                                </div> -->
+                                
+                                
+                                <div class="col-xl-2 col-lg-2">
+                                    
+                                    <div class="product-content">
+                                        Name  
+                                    </div>
+                                </div>
+                                <div class="col-xl-2 col-lg-2 text-left">
+                                    <div class="product-content">
+                                        Email
+                                    </div>
+                                </div>
+                                <div class="col-xl-1 col-lg-1 text-left">
+                                    <div class="product-content">
+                                        Phone
+                                    </div>
+                                </div>
+                                <div class="col-xl-2 col-lg-2">
+                                    <div class="product-content">
+                                        Created Date
+                                    </div>
+                                </div>
+
+                                <!-- <div class="col-xl-1 col-lg-1 text-left">
+                                    <div class="product-content">
+                                        User Type
+                                    </div>
+                                </div> -->
+                                <div class="col-xl-1 col-lg-1 text-left">
+                                    <div class="product-content">
+                                        User Level
+                                    </div>
+                                </div>
+                                <div class="col-xl-1 col-lg-1 text-left">
+                                    <div class="product-content">
+                                        Action
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- changed -->
+                        {% for rec in record %}
+                            <!-- prodcut box  -->
+                            <div class="product-box user-level bx-sd mb-1">
+                                <div class="row">
+                                    <!-- <div class="col-xl-1 col-lg-1">
+                                        <div class="pro2-img table_pro_pic">
+                                            <a href="{% url 'appdashboard:user-detail' pk=rec.pk %}"><img src="{% if rec.users.image %} {{ rec.users.image.url }} {% elif rec.users.avatar.image %} {{ rec.users.avatar.image.url }} {% else %} {% static 'admin/icons/user.png' %} {% endif %}"
+                                                 width="64" height="64"></a>
+                                        </div>
+                                    </div> -->
+                                    <div class="col-xl-2 col-lg-2">
+                                        <div class="d-flex align-items-center">
+                                       
+                                            <div class="pro2-img table_pro_pic">
+                                                <a href="{% url 'appdashboard:trainer-detail' pk=rec.pk %}" class="trainer-detail"><img src="{% if rec.users.image %} {{ rec.users.image.url }} {% elif rec.users.avatar.image %} {{ rec.users.avatar.image.url }} {% else %} {% static 'admin/icons/user.png' %} {% endif %}"
+                                                     width="64" height="64"></a>
+                                            </div>
+                                      
+                                        <div class="product-content">
+                                            <a href="{% url 'appdashboard:trainer-detail' pk=rec.pk %}"><h3 id="hovertest" style="word-break: break-all;"
+                                                >{% if rec.username %}{{ rec.username }}{% else %}{{ rec.first_name }}{% endif %}</h3></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div class= "col-xl-2 col-lg-2">
+                                            <div class="product-content">
+                                                <h3 style="word-break: break-all;">{{ rec.email }}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-1 col-lg-1">
+                                            <div class="product-content">
+                                                <h3>{% if rec.mobile %}{{ rec.mobile }}{% else %}---{% endif %}</h3>
+                                            </div>
+                                        </div>
+                                        <div class= "col-xl-2 col-lg-2">
+                                            <div class="product-content">
+                                                <h3 class="no-trim">{{ rec.created_at | to_default_timezone }}</h3>
+                                            </div>
+                                        </div>
+                                    <!-- <div class="col-xl-1 col-lg-1">
+                                        <div class="product-content">
+                                            {% if rec.user_type == 'normal_user' %}
+                                                <h3>Normal User</h3>
+                                            {% elif rec.user_type == 'trainer' %}
+                                                <h3>Trainer</h3>
+                                            {% endif %}
+                                        </div>
+                                    </div> -->
+                                    <div class="col-xl-1 col-lg-1">
+                                        <div class="product-content">
+                                            {% if rec.users.user_level %}
+                                                {{rec.users.user_level}}
+                                            {% else %}
+                                                Incomplete
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-1 col-lg-1 user-activity">
+                                        <button type="button" onclick="statusChange('{{rec.id}}',{% if rec.is_active == 0 %}'enable'{% else %}'disable'{% endif %})" {% if rec.is_active == 0 %} class="btn btn-detail" {% else %} class="btn btn-detail disb_btn" {% endif %} id="statusBtn_{{rec.id}}" >
+                                            {% if rec.is_active == 0 %} 
+                                                Enable
+                                            {% else %}
+                                                Disable
+                                            {% endif %}
+                                        </button>
+                                    </div>
+
+                                   
+                                </div>
+                            </div>
+                        {% empty %}
+                        <div class="col-xl-12 col-lg-3 text-center mt-3">
+                            <h5>No Records</h5>
+                        </div>
+                        {% endfor %}
+
+                        {% if record %}
+                        <div class="row">
+                            <div class="col-sm-6 mt-3 pagination-count">Showing <span>{{ start_index }}</span> to <span>{{ end_index }}</span> of <span>{{ count }}</span> entries</div>
+
+                            <div class="col-sm-6 mt-3">
+                                <nav aria-label="Page navigation ">
+                                    <ul class="pagination justify-content-end">
+                                        {% for i in page_range %}
+                                        <li id="pagination-count{{i}}"
+                                            class="page-item"><a
+                                                class="{% if i  == page %} activedata {% endif %} page-link" href="?page={{ i }}{{ params }}">{{i}}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                    </div>
+                    <!-- prodcut box  end-->
+                </div>
+            </div>
+        </div>
+        {% csrf_token %}
+        <!-- right side content box  -->
+        </div>
+    </main>
+{% endblock body_block %}
+
+{% block page_script %}
+<script src="{% static 'admin/assets/js/jquery.sumoselect.js' %}"></script>s
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+    flatpickr("#stDate", {
+      allowInput: true,
+      dateFormat: "Y-m-d",
+      maxDate: "today",
+    });
+    flatpickr("#endDate", {
+      allowInput: true,
+      dateFormat: "Y-m-d",
+      maxDate: "today",
+    });endDate
+
+        function statusChange(id,msg)
+        {
+            Swal.fire({
+                title: 'Are you sure?',  
+                text: 'Do you want to '+msg+' this user!',  
+                type: 'warning',
+                confirmButtonText: 'Yes',
+                confirmButtonColor: 'LightSeaGreen',
+                cancelButtonColor: 'Crimson',
+                cancelButtonText: 'No',
+                showCancelButton: true,
+                // reverseButtons: true
+            })
+            .then(function(e){
+                if (e.value === true) {
+                    data = {}
+                    data['userid'] = id
+                    $.ajax({
+                        type:'PUT',
+                        url: '/sec-access/user-enabledisable/',
+                        data: data,
+                        success: function(response){
+                            Swal.fire({
+                                type: 'success',
+                                icon: 'success',
+                                showConfirmButton: false,
+                                title: response.msg,
+                                timer: 2000
+                            });
+
+                            var btnid = '#statusBtn_'+id;
+                            if(msg == 'enable'){
+                                $(btnid).text('DISABLE');
+                                $(btnid).addClass('disb_btn')
+                                $(btnid).attr('onclick', 'statusChange('+id+',"disable")');
+                            }
+                            else{
+                                $(btnid).text('ENABLE');
+                                $(btnid).removeClass('disb_btn')
+                                $(btnid).attr('onclick', 'statusChange('+id+',"enable")');
+                            }
+                        }
+                    })
+                        
+                }
+            })
+        }
+
+
+        $("#sbmit").click(function()
+        {
+            name = $('#name').val()
+            usertype = $('#usertype').val()
+            userlevel = $('#userlevel').val()
+            gym = $('#gym').val()
+            stDate = $('#stDate').val()
+            endDate = $('#endDate').val()
+            date_flag = 0
+
+            if(stDate != '' && endDate != ''){
+                date_flag=1
+            }
+            else{
+                if(stDate!='' && endDate ==''){
+                    $('#error_msg2').text('You cannot leave to date empty')
+                    date_flag = 0
+                    return false
+                }
+                else if(stDate =='' && endDate !=''){
+                    $('#error_msg2').text('You cannot leave from date empty')
+                    date_flag = 0
+                    return false
+                }
+                else  if(stDate =='' && endDate ==''){
+                    date_flag = 0
+                }
+            }
+           
+            
+            if (name == '' && usertype == '' && userlevel == '' && gym =='' && date_flag == 0 )
+            {
+                if ($('.filter-wrapper').hasClass('active')) {
+                    $('#error_msg2').text('Choose any filtering option')
+                    $('#error_msg').text('')
+
+                } 
+                else {
+                    $('#error_msg').text('Choose any filtering option')
+                    $('#error_msg2').text('')
+                    
+                }
+                return false;
+            }
+        })  
+    </script>
+    <style>
+        .row {
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+        }
+        .alert-container{
+            position: absolute;
+            top: 45%;
+            left: 20%;
+            right: auto;
+            margin: auto;
+            width: 75%;
+            height: 20px;
+            padding: 30px;
+        }
+        .alert-container .alert{
+            justify-content: center;
+            padding: 20px 20px;
+        }
+        .alert-container .alert-success{
+            border-radius: 12px;
+            border: 1px solid #117054;
+        }
+        
+        #error_msg {
+            color:red;
+        }
+        #error_msg2{
+            color:red;
+            font-size: 14px;
+        }
+        .pro2-img:hover{
+            opacity: 0.5;
+        }
+        #hovertest:hover{
+            color: #4A469E;
+            text-decoration: underline;
+        }
+    </style>
+{% endblock %}
+   

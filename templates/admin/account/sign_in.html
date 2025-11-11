@@ -1,0 +1,118 @@
+{% extends "admin/layout/base.html" %}
+  {% load static %}
+   {% block body_block %}  
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">    
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      <div class="log-in-side-2 account-page">
+      <div class="form-box">
+         <div class="card-body">
+            <div class="form-box-inner">
+               <div>
+                  <div class="log-head">
+                     <h1 class=" mb-3">Login</h1>
+                     <p class="text-primary mb-2">Hey there! Login here to get started</p>
+                  </div>
+                  <!-- log in form area -->
+                  <div class="">
+                     <form class="row" autocomplete="off" novalidate method="post" >
+                        {% csrf_token %}
+                        <div>
+                           <!-- <label class="form-label">Email</label> -->
+                           <div class="input-wrapper">
+                              <label class="float" for="user">Email Address</label>
+                              {{ form.email }}
+                              
+                              <p class="text-danger mt-2 mb-0">{{ form.email.errors.as_text  }}</p>
+                           </div>
+                        </div>
+                        <div class="mb-4">
+                           <div class="input-wrapper">
+                              <label class="float" for="user">password</label>
+                              <div class="paswd-relative">
+                              {{ form.password }}
+                              <span class="form-icon eye-icon-new-pass eye-icon"><img src="/static/admin/assets/img/eye-hidden.svg" alt=""></span>
+                                 <!-- <svg xmlns="http://www.w3.org/2000/svg" width="21.977" height="18.975" viewBox="0 0 21.977 18.975">
+                                    <g id="invisible" transform="translate(0 -32.053)">
+                                       <g id="Group_1228" data-name="Group 1228" transform="translate(0 32.053)">
+                                          <g id="Group_1227" data-name="Group 1227" transform="translate(0 0)">
+                                             <path id="Path_3261" data-name="Path 3261" d="M231.147,160.068l3.146,3.146.015-.165a3,3,0,0,0-3-3Z" transform="translate(-220.326 -154.061)" fill="#d4cbcb"/>
+                                             <path id="Path_3262" data-name="Path 3262" d="M153.635,66.551a5,5,0,0,1,4.994,4.994,4.916,4.916,0,0,1-.355,1.823l2.921,2.921a11.861,11.861,0,0,0,3.431-4.744,11.818,11.818,0,0,0-10.991-7.49,11.68,11.68,0,0,0-3.98.7l2.157,2.152A5.019,5.019,0,0,1,153.635,66.551Z" transform="translate(-142.649 -62.556)" fill="#d4cbcb"/>
+                                             <path id="Path_3263" data-name="Path 3263" d="M1,33.326,3.276,35.6l.454.454A11.829,11.829,0,0,0,0,41.041a11.8,11.8,0,0,0,15.365,6.646l.424.424L18.7,51.028l1.273-1.268L2.272,32.053Zm5.523,5.518,1.543,1.543a3.165,3.165,0,0,0-.075.654,3,3,0,0,0,3,3,3.078,3.078,0,0,0,.649-.075l1.543,1.543a4.913,4.913,0,0,1-2.192.529,4.961,4.961,0,0,1-4.464-7.191Z" transform="translate(0 -32.053)" fill="#d4cbcb"/>
+                                          </g>
+                                       </g>
+                                    </g>
+                                 </svg> -->
+                              </div>
+                              <p class="text-danger mt-2 mb-0">{{ form.password.errors.as_text  }}</p>
+                           </div>
+                        </div>
+                        <div class="mb-1">
+                           <a href="/sec-access/forgot-password" class="forget">Forgot password?</a>
+                        </div>
+                        <!-- <div>
+                           <label class="form-check">
+                           <input class="form-check-input" type="checkbox" value="remember-me" name="remember-me" checked="">
+                           <span class="form-check-label">
+                           Remember me 
+                           </span>
+                           </label>
+                        </div> -->
+                        <div class="text-center mt-3">
+                           <button type="submit" class="btn btn-lg btn-primary w-100">login</button>
+                        </div>
+                     </form>
+                     <p class="error_message mt-2" style="display:none; font-size:14px;">
+                     <!-- {% if messages %}
+                     {% for message in messages %}
+                              <div class="alert-container">
+                                 <div class="alert alert-success {{message.tags}}"
+                                       role="alert">{{ message|lower|capfirst }}</div>
+                              </div>
+                           {% endfor %}
+                     {% endif %} -->
+                  </div>
+                  <!-- log in form area end -->
+               </div>
+            </div>
+         </div>
+      </div>
+      </div>
+      {% endblock %}   
+      {% block page_script %}
+      <script>
+      {% if messages %}
+         {% for message in messages %}            
+            var message = "{{ message }}"
+            var tag = "{{ message.tags }}"
+            if(tag=="error"){
+               $(".error_message").css("color","red")
+            }else{
+               $(".error_message").css("color","black")
+            } 
+            $(".error_message").text(message)
+            $(".error_message").show()
+            setTimeout(function(){
+               $(".error_message").hide()
+            },6000)
+            {% endfor %}
+            {% endif %}
+      </script>
+      <script>         
+        $(document).on("click", ".eye-icon-new-pass", function() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+            $('.eye-icon-new-pass').html('<img src="/static/admin/assets/img/eye_show.svg" alt="">')
+        } else {
+            x.type = "password";
+            $('.eye-icon-new-pass').html('<img src="/static/admin/assets/img/eye-hidden.svg" alt="">')
+        }
+      })
+
+      // convert to lowercase emailid
+      function convertToLowercase(input) {
+            input.value = input.value.toLowerCase();
+        }
+      </script>
+          {% endblock page_script %}
+ 

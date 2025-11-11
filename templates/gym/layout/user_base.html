@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="Fitness App">
+      <meta name="author" content="Fitness App">
+      <meta name="keywords" content="Fitness App">
+      <link rel="preconnect" href="https://fonts.gstatic.com">
+      <link rel="shortcut icon" href="{% static 'images/favicon-32x32.png' %}" />
+      <title>Trainpad App | Gym</title>
+      <link href="{% static 'admin/assets/css/app.css' %}" rel="stylesheet">
+      <link href="{% static 'admin/assets/css/fonts.css' %}" rel="stylesheet">
+      <link href="{% static 'admin/assets/css/chat.css'%}" rel="stylesheet"> 
+      <link href="{% static 'admin/assets/css/sumoselect.css' %}" rel="stylesheet">
+      <link href="{% static 'admin/assets/css/style.css' %}" rel="stylesheet">
+      <link href="{% static 'admin/assets/css/responsive.css' %}" rel="stylesheet">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.3/assets/owl.carousel.min.css"/>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.3/assets/owl.theme.default.min.css"/>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"/>
+      <script src="{% static 'tinymce/tinymce.min.js' %}"></script>
+      <script src="{% static 'tinymce/jquery.tinymce.min.js' %}"></script>
+      <script src="{% static 'django_tinymce/init_tinymce.js' %}"></script>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"/>
+
+</head>
+<body> 
+<div class="wrapper">
+  {% include 'gym/layout/menu.html' %} 
+  <div class="main">   
+    {% include 'gym/layout/header.html' %} 
+    {% block body_block %}
+    {% endblock %}
+
+  </div>
+{#{% include 'gym/layout/footer.html' %}#}
+</div>  
+    <footer class="container-fluid text-center">
+      <div class="copyright">
+         Copyrights
+         <script>document.write(new Date().getFullYear())</script>. Fitness App. All Rights Reserved.
+      </div>
+   </footer>
+      <!-- {% if messages %}
+         {% for message in messages %}
+         <div class="alert-container">
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message|lower|capfirst }}</div>
+         </div>
+         {% endfor %}
+      {% endif %} -->
+      
+   <!-- carousel -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.3/owl.carousel.min.js"></script>
+   <script src="{% static 'admin/assets/js/app.js' %}"></script>
+   <script src="{% static 'admin/assets/js/jquery.sumoselect.js' %}"></script>
+   <script src="{% static 'admin/assets/js/custom.js' %}"></script>
+   <script src="{% static 'admin/js/helper.js' %}"></script>
+   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+   <script src="{% static 'admin/assets/js/validate.js' %}"></script>
+   <script>
+      $('.card-deck a').fancybox({
+         caption : function( instance, item ) {
+            return $(this).parent().find('.card-text').html();
+         }
+      });
+   </script>
+   <script>
+      AOS.init({ once: true });
+   </script>
+     <script>
+      var urlParams = new URLSearchParams(window.location.search);
+      var pageNumber = urlParams.get('page');
+      $('#pagination-count'+pageNumber).removeClass('active')
+      $('#pagination-count'+pageNumber).addClass('disabled')
+   </script>
+</body>
+{% block page_script %}
+{% endblock %}
+</html>
